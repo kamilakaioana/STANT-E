@@ -6,7 +6,7 @@ module.exports = (server) => {
   
   server.use("/api", protectApi);
 
-  const Livro = require("../livros/livro");
+  const Livro = require("../services/livroService");
 
   Livro.register(protectApi, "/livros")
 }

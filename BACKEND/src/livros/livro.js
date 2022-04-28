@@ -3,19 +3,24 @@ const mongoose = restFul.mongoose;
 
 const livroSchema = new mongoose.Schema({
   titulo: {
-    type: String
+    type: String,
+    required: true,
   },
   autor: {
-    type: String
+    type: String,
+    required: true,
   },
   descricao: {
-    type: String
+    type: String,
+    default: null,
   },
   favorito: {
-    type: Boolean
+    type: Boolean,
+    default: false
   },
   lido: {
-    type: Boolean, default: false
+    type: Boolean,
+    default: false
   },
 });
 
