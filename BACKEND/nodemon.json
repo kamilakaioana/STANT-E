@@ -4,5 +4,5 @@
     ".git",
     "node_module"
   ],
-  "delay": 10000
+  "delay": 1000
 }
