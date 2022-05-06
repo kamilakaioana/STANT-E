@@ -1,4 +1,5 @@
-const port = 3004;
+require('dotenv').config()
+const port = process.env.PORT || 3004; 
 const bodyParser = require("body-parser");
 const express = require("express");
 const server = express();

@@ -5,6 +5,7 @@ const { sign } = require("jsonwebtoken")
 const { hash, compare } = require("bcryptjs")
 const isAuthenticated = require("../middlewares/isAuthenticated")
 
+const Secret = process.env.JWT_SECRET;
 
 module.exports = (server) => {
 
@@ -93,13 +94,13 @@ module.exports = (server) => {
     if (!checkPassword) {
       return res.status(422).json({ msg: "Senha invalida!" });
     }
-
+  
     try {
       // const secret 
       const token = sign({
         email: user.email,
 
-      }, "teste", {
+      }, Secret, {
         subject: user.id,
         expiresIn: "1d"
       });
