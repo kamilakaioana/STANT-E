@@ -46,20 +46,21 @@ module.exports = (server) => {
       return res.status(422).json({ msg: "O password é obrigatório!" });
     }
 
-    //check if user exists
-    const userExists = await ModelUser.findOne({ email: email })
-    if (userExists) {
-      return res.status(422).json({ msg: "Por favor utilize outro e-mail!" });
-    }
-    //creat password
-    const passwordHash = await hash(password, 8);
-    //CREATE USER
-    const user = new ModelUser({
-      name,
-      email,
-      password: passwordHash,
-    })
     try {
+      //check if user exists
+      const userExists = await ModelUser.findOne({ email: email })
+      if (userExists) {
+        return res.status(422).json({ msg: "Por favor utilize outro e-mail!" });
+      }
+      //creat password
+      const passwordHash = await hash(password, 8);
+      //CREATE USER
+      const user = new ModelUser({
+        name,
+        email,
+        password: passwordHash,
+      })
+
       const resUser = await user.save();
       resUser.password = null;
       res.status(201).json({ msg: "Usuário criado com sucesso!", user: resUser })
@@ -82,20 +83,19 @@ module.exports = (server) => {
       return res.status(422).json({ msg: "O password é obrigatório!" });
     }
 
-
-    //check if user exists
-    const user = await ModelUser.findOne({ email: email })
-    if (!user) {
-      return res.status(422).json({ msg: "Email ou Senha incorreto!" });
-    }
-
-    // check if password matchMedia
-    const checkPassword = await compare(password, user.password)
-    if (!checkPassword) {
-      return res.status(422).json({ msg: "Senha invalida!" });
-    }
-  
     try {
+      //check if user exists
+      const user = await ModelUser.findOne({ email: email })
+      if (!user) {
+        return res.status(422).json({ msg: "Email ou senha incorreto!" });
+      }
+
+      // check if password matchMedia
+      const checkPassword = await compare(password, user.password)
+      if (!checkPassword) {
+        return res.status(422).json({ msg: "Email ou senha incorreto!" });
+      }
+
       // const secret 
       const token = sign({
         email: user.email,
@@ -118,13 +118,18 @@ module.exports = (server) => {
     // router.get("/api/auth/me", isAuthenticated, async (req, res) => {
     const id = req.userId;
 
-    //check if user exixts
-    const user = await ModelUser.findById(id, '-password')
+    try {
+      //check if user exixts
+      const user = await ModelUser.findById(id, '-password')
 
-    if (!user) {
-      return res.status(404).json({ msg: "usuario não encontrado" })
+      if (!user) {
+        return res.status(404).json({ msg: "usuario não encontrado" })
+      }
+      res.status(200).json({ user })
+    } catch (error) {
+      console.log(error)
+      res.status(500).json({ msg: "Erro no servidor, tente novamente mais tarde!" })
     }
-    res.status(200).json({ user })
   })
 
 }
