@@ -1,5 +1,4 @@
-import {Button} from './styles';
-import React from 'react';
+import { Button } from './styles';
 
 export interface IButtonProps {
   onClickButton: () => void;
@@ -9,15 +8,13 @@ export interface IButtonProps {
   text: string;
 }
 
-function CustomButton({onClickButton, width, height, color, text}: IButtonProps, ) {
+function CustomButton({ onClickButton, width, height, color, text }: IButtonProps,) {
 
   return (
     <Button onClick={onClickButton} width={width} height={height} color={color}>
-     {text}
+      {text}
     </Button>
   )
-
-
 }
 
 export default CustomButton;
