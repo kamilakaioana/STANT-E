@@ -10,7 +10,9 @@ background-color: #F5F2F2;
 color: #3F3B3B;
 padding-left: 24px;
 border: none;
-/* && : :placeholder: {} */
-/* CCCCCC */
+&::placeholder {
+  color: #cccccc;
+}
+
 `;
 

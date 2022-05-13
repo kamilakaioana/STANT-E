@@ -1,4 +1,5 @@
 import { useState } from 'react';
+import { Link, useNavigate } from 'react-router-dom';
 import CustomButton from '../../components/button';
 import { Input } from '../../components/input/styles';
 import { useAuth } from '../../hooks/auth';
@@ -6,12 +7,14 @@ import { Brand, Container, FormContainer, ImageContainer, InputContainer, Logo, 
 
 
 function Login() {
-  const { user, signIn } = useAuth();
+  const { user, signIn, loading } = useAuth();
   const [email, setEmail] = useState<string>('')
   const [password, setPassword] = useState<string>('')
+  const navigate = useNavigate()
 
-  const handleLogin = () => {
-    signIn(email, password);
+  const handleLogin = async () => {
+    await signIn(email, password);
+
   }
   return (
     <Container>
@@ -30,6 +33,7 @@ function Login() {
 
             <Input
               placeholder='E-mail'
+              type={'email'}
               height={80}
               width={504}
               fontSize={24}
@@ -40,6 +44,7 @@ function Login() {
             <PasswordInputContainer>
               <Input
                 placeholder='Senha'
+                type={'password'}
                 height={80}
                 width={504}
                 fontSize={24}
@@ -49,7 +54,12 @@ function Login() {
               />
             </PasswordInputContainer>
           </form>
-          <CustomButton onClickButton={handleLogin} width={504} height={80} color="164C64" text='ENTRAR' />
+          <CustomButton onClickButton={handleLogin} width={504} height={80} color="164C64" text={loading ? "Loading..." : "ENTRAR"} />
+          
+          <div>
+          
+          <Link to={'/register'}>Não Tenho Cadastro</Link>
+          </div>
         </FormContainer>
       </InputContainer>
     </Container>

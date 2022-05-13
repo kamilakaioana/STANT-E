@@ -68,3 +68,10 @@ export const InputItemContainer = styled.div`
 margin-top: 16px;
 margin-bottom: 16px;
 `;
+
+// export const InputRegister = styled(Input)`
+//     height: 80px;
+//     width: 504px;
+//     font-size: 24px;
+   
+// `;

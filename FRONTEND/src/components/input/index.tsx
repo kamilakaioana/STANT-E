@@ -2,9 +2,9 @@ import { Input } from "./styles";
 
 export interface IinputProps {
   placeholder: string,
-  height: number;
-  width: number;
-  fontSize: number;
+  height?: number;
+  width?: number;
+  fontSize?: number;
   value: string;
   onChange: React.ChangeEventHandler<HTMLInputElement> | (() => void);
 }

@@ -1,12 +1,16 @@
-import React from 'react';
-import logo from './logo.svg';
 import './App.css';
-import Login from './screens/login';
+import { BrowserRouter,  } from "react-router-dom";
+import AppRoutes from './routes'
+import { AuthProvider } from './hooks/auth';
 
 function App() {
   return (
 
-    <Login />  
+        <BrowserRouter>
+          <AuthProvider>
+            <AppRoutes />
+          </AuthProvider>
+        </BrowserRouter>
   );
 }
 

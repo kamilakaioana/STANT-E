@@ -1,9 +1,9 @@
 import styled from "styled-components";
 
 interface IButtonProps {
-  width: number;
-  height: number;
-  color: string;
+  width?: number;
+  height?: number;
+  color?: string;
 }
 
 export const Button = styled.button<IButtonProps>`

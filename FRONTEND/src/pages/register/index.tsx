@@ -1,4 +1,5 @@
 import { useState } from 'react';
+import { Link } from 'react-router-dom';
 import CustomButton from '../../components/button';
 import { Input } from '../../components/input/styles';
 import { useAuth } from '../../hooks/auth';
@@ -20,6 +21,7 @@ function Register() {
       <InputContainer>
         <FormContainer>
           <form >
+            <h1>CADASTRAR</h1>
           <InputItemContainer>
             <Input
               placeholder='Nome Completo'
@@ -30,6 +32,7 @@ function Register() {
               onChange={(e) => setName(e.target.value)}
               
             />
+            
             </InputItemContainer>
               <InputItemContainer>
               <Input
@@ -64,6 +67,10 @@ function Register() {
             </PasswordInputContainer>
           </form>
           <CustomButton onClickButton={handleLogin} width={504} height={80} color="164C64" text='CADASTRAR' />
+         
+          <div>
+          <Link to={'/login'}>Já Tenho Cadastro</Link>
+          </div>
         </FormContainer>
       </InputContainer>
       <LogoContainer>
