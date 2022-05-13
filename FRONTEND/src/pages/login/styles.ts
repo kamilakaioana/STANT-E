@@ -1,6 +1,7 @@
 import styled from 'styled-components';
 import logo from '../../assets/image/logo.svg'
 import stante from '../../assets/image/stante.svg'
+import organizedBooksImg from "../../assets/image/organizedBooks.svg"
 
 
 export const Container = styled.div`
@@ -22,6 +23,9 @@ export const InputContainer = styled.div`
   display: flex;
   flex: 1 ;
   flex-direction: column;
+  justify-content: center;
+  align-items: center;
+
  
 `;
 
@@ -43,3 +47,19 @@ export const Brand = styled.img.attrs({src: stante})`
  margin-top: 24px;
 `;
 
+export const OrganizedBooksImg = styled.img.attrs({src: organizedBooksImg})`
+ width: 303px;
+ height: 244px;
+ margin-bottom: 32px;
+`;
+
+export const FormContainer = styled.div`
+justify-content: center;
+align-items: center;
+text-align: center;
+`;
+
+export const PasswordInputContainer = styled.div`
+margin-top: 32px;
+margin-bottom: 40px;
+`;
