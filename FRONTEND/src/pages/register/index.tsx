@@ -66,7 +66,7 @@ function Register() {
               />
             </PasswordInputContainer>
           </form>
-          <CustomButton onClickButton={handleLogin} width={504} height={80} color="164C64" text='CADASTRAR' />
+          <CustomButton onClickButton={handleLogin} height={80} color="164C64" text='CADASTRAR' />
          
           <div>
           <Link to={'/login'}>Já Tenho Cadastro</Link>

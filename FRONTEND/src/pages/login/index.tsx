@@ -1,9 +1,8 @@
 import { useState } from 'react';
-import { Link, useNavigate } from 'react-router-dom';
+import { useNavigate } from 'react-router-dom';
 import CustomButton from '../../components/button';
-import { Input } from '../../components/input/styles';
 import { useAuth } from '../../hooks/auth';
-import { Brand, Container, FormContainer, ImageContainer, InputContainer, Logo, LogoContainer, OrganizedBooksImg, PasswordInputContainer } from './styles';
+import { Brand, ButtonContainer, Container, EmailInput, FormContainer, ImageContainer, InputContainer, LinkContainer, LinkRegister, LoginContainer, Logo, LogoContainer, OrganizedBooksImg, PasswordInput } from './styles';
 
 
 function Login() {
@@ -24,44 +23,21 @@ function Login() {
           <Brand />
         </ImageContainer>
       </LogoContainer>
-      <InputContainer>
-
+      <LoginContainer>
         <FormContainer>
-
           <OrganizedBooksImg />
-          <form >
-
-            <Input
-              placeholder='E-mail'
-              type={'email'}
-              height={80}
-              width={504}
-              fontSize={24}
-              value={email}
-              onChange={(e) => setEmail(e.target.value)}
-            />
-
-            <PasswordInputContainer>
-              <Input
-                placeholder='Senha'
-                type={'password'}
-                height={80}
-                width={504}
-                fontSize={24}
-                value={password}
-                onChange={(e) => setPassword(e.target.value)}
-
-              />
-            </PasswordInputContainer>
-          </form>
-          <CustomButton onClickButton={handleLogin} width={504} height={80} color="164C64" text={loading ? "Loading..." : "ENTRAR"} />
-          
-          <div>
-          
-          <Link to={'/register'}>Não Tenho Cadastro</Link>
-          </div>
+            <InputContainer>
+            <EmailInput value={email} onChange={(e) => setEmail(e.target.value)}/>
+            <PasswordInput value={password} onChange={(e) => setPassword(e.target.value)}/>
+            </InputContainer>
+          <ButtonContainer>
+          <CustomButton onClickButton={handleLogin} height={80} color="164C64" text={loading ? "Loading..." : "ENTRAR"} />
+          </ButtonContainer>
+          <LinkContainer>
+          <LinkRegister>Não Tenho Cadastro</LinkRegister>
+          </LinkContainer>
         </FormContainer>
-      </InputContainer>
+      </LoginContainer>
     </Container>
 
 

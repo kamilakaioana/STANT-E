@@ -2,16 +2,15 @@ import { Button } from './styles';
 
 export interface IButtonProps {
   onClickButton: () => void;
-  width: number;
   height: number;
   color: string;
   text: string;
 }
 
-function CustomButton({ onClickButton, width, height, color, text }: IButtonProps,) {
+function CustomButton({ onClickButton,  height, color, text }: IButtonProps,) {
 
   return (
-    <Button onClick={onClickButton} width={width} height={height} color={color}>
+    <Button onClick={onClickButton} height={height} color={color}>
       {text}
     </Button>
   )

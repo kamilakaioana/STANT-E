@@ -7,7 +7,7 @@ interface IButtonProps {
 }
 
 export const Button = styled.button<IButtonProps>`
-width: ${({width}) => width}px;
+width: 100%;
 height: ${({height}) => height}px;
 background-color: #${({color}) => color || '164C64'};
 border-radius: 20px;
