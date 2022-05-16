@@ -47,13 +47,14 @@ function Login() {
               handleChange,
               handleBlur,
               handleSubmit,
+              touched,
             }) => (
               <>
                 <InputContainer>
                   <form>
                     {/* <form onSubmit={handleSubmit}> */}
-                    <EmailInput value={values.email} onChange={handleChange('email')} tooltip={errors.email} error={Boolean(errors.email)} onBlur={handleBlur('email')} />
-                    <PasswordInput value={values.password} onChange={handleChange('password')} tooltip={errors.password} error={Boolean(errors.password)} onBlur={handleBlur('password')} />
+                    <EmailInput value={values.email} onChange={handleChange('email')} tooltip={errors.email} error={Boolean(touched.email && errors.email)} onBlur={handleBlur('email')} />
+                    <PasswordInput value={values.password} onChange={handleChange('password')} tooltip={errors.password} error={Boolean(touched.password && errors.password)} onBlur={handleBlur('password')} />
                   </form>
 
                 </InputContainer>
