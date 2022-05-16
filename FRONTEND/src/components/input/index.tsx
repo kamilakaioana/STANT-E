@@ -11,7 +11,7 @@ export interface IinputProps {
   error?: boolean;
   name?: string;
   type?: React.HTMLInputTypeAttribute;
-  onBlur?: React.FocusEventHandler<HTMLInputElement> | undefined
+  onBlur?: React.FocusEventHandler<HTMLInputElement>;
 }
 
 function CustomInput(props: IinputProps) {

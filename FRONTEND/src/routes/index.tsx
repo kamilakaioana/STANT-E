@@ -1,8 +1,10 @@
 import { Routes, Route, Navigate } from 'react-router-dom';
 import { useAuth } from '../hooks/auth';
+import BookRegister from '../pages/bookRegister';
 import Home from '../pages/home';
 import Login from '../pages/login';
-import Register from '../pages/register';
+import UserRegister from '../pages/userRegister';
+import LayoutBase from '../shared/layoutBase';
 
 
 export default function AppRoutes() {
@@ -12,10 +14,13 @@ const { isAuthenticated } = useAuth();
     return (
         <Routes>
             {
-                isAuthenticated ? (
+                isAuthenticated() ? (
                     <Route path='/'>
 
-                        <Route index element={<Home />} />
+                        <Route element={<LayoutBase />} >
+                            <Route index element={<Home />} />  
+                        </Route>
+                        <Route path="/bookRegister" element={<BookRegister />} />
 
                         <Route path="*" element={<Navigate to="/" replace />} />
                     </Route>
@@ -23,7 +28,7 @@ const { isAuthenticated } = useAuth();
                     (
                         <>
                             <Route path="/login" element={<Login />} />
-                            <Route path="/register" element={<Register />} />
+                            <Route path="/register" element={<UserRegister />} />
                             <Route
                                 path="*"
                                 element={<Navigate to="/login" replace />}

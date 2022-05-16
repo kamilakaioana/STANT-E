@@ -6,7 +6,7 @@ import { useAuth } from '../../hooks/auth';
 import { Brand, Container, FormContainer, ImageContainer, InputContainer, InputItemContainer, Logo, LogoContainer, PasswordInputContainer } from './styles';
 
 
-function Register() {
+function UserRegister() {
   const { user, signIn } = useAuth();
   const [name, setName] = useState<string>('')
   const [email, setEmail] = useState<string>('')
@@ -66,7 +66,7 @@ function Register() {
               />
             </PasswordInputContainer>
           </form>
-          <CustomButton onClickButton={handleLogin} height={80} color="164C64" text='CADASTRAR' />
+          <CustomButton onClickButton={handleLogin} textColor="fff"  height={80} color="164C64" text='CADASTRAR' />
          
           <div>
           <Link to={'/login'}>Já Tenho Cadastro</Link>
@@ -83,5 +83,5 @@ function Register() {
   )
 }
 
-export default Register;
+export default UserRegister;
 

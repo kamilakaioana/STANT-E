@@ -11,8 +11,6 @@ color: #3F3B3B;
 padding-left: 24px;
 border: ${({error}) => error ? "2px solid" : "none"};
 border-color: ${({error}) => error ? "red" : "#000"};
-type: ${({type}) => type};
-name: ${({name}) => name};
 &::placeholder {
   color: #cccccc;
   font-style: italic;
