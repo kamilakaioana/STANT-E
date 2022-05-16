@@ -2,8 +2,8 @@ import styled from 'styled-components';
 import logo from '../../assets/image/logo.svg'
 import stante from '../../assets/image/stante.svg'
 import organizedBooksImg from "../../assets/image/organizedBooks.svg"
-import { Input } from '../../components/input/styles';
 import { Link } from 'react-router-dom';
+import CustomInput from '../../components/input';
 
 export const Container = styled.div`
 display: flex;
@@ -41,15 +41,20 @@ export const Logo = styled.img.attrs({src: logo})`
 `;
 
 export const Brand = styled.img.attrs({src: stante})`
- width: 323px;
- height: 92px;
+  width: 323px;
+ height: 92px; 
  margin-top: 24px;
 `;
 
 export const OrganizedBooksImg = styled.img.attrs({src: organizedBooksImg})`
- width: 303px;
- height: 244px;
- margin-bottom: 32px;
+  width: 303px;
+ height: 244px; 
+ margin-bottom: 32px; 
+ 
+ /* @media (min-width: 700px) {
+
+ }; */
+
 `;
 
 export const FormContainer = styled.div`
@@ -66,20 +71,22 @@ flex-direction: column;
 padding: 0px 120px 40px 120px;
 `;
 
-export const EmailInput = styled(Input).attrs({
+export const EmailInput = styled(CustomInput).attrs({
   height: 80,
   type: 'email',
   fontSize: 24,
-  placeholder: 'E-mail',
+  placeholder: 'email',
+  name: 'email',
   })`  
   box-shadow: 2px 2px 2px 1px rgba(0, 0, 0, 0.2);
 `;
 
-export const PasswordInput = styled(Input).attrs({
+export const PasswordInput = styled(CustomInput).attrs({
   height: 80,
   type: 'password',
   fontSize: 24,
   placeholder: 'Senha',
+  name: 'password',
   })`  
   margin-top: 32px;
   box-shadow: 2px 2px 2px 1px rgba(0, 0, 0, 0.2);
