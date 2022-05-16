@@ -5,9 +5,16 @@ const express = require("express");
 const cors = require("cors");
 const server = express();
 
+const allowlist = ['http://localhost:3000']
+
+const corsOptions = {
+  origin: allowlist,
+  optionsSuccessStatus: 200 // some legacy browsers (IE11, various SmartTVs) choke on 204
+}
+
 server.use(bodyParser.urlencoded({ extended: true }));
 server.use(bodyParser.json());
-server.use(cors())
+server.use(cors(corsOptions))
 
 
 require("./config/routes")(server);
