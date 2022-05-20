@@ -16,12 +16,15 @@ const { isAuthenticated } = useAuth();
             {
                 isAuthenticated() ? (
                     <Route path='/'>
-
                         <Route element={<LayoutBase />} >
                             <Route index element={<Home />} />  
+                            <Route path="favoritos" element={<>Favoritos</>} />
+                            <Route path="lidos" element={<>Lidos</>} />
+                            <Route path="livro">
+                                <Route index element={<BookRegister />}/>
+                                <Route path=":bookId" element={<BookRegister />} />
+                            </Route>
                         </Route>
-                        <Route path="/bookRegister" element={<BookRegister />} />
-
                         <Route path="*" element={<Navigate to="/" replace />} />
                     </Route>
                 ) :

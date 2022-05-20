@@ -4,11 +4,16 @@ import { useAuth } from "../../hooks/auth";
 
 function Home() {
   const { signOut} = useAuth();
-  const navigate = useNavigate()  
+  const navigate = useNavigate();
+  
+  const handleLogOut = async () => {
+   await signOut();
+   navigate("/login"); // check again
+  }
 
   return (
     <div >
-       <Button onClick={() => signOut()}>DESLOGAR</Button>
+       <Button onClick={() => handleLogOut()}>DESLOGAR</Button>
        <Button onClick={() => navigate("/bookRegister")}>REGISTRAR LIVRO</Button>
     </div>
 

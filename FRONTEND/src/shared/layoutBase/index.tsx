@@ -1,10 +1,11 @@
 import { Outlet } from "react-router-dom";
+import Header from "../../components/header";
 
 
 function LayoutBase () {
   return (
     <div>
-      <div>Header</div>
+      <Header />
       <Outlet/>
       <div>Body</div>
       <div>Footer</div>
