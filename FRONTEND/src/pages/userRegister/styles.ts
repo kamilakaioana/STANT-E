@@ -2,6 +2,8 @@ import styled from 'styled-components';
 import logo from '../../assets/image/logo.svg'
 import stante from '../../assets/image/stante.svg'
 import organizedBooksImg from "../../assets/image/organizedBooks.svg"
+import CustomInput from '../../components/input';
+import { Link } from 'react-router-dom';
 
 
 export const Container = styled.div`
@@ -19,12 +21,9 @@ export const LogoContainer = styled.div`
 `;
 
 export const InputContainer = styled.div`
-  background-color: #FDFDFD;
   display: flex;
-  flex: 1 ;
   flex-direction: column;
-  justify-content: center;
-  align-items: center;
+  padding: 0px 100px;
 `;
 
 export const ImageContainer = styled.div`
@@ -55,6 +54,9 @@ export const FormContainer = styled.div`
 justify-content: center;
 align-items: center;
 text-align: center;
+width: 100%; 
+
+
 `;
 
 export const PasswordInputContainer = styled.div`
@@ -65,4 +67,80 @@ margin-bottom: 40px;
 export const InputItemContainer = styled.div`
 margin-top: 16px;
 margin-bottom: 16px;
+`;
+
+export const LoginContainer = styled.div`
+  background-color: #FDFDFD;
+  display: flex;
+  flex: 1 ;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+ 
+`;
+
+export const NomeInput = styled(CustomInput).attrs({
+  height: 80,
+  fontSize: 24,
+  placeholder: 'Nome completo',
+  name: 'name',
+  })`  
+  box-shadow: 2px 2px 2px 1px rgba(0, 0, 0, 0.2);
+`;
+
+export const EmailInput = styled(CustomInput).attrs({
+  height: 80,
+  type: 'email',
+  fontSize: 24,
+  placeholder: 'email',
+  name: 'email',
+  })`  
+  align-self: stretch;
+  margin-top: 32px;
+`;
+export const PasswordInput = styled(CustomInput).attrs({
+  height: 80,
+  type: 'password',
+  fontSize: 24,
+  placeholder: 'Senha',
+  name: 'password',
+  })`  
+  margin-top: 32px;
+`;
+export const ConfirmPasswordInput = styled(CustomInput).attrs({
+  height: 80,
+  type: 'password',
+  fontSize: 24,
+  placeholder: 'Confirme sua senha',
+  name: 'confirmPassword',
+  })`  
+  margin-top: 32px;
+`;
+
+export const Title = styled.h1`
+font-weight: lighter;
+font-size: 40px;
+color: #3F3B3B;
+
+`;
+
+ export const ButtonContainer = styled.div`
+ `;
+
+export const LinkContainer = styled.div`
+align-content: center;
+justify-content: center;
+margin-top: 16px;
+`;
+
+export const LinkRegister = styled(Link).attrs({
+  to: '/register'
+})`
+color: black;
+`;
+
+export const Teste =  styled.div`
+align-content: center;
+justify-content: center; 
+text-align: center;
 `;

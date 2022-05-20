@@ -75,7 +75,7 @@ export const EmailInput = styled(CustomInput).attrs({
   height: 80,
   type: 'email',
   fontSize: 24,
-  placeholder: 'email',
+  placeholder: 'Email',
   name: 'email',
   })`  
   box-shadow: 2px 2px 2px 1px rgba(0, 0, 0, 0.2);

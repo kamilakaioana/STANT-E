@@ -1,78 +1,59 @@
-import { useState } from 'react';
-import { Link } from 'react-router-dom';
+import { Formik } from 'formik';
 import CustomButton from '../../components/button';
-import { Input } from '../../components/input/styles';
 import { useAuth } from '../../hooks/auth';
-import { Brand, Container, FormContainer, ImageContainer, InputContainer, InputItemContainer, Logo, LogoContainer, PasswordInputContainer } from './styles';
+import { registerValidationSchema } from './registerValidationSchema';
+import { Brand, ButtonContainer, ConfirmPasswordInput, Container, EmailInput, FormContainer, ImageContainer, InputContainer, LinkContainer, LinkRegister, LoginContainer, Logo, LogoContainer, NomeInput, PasswordInput, Title } from './styles';
+
 
 
 function UserRegister() {
-  const { user, signIn } = useAuth();
-  const [name, setName] = useState<string>('')
-  const [email, setEmail] = useState<string>('')
-  const [password, setPassword] = useState<string>('')
-  const [confirmPassword, setConfirmPassword] = useState<string>('')
-
-  const handleLogin = () => {
-    signIn(email, password);
-  }
+  const { loading } = useAuth();
   return (
     <Container>
-      <InputContainer>
+      <LoginContainer>
+        <Title>Cadastra-se</Title>
         <FormContainer>
-          <form >
-            <h1>CADASTRAR</h1>
-          <InputItemContainer>
-            <Input
-              placeholder='Nome Completo'
-              height={80}
-              width={504}
-              fontSize={24}
-              value={name}
-              onChange={(e) => setName(e.target.value)}
-              
-            />
-            
-            </InputItemContainer>
-              <InputItemContainer>
-              <Input
-              placeholder='Email'
-              height={80}
-              width={504}
-              fontSize={24}
-              value={email}
-              onChange={(e) => setEmail(e.target.value)}
-            />
-            </InputItemContainer>
-             <InputItemContainer>
-              <Input
-              placeholder='Senha'
-              height={80}
-              width={504}
-              fontSize={24}
-              value={password}
-              onChange={(e) => setPassword(e.target.value)}
-            />    
-            </InputItemContainer>
+          <InputContainer>
+            <Formik
+              initialValues={{ name: '', email: '', password: '', confirmPassword: '' }}
+              validateOnBlur={true}
+              validateOnChange={false}
+              validationSchema={
+                registerValidationSchema
+              }
+              onSubmit={(values, { setSubmitting }) => {
+                // função para cadastrar
+                setSubmitting(false);
+              }}
+            >
+              {({
+                values,
+                errors,
+                handleChange,
+                handleBlur,
+                handleSubmit,
+                touched,
+              }) => (
+                <>
+                  <form>
+                    <NomeInput value={values.name} onChange={handleChange('name')} tooltip={errors.name} error={Boolean(touched.name && errors.name)} onBlur={handleBlur('name')} />
+                    <EmailInput value={values.email} onChange={handleChange('email')} tooltip={errors.email} error={Boolean(touched.email && errors.email)} onBlur={handleBlur('email')} />
+                    <PasswordInput value={values.password} onChange={handleChange('password')} tooltip={errors.password} error={Boolean(touched.password && errors.password)} onBlur={handleBlur('password')} />
+                    <ConfirmPasswordInput value={values.confirmPassword} onChange={handleChange('confirmPassword')} tooltip={errors.confirmPassword} error={Boolean(touched.confirmPassword && errors.confirmPassword)} onBlur={handleBlur('confirmPassword')} />
+                  </form>
 
-            <PasswordInputContainer>
-              <Input
-                placeholder='Confirme sua senha'
-                height={80}
-                width={504}
-                fontSize={24}
-                value={confirmPassword}
-                onChange={(e) => setConfirmPassword(e.target.value)}
-              />
-            </PasswordInputContainer>
-          </form>
-          <CustomButton onClickButton={handleLogin} textColor="fff"  height={80} color="164C64" text='CADASTRAR' />
-         
-          <div>
-          <Link to={'/login'}>Já Tenho Cadastro</Link>
-          </div>
+                  <ButtonContainer>
+                    <CustomButton disabled={loading} onClickButton={handleSubmit} height={80} textColor="fff" color="164C64" text={loading ? "Loading..." : "CADASTRAR"} />
+                  </ButtonContainer>
+                </>
+              )}
+            </Formik>
+          </InputContainer>
         </FormContainer>
-      </InputContainer>
+        <LinkContainer>
+          <LinkRegister>Não Tenho Cadastro</LinkRegister>
+        </LinkContainer>
+      </LoginContainer>
       <LogoContainer>
         <ImageContainer>
           <Logo />

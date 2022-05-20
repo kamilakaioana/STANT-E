@@ -11,6 +11,7 @@ color: #3F3B3B;
 padding-left: 24px;
 border: ${({error}) => error ? "2px solid" : "none"};
 border-color: ${({error}) => error ? "red" : "#000"};
+box-shadow: 2px 2px 2px 1px rgba(0, 0, 0, 0.2);
 &::placeholder {
   color: #cccccc;
   font-style: italic;
