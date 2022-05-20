@@ -134,7 +134,7 @@ margin-top: 16px;
 `;
 
 export const LinkRegister = styled(Link).attrs({
-  to: '/register'
+  to: "/login"
 })`
 color: black;
 `;
