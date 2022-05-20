@@ -1,13 +1,19 @@
 import { Formik } from 'formik';
+import { useState } from 'react';
 import CustomButton from '../../components/button';
-import { useAuth } from '../../hooks/auth';
+import UserService from '../../services/userService';
 import { registerValidationSchema } from './registerValidationSchema';
 import { Brand, ButtonContainer, ConfirmPasswordInput, Container, EmailInput, FormContainer, ImageContainer, InputContainer, LinkContainer, LinkRegister, LoginContainer, Logo, LogoContainer, NomeInput, PasswordInput, Title } from './styles';
 
-
+export type IUserRegister = {
+  name: string, 
+  email: string,
+  password: string, 
+}
 
 function UserRegister() {
-  const { loading } = useAuth();
+  const [loading, setLoading] = useState<boolean>();
+
   return (
     <Container>
       <LoginContainer>
@@ -21,9 +27,17 @@ function UserRegister() {
               validationSchema={
                 registerValidationSchema
               }
-              onSubmit={(values, { setSubmitting }) => {
-                // função para cadastrar
+              onSubmit={async (values, { setSubmitting }) => {
+                setLoading(true);
+                const data = {
+                  name: values.name,
+                  email: values.email,
+                  password: values.password,
+                };
+               const resposta = await UserService.register(data)
+               window.alert(resposta.msg)
                 setSubmitting(false);
+                setLoading(false);
               }}
             >
               {({

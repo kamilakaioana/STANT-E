@@ -41,11 +41,11 @@ function AuthProvider({children}: AuthProviderProps) {
           email,
           password,
         } 
-        const resLogin = await api.post('/api/auth/login', data);
-          
+        const resLogin = await api.post('/api/auth/login', data);        
+        
         setToken(resLogin.data?.token);
-      
 
+        
         return {
           msg: resLogin.data?.msg || 'Login realizado com sucesso!',
           success: true
