@@ -1,6 +1,7 @@
-import { useState } from 'react';
-import { useNavigate } from 'react-router-dom';
-import { AddImageContainer, ButtonContainer, Container, DescriptionInput, ExcluirButton, InputContainer, SalveButton, TitleInput } from './styles';
+import { useEffect, useState } from 'react';
+import { useNavigate, useParams } from 'react-router-dom';
+import BookService from '../../services/bookService';
+import { ActorInput, AddImageContainer, ButtonContainer, ButtonExcluirContainer, ButtonSalveContainer, Container, Content, DescriptionInput, ExcluirButton, InputContainer, Logo, SalveButton, Title, TitleInput } from './styles';
 
 
 function BookRegister() {
@@ -8,30 +9,42 @@ function BookRegister() {
   const [title, setTitle] = useState<string>('')
   const [actor, setActor] = useState<string>('')
   const [description, setDescription] = useState<string>('')
+  // const []
   const navigate = useNavigate()
+  const { bookId } = useParams();
 
+  const loadBook = async () => {
+    const livro = await BookService.getOne(bookId ?? '');
+  } 
 
-
+  useEffect(() => {
+console.log("bookId", bookId)
+  }, [])
   return (
     <>
       <Container>
+     <Title>Cadastro</Title>
+      <Content>
       <AddImageContainer>
-        <p>ADD</p>
+        <Logo/>
       </AddImageContainer>
 
+     
       <InputContainer>
-      <button style={{border: 'none'}}>Cancelar edição</button>
+      {/* <button style={{border: 'none'}}>Cancelar edição</button> */}
         <TitleInput value={title} onChange={(e) => setTitle(e.target.value)} />
-        {/* <ActorInput value={actor} onChange={(e) => setActor(e.target.value)} /> */}
+        <ActorInput value={actor} onChange={(e) => setActor(e.target.value)} />
         <DescriptionInput value={description} onChange={(e) => setDescription(e.target.value)} />
         <ButtonContainer>
-        {/* <CustomButton onClickButton={() => console.log("cadastrei")} height={80} color="164C64" text="EXCLUIR"  />
-        <CustomButton onClickButton={() => console.log("cadastrei")} height={80} color="164C64" text="SALVAR" /> */}
+          <ButtonExcluirContainer>
         <ExcluirButton onClickButton={() => console.log("cadastrei")} textColor="fff" height={80} color="164C64" text="EXCLUIR"  />
-        <SalveButton onClickButton={() => console.log("cadastrei")} textColor="fff"  height={80} color="fff" text="SALVAR" />
+        </ButtonExcluirContainer>
+        <ButtonSalveContainer>
+        <SalveButton onClickButton={() => window.alert('entrei no livro ')} textColor="164C64"  height={80} color="fff" text="SALVAR" />
+        </ButtonSalveContainer>
       </ButtonContainer>
       </InputContainer>
-   
+      </Content>
       </Container>
       
      
