@@ -47,7 +47,6 @@ justify-content: center;
 align-items: center;
 margin: 8px;
 text-decoration: none;
-
 `;
 
 export const Logo = styled.img.attrs({src: brand})`
