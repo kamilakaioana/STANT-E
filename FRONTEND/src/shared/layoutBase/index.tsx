@@ -7,7 +7,6 @@ function LayoutBase () {
     <div>
       <Header />
       <Outlet/>
-      <div>Body</div>
       <div>Footer</div>
     </div>
   )
