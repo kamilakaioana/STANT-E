@@ -8,6 +8,8 @@ background-color: #338499;
 width: 100%;
 display: flex;
 flex-direction: row;
+position: sticky;
+top: 0
 `;
 
 export const LogoContainer = styled.div`
@@ -45,6 +47,7 @@ justify-content: center;
 align-items: center;
 margin: 8px;
 text-decoration: none;
+
 `;
 
 export const Logo = styled.img.attrs({src: brand})`

@@ -1,24 +1,18 @@
 import { render } from "@testing-library/react"
+import { useEffect } from "react";
 import {  useNavigate} from "react-router-dom";
 
 import { useAuth } from "../../hooks/auth";
 import { Item, Logo, Container, MenuContainer, LogoContainer } from "./styles";
 
 
-
-
-
 function Header() {
-  const { signOut} = useAuth();
-  const navigate = useNavigate() 
+  const { signOut, loadUser} = useAuth();
 
 
   const logoutLink = () => {
     signOut()
-  
-    // window.location.reload()
-    // navigate('/login')
-    // props.history.push()
+
   }
 
 
@@ -43,12 +37,13 @@ const pages = [
     name: 'Cadastrar',
     path: '/livro'
   },
-  // {
-  //   id: '5',
-  //   name: 'Sair',
-  //   path: '/login',
-  // }
+
 ];
+
+
+useEffect(() => {
+  loadUser()
+}, [])
 
   return (
     <Container>
@@ -60,7 +55,7 @@ const pages = [
           pages.map(({ id, name, path }) => <Item to={path} key={id}>{name}</Item>
           )
         }
-        <button onClick={() => logoutLink()}>'Sair'</button>
+        <button style={{backgroundColor: 'transparent', border: 'none', fontSize: 20, color: '#fff', fontWeight: 'bolder', fontFamily: 'Times'}} onClick={() => logoutLink()}>Sair</button>
       </MenuContainer>
 
     </Container>
