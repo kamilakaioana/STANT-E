@@ -1,4 +1,5 @@
 const ModelUser = require("../models/users/user");
+const ModelBook= require("../models/livros/livro");
 const express = require("express");
 
 const { sign } = require("jsonwebtoken")
@@ -15,7 +16,42 @@ module.exports = (server) => {
 
   const Livro = require("../services/livroService");
   Livro.register(router, "/livros");
+  
+  // router.post('/livros', async (req, res) => {
+  //   const { title, author, favorite, read, description, image } = req.body;
 
+  //   //validation
+  //   if (!title) {
+  //     return res.status(422).json({ msg: "O titulo é obrigatório!" });
+  //   }
+  //   if (!author) {
+  //     return res.status(422).json({ msg: "O Autor é obrigatório!" });
+  //   }
+  //   imgB64 = '';
+  //   if (image) {
+  //     imgB64 = Buffer.from(image).toString('base64');
+  //     console.log(imgB64)
+  //   }
+    
+  //   try {
+  //      //CREATE book
+  //     const book = new ModelBook({
+  //       title,
+  //       author,
+  //       favorite,
+  //       read,
+  //       description,
+  //       image: imgB64
+  //     })
+
+  //     const resBook = await book.save();
+      
+  //     res.status(201).json({ msg: "Livro criado com sucesso!", data: resBook })
+  //   } catch (error) {
+  //     console.log(error)
+  //     res.status(500).json({ msg: "Erro no servidor, tente novamente mais tarde!" })
+  //   }
+  // });
   // Usuários
   // busca 1 user
   router.get("/users/:id", isAuthenticated, async (req, res) => {
@@ -31,8 +67,8 @@ module.exports = (server) => {
   })
 
   // cria User
-  router.post('/users', async (req, res) => {
-
+  router.post('/users', async (req, res) => { //userController.store
+ 
     const { name, email, password } = req.body;
 
     //validation

@@ -2,26 +2,34 @@ const restFul = require("node-restful");
 const mongoose = restFul.mongoose;
 
 const livroSchema = new mongoose.Schema({
-  titulo: {
+  title: {
     type: String,
     required: true,
   },
-  autor: {
+  author: {
     type: String,
     required: true,
   },
-  descricao: {
+  description: {
     type: String,
     default: null,
   },
-  favorito: {
+  favorite: {
     type: Boolean,
     default: false
   },
-  lido: {
+  read: {
     type: Boolean,
     default: false
+  },
+  image: {
+    type: String,
+    default: ''
+  },
+  clientId: {
+    type: String,
+    default: ''
   },
 });
 
-module.exports = restFul.model("Livro", livroSchema)
+module.exports = restFul.model("Book", livroSchema)

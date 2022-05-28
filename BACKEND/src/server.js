@@ -9,11 +9,12 @@ const allowlist = ['http://localhost:3000']
 
 const corsOptions = {
   origin: allowlist,
-  optionsSuccessStatus: 200 // some legacy browsers (IE11, various SmartTVs) choke on 204
+  optionsSuccessStatus: 200
 }
 
-server.use(bodyParser.urlencoded({ extended: true }));
 server.use(bodyParser.json());
+server.use(bodyParser.urlencoded({extended: true}));
+
 server.use(cors(corsOptions))
 
 
