@@ -3,8 +3,8 @@ import CustomInput from "../../components/inputs/input";
 
 export const Container = styled.div`
   min-height: 100vh;
-  background-color: #f2f8f7; //trocar
-  padding: 24px;
+  background-color: #f2f8f7;
+  padding: 44px;
 `;
 
 export const SearchInput = styled(CustomInput).attrs({
@@ -36,4 +36,14 @@ export const BoxButton = styled.button`
   align-items: center;
   justify-content: center;
   text-align: center;
+`;
+
+export const ShowMoreButton = styled.button`
+  padding: 0;
+  margin: 0;
+  background: none;
+  border: none;
+  margin-top: 12px;
+  text-decoration: underline;
+  cursor: pointer;
 `;

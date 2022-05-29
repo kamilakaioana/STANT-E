@@ -1,35 +1,72 @@
 import React, { useState } from "react";
 import Reading from "../../assets/image/reading.svg";
-import { SearchInputAuthor, SearchInputTitle } from "./styles";
 
+import { SearchIcon } from "../icons";
+import SearchInput from "../inputs/searchInput";
+import {
+  Button,
+  Container,
+  SearchInputAuthor,
+  SearchInputTitle,
+  ShowMoreButton,
+} from "./styles";
 
-const SearchAdvanced: React.FC = ({}) => {
-  const [teste, setTeste] = useState<string>("");
+interface ISearchAdvanced {
+  setShowMoreFilter: (value: boolean) => void;
+  onSubmit: (value: string) => void;
+}
+const SearchAdvanced: React.FC<ISearchAdvanced> = ({
+  setShowMoreFilter,
+  onSubmit,
+}) => {
+  const [value, setValue] = useState<string>("");
+
+  const handleShowLess = () => {
+    setShowMoreFilter(false);
+  };
   return (
-    <div
-      style={{
-        marginTop: 24,
-        backgroundColor: "pink",
-        display: "flex",
-        flexDirection: "row",
-        justifyContent: "space-between",
-        paddingLeft: "10%",
-        paddingRight: "10%",
-      }}
-    >
+    <Container>
       <div style={{ width: "50%" }}>
-        <SearchInputTitle
-          value={teste}
-          onChange={(e) => setTeste(e.target.value)}
+        <SearchInput
+          placeholder="Titulo livro"
+          value={value}
+          onChange={(e) => setValue(e.target.value)}
         />
-        <SearchInputAuthor
-          value={teste}
-          onChange={(e) => setTeste(e.target.value)}
-        />
+        <div style={{ paddingTop: 16 }}>
+          <SearchInput
+            placeholder="Autor"
+            value={value}
+            onChange={(e) => setValue(e.target.value)}
+          />
+        </div>
+        <div style={{ display: "flex", justifyContent: "flex-end" }}>
+          <ShowMoreButton onClick={() => handleShowLess()}>
+            Esconder filtros
+          </ShowMoreButton>
+        </div>
+        <div
+          style={{
+            justifyContent: "center",
+            display: "flex",
+          }}
+        >
+          <Button onClick={() => onSubmit(value)}>
+            PESQUISAR
+            <img
+              src={SearchIcon}
+              alt="search"
+              height={24}
+              width={24}
+              style={{
+                marginLeft: 12,
+              }}
+            />
+          </Button>
+        </div>
       </div>
 
       <img src={Reading} alt="reading" height={183} width={294} />
-    </div>
+    </Container>
   );
 };
 
