@@ -112,9 +112,7 @@ function BookRegister() {
                 image: imageBase64,
                 clientId: user._id ?? undefined,
               };
-         
-              BookService.create(data)
-         
+              BookService.create(data)       
               window.alert('foi')
               setSubmitting(false);
               setLoading(false);
@@ -156,17 +154,12 @@ function BookRegister() {
                     <ButtonExcluirContainer>
                       <ExcluirButton
                         onClickButton={() => console.log("cadastrei")}
-                        textColor="fff"
-                        height={80}
-                        color="164C64"
+                        secondary
                         text={haLivroSelecionado ? "EXCLUIR" : "CANCELAR"}
                       />
                     </ButtonExcluirContainer>
                     <ButtonSalveContainer>
                       <SalveButton
-                        textColor="164C64"
-                        height={80}
-                        color="fff"
                         text={haLivroSelecionado ? "SALVAR" : "CADASTRAR"}
                         onClickButton={handleSubmit}
                       />

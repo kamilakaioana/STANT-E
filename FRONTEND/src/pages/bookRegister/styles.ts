@@ -89,6 +89,7 @@ export const DescriptionInput = styled(Input).attrs({
   margin-top: 32px;
 `;
 export const ExcluirButton = styled(CustomButton).attrs({
+
   height: 80,
 })`
   box-shadow: 2px 2px 2px 1px rgba(0, 0, 0, 0.2);
