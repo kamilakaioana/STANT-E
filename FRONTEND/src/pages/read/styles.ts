@@ -3,7 +3,7 @@ import CustomInput from "../../components/input";
 
 export const Container = styled.div`
   min-height: 100vh;
-  background-color: #f2f8f7;
+  background-color: #f2f8f7; 
   padding: 24px;
 `;
 
@@ -14,6 +14,7 @@ export const SearchInput = styled(CustomInput).attrs({
   name: "name",
 })`
   box-shadow: 2px 2px 2px 1px rgba(0, 0, 0, 0.2);
+
   margin-bottom: 0;
   padding-bottom: 0;
 `;

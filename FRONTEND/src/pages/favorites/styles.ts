@@ -3,7 +3,7 @@ import CustomInput from "../../components/input";
 
 export const Container = styled.div`
   min-height: 100vh;
-  background-color: #f2f8f7;
+  background-color: #f2f8f7; //trocar
   padding: 24px;
 `;
 

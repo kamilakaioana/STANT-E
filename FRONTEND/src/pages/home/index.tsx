@@ -1,65 +1,35 @@
 import { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
-import { Button } from "../../components/button/styles";
 import { useAuth } from "../../hooks/auth";
 import { IBook } from "../../interfaces";
 import BookService from "../../services/bookService";
-
-import { BookImage, Container, Livro, Livros, Content } from "./styles";
+import BookShared from "../../shared/bookShared";
 
 function Home() {
-  const [books, setBooks] = useState<IBook[]>()
+  const [books, setBooks] = useState<IBook[]>([]);
   const { signOut } = useAuth();
   const navigate = useNavigate();
+  const [loading, setLoading] = useState<boolean>(false);
 
-  const handleLogOut = async () => {
-    await signOut();
-    navigate("/login"); // check again
-  }
+  const handleSelectBook = (id: string) => {
+    navigate(`/livro/${id} `);
+  };
+
   const loadBooks = async () => {
+    setLoading(true);
     const book: IBook[] = await BookService.getAll();
-    console.log(book)
-    setBooks(book ? book : [])
+    console.log(book);
+    setBooks(book ? book : []);
+    setLoading(false);
     return book;
-  }
+  };
 
-  const handleSelectBook =  (id: string) => {
-   
-    navigate(`/livro/${id} `); // check again
-  }
- 
-  // componentDiMount() {
-  //   getBooks();
-  // }
   useEffect(() => {
     const teste = loadBooks();
-    console.log("teste", teste)
-  }, [])
-  return (
-    <Container >
-      <Livros>
-        {
-          books?.map(book => (
-            <Livro key={book._id} onClick={() => handleSelectBook(book._id)}>
-              <BookImage />
-              <Content>
-              <h2>{book.titulo}</h2>
-              <p>{book.descricao ?? ' Ainda não há descrição para essa obra'}</p>
-              </Content>
-             
-            </Livro>
-          ))
-        }
-      </Livros>
-    </Container>
+    console.log("teste", teste);
+  }, []);
 
-
-  )
+  return <BookShared data={books} loading={loading} />;
 }
 
 export default Home;
-
-function componentDiMount() {
-  throw new Error("Function not implemented.");
-}
-
