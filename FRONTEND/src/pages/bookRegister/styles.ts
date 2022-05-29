@@ -1,4 +1,4 @@
-import Input from "../../components/input/index";
+import Input from "../../components/inputs/input/index";
 import styled from "styled-components";
 import CustomButton from "../../components/button";
 import ImageIcon from "../../assets/icon/image.svg";

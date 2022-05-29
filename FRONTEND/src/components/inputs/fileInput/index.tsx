@@ -4,7 +4,7 @@ interface Props {
   setFile: (base64: string | ArrayBuffer | null) => void;
 }
 
-function CustomInputFile({ setFile }: Props) {
+function CustomFileInput({ setFile }: Props) {
   const encodeFileBase64 = (files: FileList | null) => {
     var reader = new FileReader();
     if (files?.[0]) {
@@ -37,4 +37,4 @@ function CustomInputFile({ setFile }: Props) {
   );
 }
 
-export default CustomInputFile;
+export default CustomFileInput;

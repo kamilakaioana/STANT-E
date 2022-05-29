@@ -1,7 +1,7 @@
 import { Formik } from "formik";
 import { useCallback, useEffect, useState } from "react";
 import { useNavigate, useParams } from "react-router-dom";
-import CustomInputFile from "../../components/inpuFile";
+import CustomFileInput from "../../components/inputs/fileInput";
 import { useAuth } from "../../hooks/auth";
 import { IBook } from "../../interfaces";
 import BookService from "../../services/bookService";
@@ -94,7 +94,7 @@ function BookRegister() {
             <ImgContent>
             { previewImg ? <img src={imageBase64} alt="image book"/> : <Logo />}
             </ImgContent>
-            <CustomInputFile setFile={setFile}/>
+            <CustomFileInput setFile={setFile}/>
           </AddImageContainer>
 
           <Formik

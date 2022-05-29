@@ -1,5 +1,5 @@
 import styled from "styled-components";
-import CustomInput from "../../components/input";
+import CustomInput from "../../components/inputs/input";
 
 export const Container = styled.div`
   min-height: 100vh;

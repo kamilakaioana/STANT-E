@@ -1,5 +1,5 @@
 import styled from "styled-components";
-import CustomInput from "../input";
+import CustomInput from "../inputs/input";
 
 export const SearchInputTitle = styled(CustomInput).attrs({
   height: 64,

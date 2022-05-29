@@ -2,7 +2,7 @@ import styled from 'styled-components';
 import logo from '../../assets/image/logo.svg'
 import stante from '../../assets/image/stante.svg'
 import organizedBooksImg from "../../assets/image/organizedBooks.svg"
-import CustomInput from '../../components/input';
+import CustomInput from '../../components/inputs/input';
 import { Link } from 'react-router-dom';
 
 

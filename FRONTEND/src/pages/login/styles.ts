@@ -3,7 +3,7 @@ import logo from '../../assets/image/logo.svg'
 import stante from '../../assets/image/stante.svg'
 import organizedBooksImg from "../../assets/image/organizedBooks.svg"
 import { Link } from 'react-router-dom';
-import CustomInput from '../../components/input';
+import CustomInput from '../../components/inputs/input';
 
 export const Container = styled.div`
 display: flex;

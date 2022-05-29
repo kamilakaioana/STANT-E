@@ -1,4 +1,3 @@
-import { useState } from "react";
 import { Container, Error, ErrorContainer, Input } from "./styles";
 
 export interface IinputProps {
