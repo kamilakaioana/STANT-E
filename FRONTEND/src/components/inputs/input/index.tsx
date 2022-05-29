@@ -1,7 +1,7 @@
 import { Container, Error, ErrorContainer, Input } from "./styles";
 
 export interface IinputProps {
-  placeholder: string,
+  placeholder: string;
   height?: number;
   fontSize?: number;
   value: string;
@@ -14,7 +14,6 @@ export interface IinputProps {
 }
 
 function CustomInput(props: IinputProps) {
-
   return (
     <Container>
       <Input
@@ -28,15 +27,11 @@ function CustomInput(props: IinputProps) {
         type={props.type}
         onBlur={props.onBlur}
       />
-        <ErrorContainer>
-      
-         <Error > { props.error ? props.tooltip : ''}</Error>
-        
-        </ErrorContainer>
+      <ErrorContainer>
+        <Error> {props.error ? props.tooltip : ""}</Error>
+      </ErrorContainer>
     </Container>
-
-
-  )
+  );
 }
 
 export default CustomInput;

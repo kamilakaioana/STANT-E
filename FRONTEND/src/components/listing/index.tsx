@@ -6,10 +6,18 @@ import { useAuth } from "../../hooks/auth";
 import { IBook } from "../../interfaces";
 import { HeartIconGray } from "../../pages/bookRegister/styles";
 import {
+  Book,
   BookImage,
-  Container, Content,
-  HeartIconRed, Livro,
-  Livros
+  Books,
+  Container,
+  ContainerNotFound,
+  Content,
+  Description,
+  HeaderBook,
+  HeartIconRed,
+  ImageContainer,
+  InfoMessage,
+  Title,
 } from "./styles";
 
 interface IBookListProps {
@@ -27,48 +35,19 @@ const Listing: React.FC<IBookListProps> = ({ data }) => {
   return (
     <>
       {data && data.length ? (
-        <Container style={{ marginLeft: 24, marginRight: 24 }}>
-          <Livros>
+        <Container>
+          <Books>
             {data?.map((book) => (
-              <Livro key={book._id} onClick={() => handleSelectBook(book._id)}>
-                <div
-                  style={{
-                    backgroundColor: "#7BBBAD",
-                    height: 48,
-                    borderTopLeftRadius: 20,
-                    borderTopRightRadius: 20,
-                    alignSelf: "flex-start",
-                    display: "flex",
-                    flexDirection: "row",
-                    alignItems: "center",
-                    justifyContent: "space-between",
-                    paddingLeft: 24,
-                    paddingRight: 24,
-                  }}
-                >
-                  <p
-                    style={{
-                      fontSize: 20,
-                      fontWeight: "600",
-                      textTransform: "capitalize",
-                    }}
-                  >
-                    {book.title}
-                  </p>
+              <Book key={book._id} onClick={() => handleSelectBook(book._id)}>
+                <HeaderBook>
+                  <Title>{book.title}</Title>
                   {favoritos ? (
                     <HeartIconRed />
                   ) : (
                     <HeartIconGray selected={favoritos} />
                   )}
-                </div>
-                <div
-                  style={{
-                    backgroundColor: "#AACFC7",
-                    height: 300,
-                    width: "100%",
-                    overflow: "hidden",
-                  }}
-                >
+                </HeaderBook>
+                <ImageContainer>
                   <BookImage
                     src={
                       book?.image && book.image !== ""
@@ -76,17 +55,14 @@ const Listing: React.FC<IBookListProps> = ({ data }) => {
                         : DefaultBook
                     }
                   />
-                </div>
+                </ImageContainer>
+                {/* // @TODO CORRIGIR ELLIPSIS */}
                 <Content>
-                  <p
-                    style={{ padding: 0, margin: 0, textOverflow: "ellipsis" }}
-                  >
-                    {book.description}
-                  </p>
+                  <Description>{book.description}</Description>
                 </Content>
-              </Livro>
+              </Book>
             ))}
-          </Livros>
+          </Books>
         </Container>
       ) : (
         <Container
@@ -98,33 +74,22 @@ const Listing: React.FC<IBookListProps> = ({ data }) => {
             textAlign: "center",
           }}
         >
-          <div
-            style={{
-              alignItems: "center",
-              justifyContent: "center",
-              display: "flex",
-              flexDirection: "row",
-              textAlign: "end",
-              alignSelf: "center",
-              padding: 100,
-            }}
-          >
-            <text fontSize={32}>
+          <ContainerNotFound>
+            <InfoMessage>
               <br />
               <b>
                 Nenhum resultado <br /> encontrado para essa busca.
               </b>
-              <br />
-              Você pode usar o<br /> cadatrar.
-            </text>
+              <br /> Você pode usar o<br /> cadastrar.
+            </InfoMessage>
             <img
               src={NotFound}
-              height={181}
-              width={181}
+              height={200}
+              width={200}
               alt="Um desenho de um menino em pé segurando um livro"
               style={{ marginLeft: 40 }}
             />
-          </div>
+          </ContainerNotFound>
         </Container>
       )}
     </>
