@@ -1,14 +1,17 @@
-import {createContext, ReactNode, useContext, useState} from "react";
-import {api} from '../services/api'
-import { isAuthenticated as isAuthenticatedService, removeToken, setToken } from "../services/authService";
+import { createContext, ReactNode, useContext, useState } from "react";
+import { useNavigate } from "react-router-dom";
+import { api } from "../services/api";
+import {
+  isAuthenticated as isAuthenticatedService,
+  removeToken,
+  setToken,
+} from "../services/authService";
 
 type User = {
-id: string,
-name: string,
-email: string,
-password: string,
-token: string,
-}
+  _id: string;
+  name: string;
+  email: string;
+};
 
 type AuthContextData = {
   user: User;
@@ -16,67 +19,77 @@ type AuthContextData = {
   signOut: () => void;
   isAuthenticated: () => boolean;
   loading: boolean;
-}
+  loadUser: () => void;
+};
 
 type AuthProviderProps = {
   children: ReactNode;
-}
+};
 
 export type IMensageLoginType = {
   success: boolean;
   msg: string;
-}
+};
 
-export const AuthContext = createContext({} as AuthContextData)
+export const AuthContext = createContext({} as AuthContextData);
 
-function AuthProvider({children}: AuthProviderProps) {
+function AuthProvider({ children }: AuthProviderProps) {
   const [user, setUser] = useState<User>({} as User);
   const [loading, setLoading] = useState<boolean>(false);
-  
-   const signIn = async (email: string, password: string): Promise<IMensageLoginType> => {
-      try{
-        
-        setLoading(true)
-        const data = {
-          email,
-          password,
-        } 
-        const resLogin = await api.post('/api/auth/login', data);        
-        
-        setToken(resLogin.data?.token);
+  const navigate = useNavigate();
 
-        
-        return {
-          msg: resLogin.data?.msg || 'Login realizado com sucesso!',
-          success: true
-        }
+  const signIn = async (
+    email: string,
+    password: string
+  ): Promise<IMensageLoginType> => {
+    try {
+      setLoading(true);
+      const data = {
+        email,
+        password,
+      };
+      const resLogin = await api.post("/api/auth/login", data);
 
-      }catch(error: any){
-        return {
-          msg: error?.response?.data?.msg || 'Não foi possível realizar o login.',
-          success: false
-        }
-      } finally{
-      
-        setLoading(false);
-      
-      }
-   }
+      setToken(resLogin.data?.token);
 
-   const signOut = () => {
-     removeToken();
-   }
+      setUser(resLogin.data);
+      return {
+        msg: resLogin.data?.msg || "Login realizado com sucesso!",
+        success: true,
+      };
+    } catch (error: any) {
+      return {
+        msg: error?.response?.data?.msg || "Não foi possível realizar o login.",
+        success: false,
+      };
+    } finally {
+      setLoading(false);
+    }
+  };
 
-   const isAuthenticated = () => {
-    return isAuthenticatedService()
-   }
+  const loadUser = async () => {
+    try {
+      const res = await api.get("/api/auth/me");
+      setUser(res.data?.user);
+    } catch (error) {}
+  };
 
+  const signOut = () => {
+    removeToken();
+    navigate("/login");
+  };
+
+  const isAuthenticated = () => {
+    return isAuthenticatedService();
+  };
 
   return (
-    <AuthContext.Provider value={{user, signIn, signOut, isAuthenticated, loading}}>
+    <AuthContext.Provider
+      value={{ user, signIn, signOut, isAuthenticated, loading, loadUser }}
+    >
       {children}
     </AuthContext.Provider>
-  )
+  );
 }
 
 function useAuth() {
@@ -84,8 +97,4 @@ function useAuth() {
   return context;
 }
 
-export {
-  AuthProvider,
-  useAuth
-}
-
+export { AuthProvider, useAuth };

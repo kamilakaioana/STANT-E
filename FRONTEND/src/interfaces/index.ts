@@ -6,10 +6,12 @@ export interface IResponse {
 
 export interface IBook {
   _id: string,
-  titulo: string, 
-  autor: string,
-  descricao: string | null,
-  favorito: boolean,
-  lido: boolean,
+  title: string, 
+  author: string,
+  description: string | null,
+  favorite: boolean,
+  read: boolean,
+  image: string,
+  clientId: string;
 }
 
