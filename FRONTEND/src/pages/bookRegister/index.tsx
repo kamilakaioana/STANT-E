@@ -1,6 +1,9 @@
 import { Formik } from "formik";
-import { useEffect, useState } from "react";
+import { useCallback, useEffect, useState } from "react";
 import { useNavigate, useParams } from "react-router-dom";
+import CustomInputFile from "../../components/inpuFile";
+import { useAuth } from "../../hooks/auth";
+import { IBook } from "../../interfaces";
 import BookService from "../../services/bookService";
 import { registerBookValidationSchema } from "./registerBookValidationSchema";
 import {
@@ -17,7 +20,6 @@ import {
   DescriptionInput,
   EditIcon,
   ExcluirButton,
-
   HeartIconGray,
   HeartIconRed,
   ImgContent,
@@ -32,31 +34,31 @@ import {
   Title,
   TitleContainer,
   TitleInput,
-  UncheckedIconLidos,
+  UncheckedIconLidos
 } from "./styles";
 
 function BookRegister() {
   const [loading, setLoading] = useState<boolean>();
   const navigate = useNavigate();
   const { bookId } = useParams();
-
-  const loadBook = async () => {
-    const livro = await BookService.getOne(bookId ?? "");
-    // setHaLivroSelecionado(livro);
-    return livro;
-  };
+  const [file, setFile] = useState<string | ArrayBuffer | null>();
+  const [previewImg, setPreviewImg] = useState<string>();
+  const { user } = useAuth();
   const [lidosChecked, setLidosChecked] = useState<boolean>(true);
   const [favoritos, setFavoritos] = useState<boolean>(false);
-  const [haLivroSelecionado, setHaLivroSelecionado] = useState<boolean>(true);
+  const [haLivroSelecionado, setHaLivroSelecionado] = useState<boolean>(false);
+  const imageBase64 = typeof file === 'string' ? file : '';
 
-  useEffect(() => {
+  const loadBook =  useCallback(async () => {
+    const livro = await BookService.getOne(bookId ?? "");
+    return livro;
+  }, [bookId]);
+
+   useEffect(() => {
     console.log("bookId", bookId);
     loadBook();
-  }, []);
+  }, [bookId, loadBook]);
 
-  const handleAddImg = () => {
-    //@ add img e converter base 64
-  }
   return (
     <>
       <Container>
@@ -89,27 +91,31 @@ function BookRegister() {
         )}
         <Content>
           <AddImageContainer>
-            <ImgContent onClick={() => handleAddImg()}>
-            <Logo />
+            <ImgContent>
+            { previewImg ? <img src={imageBase64} alt="image book"/> : <Logo />}
             </ImgContent>
+            <CustomInputFile setFile={setFile}/>
           </AddImageContainer>
 
           <Formik
-            initialValues={{ title: "", actor: "", description: "" }}
+            initialValues={{ title: "", author: "", description: "", image: "", clientId: "" }}
             validateOnBlur={true}
             validateOnChange={false}
             validationSchema={registerBookValidationSchema}
             onSubmit={async (values, { setSubmitting }) => {
               setLoading(true);
-              const data = {
+             
+              const data: Partial<IBook> = {
                 title: values.title,
-                actor: values.actor,
+                author: values.author,
                 description: values.description,
-                // image: values.image,
+                image: imageBase64,
+                clientId: user._id ?? undefined,
               };
-              window.alert(`valores ${data.title} ${data.actor}`);
-              // const resposta = await UserService.register(data)
-              // window.alert(resposta.msg)
+         
+              BookService.create(data)
+         
+              window.alert('foi')
               setSubmitting(false);
               setLoading(false);
             }}
@@ -132,11 +138,11 @@ function BookRegister() {
                     onBlur={handleBlur("title")}
                   />
                   <ActorInput
-                    value={values.actor}
-                    onChange={handleChange("actor")}
-                    tooltip={errors.actor}
-                    error={Boolean(touched.actor && errors.actor)}
-                    onBlur={handleBlur("actor")}
+                    value={values.author}
+                    onChange={handleChange("author")}
+                    tooltip={errors.author}
+                    error={Boolean(touched.author && errors.author)}
+                    onBlur={handleBlur("author")}
                   />
                   <DescriptionInput
                     value={values.description}
@@ -153,7 +159,7 @@ function BookRegister() {
                         textColor="fff"
                         height={80}
                         color="164C64"
-                        text="EXCLUIR"
+                        text={haLivroSelecionado ? "EXCLUIR" : "CANCELAR"}
                       />
                     </ButtonExcluirContainer>
                     <ButtonSalveContainer>
@@ -161,7 +167,7 @@ function BookRegister() {
                         textColor="164C64"
                         height={80}
                         color="fff"
-                        text="SALVAR"
+                        text={haLivroSelecionado ? "SALVAR" : "CADASTRAR"}
                         onClickButton={handleSubmit}
                       />
                     </ButtonSalveContainer>
