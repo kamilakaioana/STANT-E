@@ -9,35 +9,35 @@ import {
   MenuContainer,
 } from "./styles";
 
+const pages = [
+  {
+    id: "1",
+    name: "Home",
+    path: "/",
+  },
+  {
+    id: "2",
+    name: "Favoritos",
+    path: "/favoritos",
+  },
+  {
+    id: "3",
+    name: "Lidos",
+    path: "/lidos",
+  },
+  {
+    id: "4",
+    name: "Cadastrar",
+    path: "/livro",
+  },
+];
+
 function Header() {
   const { signOut, loadUser } = useAuth();
 
   const logoutLink = () => {
     signOut();
   };
-
-  const pages = [
-    {
-      id: "1",
-      name: "Home",
-      path: "/",
-    },
-    {
-      id: "2",
-      name: "Favoritos",
-      path: "/favoritos",
-    },
-    {
-      id: "3",
-      name: "Lidos",
-      path: "/lidos",
-    },
-    {
-      id: "4",
-      name: "Cadastrar",
-      path: "/livro",
-    },
-  ];
 
   useEffect(() => {
     loadUser();
