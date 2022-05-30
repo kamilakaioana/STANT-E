@@ -3,11 +3,19 @@ import styled from "styled-components";
 export const Label = styled.label`
   padding: 20px 10px;
   width: 200px;
-  background-color: #333;
+  /* background-color: #333; */
+  background-color: #7bbbad;
   color: #fff;
   text-transform: uppercase;
   text-align: center;
   display: block;
   margin-top: 10px;
+  border-radius: 20px;
   cursor: pointer;
+  font-weight: bolder;
+  letter-spacing: 0.3;
+  :hover {
+    background-color: #aad4cb;
+    transform: scale(1.05);
+  }
 `;

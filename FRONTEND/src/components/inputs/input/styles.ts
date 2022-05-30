@@ -10,7 +10,7 @@ export const Input = styled.input<IinputProps>`
   font-size: ${({ fontSize }) => fontSize || 24}px;
   height: ${({ height }) => height}px;
   border-radius: 20px;
-  background-color: #f5f2f2;
+  background-color: #${({ disabled }) => (disabled ? "C4C4C466" : "f5f2f2")};
   color: #3f3b3b;
   padding-left: 24px;
   border: ${({ error }) => (error ? "2px solid" : "none")};
@@ -19,6 +19,8 @@ export const Input = styled.input<IinputProps>`
   &::placeholder {
     color: #cccccc;
     font-style: italic;
+
+    /* disabled */
   }
   &:focus {
     outline: none;
