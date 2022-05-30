@@ -25,7 +25,6 @@ const BookShared: React.FC<IBookShared> = ({ data, loading }) => {
   return (
     <>
       <Container>
-        <CustomToast />
         <Header />
         <Listing data={data} handleSelectBook={handleSelectedBook} />
       </Container>
