@@ -8,6 +8,9 @@ export interface IButtonProps {
   textColor?: string;
   disabled?: boolean;
   secondary?: boolean;
+  colorHover?: string;
+  fontSize?: number;
+  borderRadius?: number;
 }
 
 function CustomButton({
@@ -18,6 +21,8 @@ function CustomButton({
   textColor,
   disabled,
   secondary,
+  fontSize,
+  borderRadius,
 }: IButtonProps) {
   return (
     <Button
@@ -27,6 +32,8 @@ function CustomButton({
       textColor={textColor}
       disabled={disabled}
       secondary={secondary}
+      fontSize={fontSize}
+      borderRadius={borderRadius}
     >
       {text}
     </Button>

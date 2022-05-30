@@ -1,15 +1,14 @@
 import { Outlet } from "react-router-dom";
 import Header from "../../components/header";
 
-
-function LayoutBase () {
+function LayoutBase() {
   return (
     <div>
       <Header />
-      <Outlet/>
+      <Outlet />
       <div>Footer</div>
     </div>
-  )
+  );
 }
 
 export default LayoutBase;

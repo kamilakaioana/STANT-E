@@ -11,6 +11,7 @@ export interface IinputProps {
   name?: string;
   type?: React.HTMLInputTypeAttribute;
   onBlur?: React.FocusEventHandler<HTMLInputElement>;
+  disabled?: boolean;
 }
 
 function CustomInput(props: IinputProps) {
@@ -26,6 +27,7 @@ function CustomInput(props: IinputProps) {
         name={props.name}
         type={props.type}
         onBlur={props.onBlur}
+        disabled={props.disabled}
       />
       <ErrorContainer>
         <Error> {props.error ? props.tooltip : ""}</Error>

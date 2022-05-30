@@ -1,4 +1,10 @@
-import { createContext, ReactNode, useContext, useState } from "react";
+import {
+  createContext,
+  ReactNode,
+  useCallback,
+  useContext,
+  useState,
+} from "react";
 import { useNavigate } from "react-router-dom";
 import { api } from "../services/api";
 import {
@@ -51,8 +57,6 @@ function AuthProvider({ children }: AuthProviderProps) {
       const resLogin = await api.post("/api/auth/login", data);
 
       setToken(resLogin.data?.token);
-
-      setUser(resLogin.data);
       return {
         msg: resLogin.data?.msg || "Login realizado com sucesso!",
         success: true,
@@ -67,21 +71,21 @@ function AuthProvider({ children }: AuthProviderProps) {
     }
   };
 
-  const loadUser = async () => {
+  const loadUser = useCallback(async () => {
     try {
       const res = await api.get("/api/auth/me");
       setUser(res.data?.user);
     } catch (error) {}
-  };
+  }, []);
 
   const signOut = () => {
     removeToken();
     navigate("/login");
   };
 
-  const isAuthenticated = () => {
+  const isAuthenticated = useCallback(() => {
     return isAuthenticatedService();
-  };
+  }, []);
 
   return (
     <AuthContext.Provider

@@ -8,30 +8,34 @@ import { IBook } from "../../interfaces";
 import { Container, ShowMoreButton } from "./styles";
 import SearchInput from "../../components/inputs/searchInput";
 import Header from "./Header";
+import CustomToast from "../../components/toast";
 
 interface IBookShared {
   data: IBook[];
   loading: boolean;
 }
 const BookShared: React.FC<IBookShared> = ({ data, loading }) => {
-  const [books, setBooks] = useState<IBook[]>([]);
-  const { signOut } = useAuth();
   const navigate = useNavigate();
   const [favoritos, setFavoritos] = useState<boolean>(true);
+
+  const handleSelectedBook = (bookId: string) => {
+    navigate(`/livro/${bookId} `);
+  };
 
   return (
     <>
       <Container>
+        <CustomToast />
         <Header />
-        <Listing data={data} />
+        <Listing data={data} handleSelectBook={handleSelectedBook} />
       </Container>
       <LoadingModal modalVisible={loading} />
     </>
   );
 };
 
-BookShared.defaultProps = {
-  loading: false,
-};
+// BookShared.defaultProps = {
+//   loading: false,
+// };
 
 export default BookShared;

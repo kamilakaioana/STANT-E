@@ -22,15 +22,12 @@ import {
 
 interface IBookListProps {
   data: IBook[];
+  handleSelectBook: (bookId: string) => void;
 }
-const Listing: React.FC<IBookListProps> = ({ data }) => {
+const Listing: React.FC<IBookListProps> = ({ data, handleSelectBook }) => {
   const { signOut } = useAuth();
   const navigate = useNavigate();
   const [favoritos, setFavoritos] = useState<boolean>(true);
-
-  const handleSelectBook = (id: string) => {
-    navigate(`/livro/${id} `);
-  };
 
   return (
     <>
@@ -58,7 +55,11 @@ const Listing: React.FC<IBookListProps> = ({ data }) => {
                 </ImageContainer>
                 {/* // @TODO CORRIGIR ELLIPSIS */}
                 <Content>
-                  <Description>{book.description}</Description>
+                  <Description>
+                    {book.description?.length
+                      ? book.description
+                      : "Não há uma descrição cadastrada"}
+                  </Description>
                 </Content>
               </Book>
             ))}

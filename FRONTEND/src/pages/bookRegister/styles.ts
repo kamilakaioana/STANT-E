@@ -22,7 +22,7 @@ export const InputContainer = styled.div`
 export const ButtonContainer = styled.div`
   display: flex;
   flex-direction: row;
-  margin-top: 65px;
+  /* margin-top: 65px; */
 `;
 
 export const Container = styled.div`
@@ -56,6 +56,7 @@ export const CancelarEdicao = styled.p`
   color: #797878;
   text-decoration: underline;
   font-size: 24px;
+  cursor: pointer;
 `;
 
 export const AddImageContainer = styled.div`
@@ -69,25 +70,30 @@ export const TitleInput = styled(Input).attrs({
   name: "title",
   height: 80,
   fontSize: 24,
-  placeholder: "Titulo da obra",
-})``;
+  placeholder: "Titulo do livro",
+})`
+  font-family: Arial, Helvetica, sans-serif;
+`;
 
-export const ActorInput = styled(Input).attrs({
+export const AuthorInput = styled(Input).attrs({
   name: "author",
   height: 80,
   fontSize: 24,
   placeholder: "Autor",
 })`
   margin-top: 32px;
+  font-family: Arial, Helvetica, sans-serif;
 `;
-export const DescriptionInput = styled(Input).attrs({
-  name: "description",
-  height: 80,
-  fontSize: 24,
-  placeholder: "Descrição",
-})`
-  margin-top: 32px;
-`;
+// export const DescriptionInput = styled(Input).attrs({
+//   name: "description",
+//   height: 80,
+//   fontSize: 24,
+//   placeholder: "Descrição",
+//   // type: "textarea",
+// })`
+//   margin-top: 32px;
+//   font-family: Arial, Helvetica, sans-serif;
+// `;
 export const ExcluirButton = styled(CustomButton).attrs({
   height: 80,
 })`
