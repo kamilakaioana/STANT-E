@@ -1,15 +1,15 @@
 import styled from "styled-components";
 import { IModalProps } from ".";
 
-
 export const Modal = styled.div<IModalProps>`
-background-color: white;
-display: flex;
-position: fixed;
-width: 513px;
-height: 243px;
-transform: translate(-50%, -50%);
-left: 50%;
+  background-color: white;
+  display: flex;
+  position: fixed;
+  flex-direction: column;
+  width: 513px;
+  height: 243px;
+  transform: translate(-50%, -50%);
+  left: 50%;
   padding: 24px;
   top: 50%;
   border-radius: 8px;
@@ -28,4 +28,8 @@ export const Overlay = styled.div<IModalProps>`
   position: fixed;
   top: 0;
   width: 100vw;
-  `;
+`;
+export const CLoseIcon = styled.img`
+  align-self: end;
+  cursor: pointer;
+`;
