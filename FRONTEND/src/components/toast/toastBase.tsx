@@ -8,8 +8,6 @@ import {
   Toast,
 } from "./styles";
 
-import styles from "./Toast.module.css";
-
 interface IToastProps {
   toastlist: IToastBase[];
   position: string;

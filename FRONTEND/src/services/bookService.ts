@@ -1,4 +1,5 @@
 import { AxiosResponse } from "axios";
+import { IResponse } from "../interfaces";
 
 import { api } from "./api";
 
@@ -7,6 +8,25 @@ class BooksService {
     try {
       const res = await api.get("/api/livros");
       return res.data;
+    } catch (error: any) {
+      console.log(error);
+      return [];
+    }
+  }
+  public async getFavorites() {
+    try {
+      const res = await api.get("/api/livros/favoritos");
+      return res.data.books;
+    } catch (error: any) {
+      console.log(error);
+      return [];
+    }
+  }
+
+  public async getRead() {
+    try {
+      const res = await api.get("/api/livros/lidos");
+      return res.data.books;
     } catch (error: any) {
       console.log(error);
       return [];
@@ -22,7 +42,7 @@ class BooksService {
     }
   }
 
-  public async create(data: any, img?: File): Promise<any> {
+  public async create(data: any, img?: File): Promise<IResponse> {
     // const postData = new FormData();
     // postData.append('title', data.title)
     // postData.append('author', data.author)
@@ -51,7 +71,7 @@ class BooksService {
     }
   }
 
-  public async deleteBook(id: string) {
+  public async deleteBook(id: string): Promise<IResponse> {
     try {
       const res: AxiosResponse<any, any> = await api.delete(
         `/api/livros/${id}`

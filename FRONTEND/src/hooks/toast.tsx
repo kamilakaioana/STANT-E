@@ -25,7 +25,11 @@ type toastProps = {
 export interface IToastBase extends Omit<toastProps, "type"> {}
 
 interface ToastContextData {
-  showToast: (type: toastProps["type"], description: string) => void;
+  showToast: (
+    type: toastProps["type"],
+    title: string,
+    description: string
+  ) => void;
 }
 
 type ToastProviderProps = {
@@ -38,12 +42,16 @@ function ToastProvider({ children }: ToastProviderProps) {
   const [list, setList] = useState<IToastBase[]>([] as unknown as IToastBase[]);
   let toastProperties: IToastBase[] = [];
 
-  const showToast = (type: toastProps["type"], description: string) => {
+  const showToast = (
+    type: toastProps["type"],
+    title: string,
+    description: string
+  ) => {
     switch (type) {
       case "success":
         toastProperties.push({
           id: list.length + 1,
-          title: "Success",
+          title: title,
           description: description,
           backgroundColor: "#5cb85c",
         });
@@ -52,7 +60,7 @@ function ToastProvider({ children }: ToastProviderProps) {
       case "danger":
         toastProperties.push({
           id: list.length + 1,
-          title: "Danger",
+          title: title,
           description: description,
           backgroundColor: "#d9534f",
         });
@@ -60,7 +68,7 @@ function ToastProvider({ children }: ToastProviderProps) {
       case "info":
         toastProperties.push({
           id: list.length + 1,
-          title: "Info",
+          title: title,
           description: description,
           backgroundColor: "#5bc0de",
         });
@@ -68,7 +76,7 @@ function ToastProvider({ children }: ToastProviderProps) {
       case "warning":
         toastProperties.push({
           id: list.length + 1,
-          title: "Warning",
+          title: title,
           description: description,
           backgroundColor: "#f0ad4e",
         });

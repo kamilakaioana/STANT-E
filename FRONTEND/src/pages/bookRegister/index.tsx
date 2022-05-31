@@ -9,7 +9,7 @@ import CustomTextArea from "../../components/textArea";
 import { TextArea } from "../../components/textArea/styles";
 import { useAuth } from "../../hooks/auth";
 import { useToast } from "../../hooks/toast";
-import { IBook } from "../../interfaces";
+import { IBook, IResponse } from "../../interfaces";
 import BookService from "../../services/bookService";
 import { registerBookValidationSchema } from "./registerBookValidationSchema";
 import {
@@ -49,6 +49,7 @@ function BookRegister() {
   const { showToast } = useToast();
   const { bookId } = useParams();
   const [file, setFile] = useState<string | ArrayBuffer | null>();
+  const [res, setRes] = useState<IResponse>();
   const [previewImg, setPreviewImg] = useState<string>();
   const [modalConfirm, setModalConfirm] = useState<boolean>(false);
   const { user } = useAuth();
@@ -70,6 +71,20 @@ function BookRegister() {
   useEffect(() => {
     bookId && loadBook(bookId);
   }, [bookId, loadBook]);
+
+  // useEffect(() => {
+  //   res?.success === true
+  //     ? showToast(
+  //         "info",
+  //         "Image adicionada",
+  //         "Sucesso em adicionar a imagem. preencha todos campo e confirme."
+  //       )
+  //     : showToast(
+  //         "danger",
+  //         "Erro ao adicionar o arquivo",
+  //         "Verifique se o tipo(jpge e png) e tamanho do arquivos (máximo 3MB) atendem ao requerido."
+  //       );
+  // }, []);
 
   console.log("renderizou cadastro");
 
@@ -96,7 +111,18 @@ function BookRegister() {
   const handleDeleteBook = useCallback(async () => {
     if (!bookId) return;
     setLoadingDeleteBook(true);
-    BookService.deleteBook(bookId);
+    const res = await BookService.deleteBook(bookId);
+    res.success === true
+      ? showToast(
+          "success",
+          "Livro foi deletado!",
+          "O livro selecionado foi deletado permanentemente"
+        )
+      : showToast(
+          "danger",
+          "Erro ao deletar o livro",
+          "Não foi possivel deletar o livro, por favor tente novamente mais tarde."
+        );
     navigate("/");
     setLoadingDeleteBook(false);
     // @ TODO CRIAR TOAST INFORMANDO QUE FOI EXCLUIDO COM SUCESSO
@@ -109,10 +135,6 @@ function BookRegister() {
       if (editable) return false;
       if (editable === false) return true;
     }
-    // if (!bookId) {
-
-    //   return loading;
-    // }
     return false;
   };
   return (
@@ -155,7 +177,7 @@ function BookRegister() {
             <ImgContent>
               {previewImg ? <img src={imageBase64} alt="book" /> : <Logo />}
             </ImgContent>
-            <CustomFileInput setFile={setFile} />
+            <CustomFileInput res={setRes} setFile={setFile} />
           </AddImageContainer>
           {/* interface ICustomToastProps {
   description?: string;
@@ -178,9 +200,22 @@ function BookRegister() {
                 image: imageBase64,
                 clientId: user._id ?? undefined,
               };
-              BookService.create(data);
-              showToast("warning", "eitaaa");
-              // window.alert("foi");
+              const res = await BookService.create(data);
+              if (res.success === true) {
+                showToast(
+                  "success",
+                  "Livro cadastrado",
+                  "O seu livro foi cadastrado com sucesso"
+                );
+                navigate("/");
+              } else {
+                showToast(
+                  "danger",
+                  "Erro ao cadastrar o livro",
+                  "Não foi possível realizar o cadastro do livro, tente novamente mais tarde"
+                );
+              }
+
               setLoading(false);
               setSubmitting(false);
             }}

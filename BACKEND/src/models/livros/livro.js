@@ -16,20 +16,20 @@ const livroSchema = new mongoose.Schema({
   },
   favorite: {
     type: Boolean,
-    default: false
+    default: false,
   },
   read: {
     type: Boolean,
-    default: false
+    default: false,
   },
   image: {
     type: String,
-    default: ''
+    default: "",
   },
   clientId: {
     type: String,
-    default: ''
+    default: "",
   },
 });
 
-module.exports = restFul.model("Book", livroSchema)
+module.exports = restFul.model("Book", livroSchema);

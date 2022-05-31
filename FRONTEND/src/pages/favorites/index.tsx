@@ -3,30 +3,23 @@ import { IBook } from "../../interfaces";
 import BookService from "../../services/bookService";
 import BookShared from "../../shared/bookShared";
 
-
 function Favorites() {
-  const [books, setBooks] = useState<IBook[]>([])
+  const [books, setBooks] = useState<IBook[]>([]);
   const [loading, setLoading] = useState<boolean>(false);
-  
+
   const loadBooks = useCallback(async () => {
-    const book: IBook[] = await BookService.getAll();
-    console.log(book)
-    setBooks(book ? book : [])
+    const book: IBook[] = await BookService.getFavorites();
+    console.log(book);
+    setBooks(book ? book : []);
     return book;
   }, []);
 
-    useEffect(() => {
+  useEffect(() => {
     const teste = loadBooks();
-    console.log("teste", teste)
-  }, [loadBooks])
-  
-  return (
+    console.log("teste", teste);
+  }, [loadBooks]);
 
-    <BookShared data={books} loading={loading}/>
-
-  )
+  return <BookShared data={books} loading={loading} />;
 }
 
 export default Favorites;
-
-
