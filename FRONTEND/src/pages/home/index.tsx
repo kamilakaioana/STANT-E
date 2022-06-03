@@ -9,7 +9,7 @@ function Home() {
 
   const loadBooks = useCallback(async () => {
     setLoading(true);
-    const book: IBook[] = await BookService.getAll();
+    const book: IBook[] = await BookService.getByLoggedUser();
 
     book && book.length && setBooks(book);
     setLoading(false);
