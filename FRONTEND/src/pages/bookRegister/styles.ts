@@ -9,7 +9,7 @@ import CheckedIcon from "../../assets/icon/checked.svg";
 import UncheckedIcon from "../../assets/icon/unchecked.svg";
 
 type IcolorSelected = {
-  selected: boolean;
+  selected?: boolean;
 };
 
 export const InputContainer = styled.div`

@@ -1,33 +1,28 @@
-import { useState } from "react";
 import { useNavigate } from "react-router-dom";
-import DefaultBook from "../../assets/image/defaultBook.svg";
 import NotFound from "../../assets/image/resultsNotFound.svg";
 import { useAuth } from "../../hooks/auth";
 import { IBook } from "../../interfaces";
-import { HeartIconGray } from "../../pages/bookRegister/styles";
+import Card from "../Card";
 import {
   Book,
-  BookImage,
   Books,
   Container,
   ContainerNotFound,
-  Content,
-  Description,
-  HeaderBook,
-  HeartIconRed,
-  ImageContainer,
   InfoMessage,
-  Title,
 } from "./styles";
 
 interface IBookListProps {
   data: IBook[];
   handleSelectBook: (bookId: string) => void;
+  favoriteOnPress: (bookId: string) => void;
 }
-const Listing: React.FC<IBookListProps> = ({ data, handleSelectBook }) => {
+const Listing: React.FC<IBookListProps> = ({
+  data,
+  handleSelectBook,
+  favoriteOnPress,
+}) => {
   const { signOut } = useAuth();
   const navigate = useNavigate();
-  const [favoritos, setFavoritos] = useState<boolean>(true);
 
   return (
     <>
@@ -35,33 +30,17 @@ const Listing: React.FC<IBookListProps> = ({ data, handleSelectBook }) => {
         <Container>
           <Books>
             {data?.map((book) => (
-              <Book key={book._id} onClick={() => handleSelectBook(book._id)}>
-                <HeaderBook>
-                  <Title>{book.title}</Title>
-                  {favoritos ? (
-                    <HeartIconRed />
-                  ) : (
-                    <HeartIconGray selected={favoritos} />
-                  )}
-                </HeaderBook>
-                <ImageContainer>
-                  <BookImage
-                    src={
-                      book?.image && book.image !== ""
-                        ? book.image
-                        : DefaultBook
-                    }
-                  />
-                </ImageContainer>
-                {/* // @TODO CORRIGIR ELLIPSIS */}
-                <Content>
-                  <Description>
-                    {book.description?.length
-                      ? book.description
-                      : "Não há uma descrição cadastrada"}
-                  </Description>
-                </Content>
-              </Book>
+              <div key={book._id}>
+                <Card
+                  title={book.title}
+                  favoritos={book.favorite}
+                  image={book.image}
+                  description={book.description ?? ""}
+                  onPressFavorite={() => favoriteOnPress(book._id)}
+                  bookId={Book.id}
+                  onPressBook={() => handleSelectBook(book._id)}
+                />
+              </div>
             ))}
           </Books>
         </Container>
