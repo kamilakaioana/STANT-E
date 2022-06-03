@@ -13,6 +13,16 @@ class BooksService {
       return [];
     }
   }
+  public async getByLoggedUser() {
+    try {
+      const res = await api.get("/api/livros/usuario");
+      console.log("res", res);
+      return res.data.books;
+    } catch (error: any) {
+      console.log(error);
+      return [];
+    }
+  }
   public async getFavorites() {
     try {
       const res = await api.get("/api/livros/favoritos");
@@ -30,6 +40,24 @@ class BooksService {
     } catch (error: any) {
       console.log(error);
       return [];
+    }
+  }
+  public async UpdateFavoriteBookbyId(id: string): Promise<IResponse> {
+    try {
+      const res = await api.put(`/api/livros/update-favorite/${id}`);
+      console.log(res.data.book, "testando data");
+      return {
+        msg: res.data.book?.msg || "Livro Adicionado aos favoritos!",
+        success: true,
+      };
+    } catch (error: any) {
+      console.log(error);
+      return {
+        msg:
+          error?.response?.data?.book?.msg ||
+          "Ocorreu um erro, não foi possível favoritar o livro.",
+        success: false,
+      };
     }
   }
 
