@@ -59,6 +59,7 @@ export const Content = styled.div`
 export const BookImage = styled.img.attrs({ alt: "imagem livro" })<imageSrc>`
   width: 100%;
   height: 100%;
+  height: 300px;
   object-fit: contain;
 `;
 
