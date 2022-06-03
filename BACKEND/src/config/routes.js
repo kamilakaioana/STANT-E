@@ -16,10 +16,24 @@ module.exports = (server) => {
   const Livro = require("../services/livroService");
   Livro.register(router, "/livros");
 
+  router.get("/livros/usuario", isAuthenticated, async (req, res) => {
+    const id = req.userId;
+
+    const books = await ModelBook.find({ clientId: id })
+      .collation({ locale: "pt" })
+      .sort({ title: 1 });
+
+    if (!books) {
+      return res.status(404).json({
+        msg: "Não foram encontrados livros registrados para esse usuario.",
+      });
+    }
+    res.status(200).json({ books });
+  });
+
   router.get("/livros/favoritos", isAuthenticated, async (req, res) => {
     const id = req.userId;
 
-    //check if user exixts
     const books = await ModelBook.find({ clientId: id })
       .find({
         favorite: true,
@@ -28,7 +42,9 @@ module.exports = (server) => {
       .sort({ title: 1 });
 
     if (!books) {
-      return res.status(404).json({ msg: "usuario não encontrado" });
+      return res.status(404).json({
+        msg: "Não foram encontrados livros registrados como favoritos.",
+      });
     }
     res.status(200).json({ books });
   });
@@ -45,10 +61,38 @@ module.exports = (server) => {
       .sort({ title: 1 });
 
     if (!books) {
-      return res.status(404).json({ msg: "usuario não encontrado" });
+      return res
+        .status(404)
+        .json({ msg: "Não foram encontrados livros registrados como lidos." });
     }
     res.status(200).json({ books });
   });
+
+  router.put(
+    "/livros/update-favorite/:id",
+    isAuthenticated,
+    async (req, res) => {
+      console.log("entrei api");
+      const id = req.userId;
+      const bookId = req.params.id;
+      try {
+        const bookById = await ModelBook.findById(bookId);
+        if (!bookById) {
+          return res.status(404).json({ msg: "Erro livro não encontrado." });
+        }
+
+        const book = await ModelBook.updateOne(
+          { _id: bookId }, // Filter
+          { favorite: !bookById.favorite } // Update)
+        );
+        console.log("o livro", book);
+        res.status(200).json({ book });
+      } catch (error) {
+        console.log("error", error);
+        return res.status(404).json({ msg: "Erro ao favoritar livro." });
+      }
+    }
+  );
   // router.use("/favoritos", (req, res, next) => {
   //   const filters = req.query;
   //   const filteredUsers = data.filter((user) => {
