@@ -35,6 +35,9 @@ export const Title = styled.p`
   font-size: 20px;
   font-weight: 600;
   text-transform: capitalize;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
 `;
 
 export const HeartIconRed = styled.img.attrs({ src: HeartRedIcon })`
@@ -66,5 +69,8 @@ export const BookImage = styled.img.attrs({ alt: "imagem livro" })<imageSrc>`
 export const Description = styled.p`
   padding: 0;
   margin: 0;
-  text-overflow: ellipsis;
+  display: -webkit-box;
+  -webkit-line-clamp: 3;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
 `;
