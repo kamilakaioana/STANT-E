@@ -2,13 +2,10 @@ import React, { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import Listing from "../../components/listing";
 import LoadingModal from "../../components/modais/Loading";
-import SearchAdvanced from "../../components/seachAdvanced";
 import { useAuth } from "../../hooks/auth";
 import { IBook, IResponse } from "../../interfaces";
 import { Container, ShowMoreButton } from "./styles";
-import SearchInput from "../../components/inputs/searchInput";
 import Header from "./Header";
-import CustomToast from "../../components/toast";
 import BookService from "../../services/bookService";
 import { useToast } from "../../hooks/toast";
 
@@ -54,9 +51,5 @@ const BookShared: React.FC<IBookShared> = ({ data, loading }) => {
     </>
   );
 };
-
-// BookShared.defaultProps = {
-//   loading: false,
-// };
 
 export default BookShared;

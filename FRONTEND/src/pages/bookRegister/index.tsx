@@ -6,7 +6,6 @@ import CustomFileInput from "../../components/inputs/fileInput";
 import DeleteConfimModal from "../../components/modais/DeleteConfimModal";
 import LoadingModal from "../../components/modais/Loading";
 import CustomTextArea from "../../components/textArea";
-import { TextArea } from "../../components/textArea/styles";
 import { useAuth } from "../../hooks/auth";
 import { useToast } from "../../hooks/toast";
 import { IBook, IResponse } from "../../interfaces";
@@ -101,12 +100,8 @@ function BookRegister() {
       livroSelecionado.description,
       livroSelecionado.image,
       livroSelecionado.title,
-      // loadBook(),
     ]
   );
-  // const seDataTest = () => {
-
-  // };
 
   const handleDeleteBook = useCallback(async () => {
     if (!bookId) return;
@@ -179,11 +174,7 @@ function BookRegister() {
             </ImgContent>
             <CustomFileInput res={setRes} setFile={setFile} />
           </AddImageContainer>
-          {/* interface ICustomToastProps {
-  description?: string;
-  title?: string;
-  type?: string;
-} */}
+
           <Formik
             initialValues={initialValues}
             validateOnBlur={true}

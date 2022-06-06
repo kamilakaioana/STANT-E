@@ -71,20 +71,14 @@ class BooksService {
   }
 
   public async create(data: any, img?: File): Promise<IResponse> {
-    // const postData = new FormData();
-    // postData.append('title', data.title)
-    // postData.append('author', data.author)
-    // if (data.description )postData.append('description', data.description)
-    // if (img) postData.append('image', img)
     const postData = data;
-    // console.log("")
+
     try {
       const res: AxiosResponse<any, any> = await api.post(
         "/api/livros",
         postData
       );
 
-      // const res = {data: {msg: "teste"}}
       return {
         msg: res.data.msg || "Livro criado com sucesso!",
         success: true,

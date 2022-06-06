@@ -22,7 +22,6 @@ export const InputContainer = styled.div`
 export const ButtonContainer = styled.div`
   display: flex;
   flex-direction: row;
-  /* margin-top: 65px; */
 `;
 
 export const Container = styled.div`

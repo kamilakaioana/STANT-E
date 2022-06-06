@@ -23,10 +23,8 @@ export const ContainerNotFound = styled.div`
   flex-direction: row;
   text-align: end;
   align-self: center;
-  /* padding: 100px; */
   padding-bottom: 24px;
 `;
-//
 
 export const ButtonExcluirContainer = styled.div`
   margin-right: 30px;
@@ -76,5 +74,4 @@ export const ButtonContainer = styled.div`
   flex-direction: row;
   padding-left: 4%;
   padding-right: 4%;
-  /* margin-top: 65px; */
 `;

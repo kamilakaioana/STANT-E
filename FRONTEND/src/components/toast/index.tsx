@@ -1,7 +1,5 @@
 import { useState } from "react";
-// import Button from "./components/button/Button";
 import Toast from "./toastBase";
-// import styles from "./App.module.css";
 import { Button } from "../button/styles";
 
 interface ICustomToastProps {
@@ -22,47 +20,6 @@ export interface IToastBase extends Omit<toastProps, "type"> {}
 const CustomToast: React.FC<ICustomToastProps> = () => {
   const [list, setList] = useState<IToastBase[]>([] as unknown as IToastBase[]);
   let toastProperties: IToastBase[] = [];
-
-  // const showToast = (type: toastProps["type"], description: string) => {
-  //   switch (type) {
-  //     case "success":
-
-  //       toastProperties = {
-  //         id: list.length + 1,
-  //         title: "Success",
-  //         description: description,
-  //         backgroundColor: "#5cb85c",
-  //       };
-  //       break;
-  //     case "danger":
-  //       toastProperties = {
-  //         id: list.length + 1,
-  //         title: "Danger",
-  //         description: description,
-  //         backgroundColor: "#d9534f",
-  //       };
-  //       break;
-  //     case "info":
-  //       toastProperties = {
-  //         id: list.length + 1,
-  //         title: "Info",
-  //         description: description,
-  //         backgroundColor: "#5bc0de",
-  //       };
-  //       break;
-  //     case "warning":
-  //       toastProperties = {
-  //         id: list.length + 1,
-  //         title: "Warning",
-  //         description: description,
-  //         backgroundColor: "#f0ad4e",
-  //       };
-  //       break;
-  //     default:
-  //       toastProperties = [];
-  //   }
-  //   setList([...list, toastProperties]);
-  // };
 
   const showToast = (type: toastProps["type"], description: string) => {
     switch (type) {
@@ -105,8 +62,6 @@ const CustomToast: React.FC<ICustomToastProps> = () => {
     setList([...list, ...toastProperties]);
   };
   return (
-    // <ToastBase />
-    // <div className={styles.root}>
     <>
       <h1>React Toast Component</h1>
       <div>
@@ -123,8 +78,6 @@ const CustomToast: React.FC<ICustomToastProps> = () => {
       </div>
       <Toast toastlist={list} position="buttom-right" setList={setList} />
     </>
-
-    // </div>
   );
 };
 
