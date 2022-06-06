@@ -1,5 +1,6 @@
 import styled from "styled-components";
 import { IinputProps } from ".";
+import { colors, colorsNoHash } from "../../../styles/colors";
 
 export const Container = styled.div`
   display: flex;
@@ -10,8 +11,8 @@ export const Input = styled.input<IinputProps>`
   font-size: ${({ fontSize }) => fontSize || 24}px;
   height: ${({ height }) => height}px;
   border-radius: 20px;
-  background-color: #${({ disabled }) => (disabled ? "C4C4C466" : "f5f2f2")};
-  color: #3f3b3b;
+  background-color: #${({ disabled }) => (disabled ? colorsNoHash.grayDisabled : "f5f2f2")};
+  color: ${colors.fonts.light};
   padding-left: 24px;
   border: ${({ error }) => (error ? "2px solid" : "none")};
   border-color: ${({ error }) => (error ? "red" : "#000")};
@@ -19,8 +20,6 @@ export const Input = styled.input<IinputProps>`
   &::placeholder {
     color: #cccccc;
     font-style: italic;
-
-    /* disabled */
   }
   &:focus {
     outline: none;

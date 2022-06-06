@@ -1,22 +1,19 @@
 import styled from "styled-components";
 import { ITextAreaProps } from ".";
+import { colors } from "../../styles/colors";
 
 export const TextArea = styled.textarea<ITextAreaProps>`
   font-size: 24px;
   border-radius: 20px;
-
   background-color: #${({ disabled }) => (disabled ? "C4C4C466" : "f5f2f2")};
-  color: #3f3b3b;
-
+  color: ${colors.fonts.light};
   padding: 12px 24px;
-  /* border: none; */
   font-family: Arial, Helvetica, sans-serif;
   /* Hide scrollbar for Chrome, Safari and Opera */
   ::-webkit-scrollbar {
     display: none;
   }
   /* Hide scrollbar for IE, Edge and Firefox */
-
   -ms-overflow-style: none; /* IE and Edge */
   scrollbar-width: none; /* Firefox */
 

@@ -4,6 +4,7 @@ import { useNavigate } from "react-router-dom";
 import CustomButton from "../../components/button";
 import { useToast } from "../../hooks/toast";
 import UserService from "../../services/userService";
+import { colors, colorsNoHash } from "../../styles/colors";
 import { registerValidationSchema } from "./registerValidationSchema";
 import {
   Brand,
@@ -124,8 +125,8 @@ function UserRegister() {
                       disabled={loading}
                       onClickButton={handleSubmit}
                       height={80}
-                      textColor="fff"
-                      color="164C64"
+                      textColor={colorsNoHash.fonts.white}
+                      color={colorsNoHash.fonts.primary}
                       text={loading ? "Loading..." : "CADASTRAR"}
                     />
                   </ButtonContainer>

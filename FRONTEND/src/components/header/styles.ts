@@ -1,10 +1,11 @@
 import { Link } from "react-router-dom";
 import styled from "styled-components";
 import brand from "../../assets/image/brand.svg";
+import { colors } from "../../styles/colors";
 
 export const Container = styled.div`
   height: 80px;
-  background-color: #338499;
+  background-color: ${colors.secondary};
   width: 100%;
   display: flex;
   flex-direction: row;
@@ -32,7 +33,7 @@ export const MenuContainer = styled.div`
   height: 80px;
   display: flex;
   flex: 1;
-  background-color: #338499;
+  background-color: ${colors.secondary};
   width: 100%;
   flex-direction: row;
   justify-content: space-around;
@@ -41,7 +42,7 @@ export const MenuContainer = styled.div`
 export const Item = styled(Link)`
   display: flex;
   font-size: 20px;
-  color: #fff;
+  color: ${colors.fonts.white};
   font-weight: bolder;
   justify-content: center;
   align-items: center;
@@ -53,7 +54,7 @@ export const ButtonSair = styled.button`
   background-color: transparent;
   border: none;
   font-size: 20px;
-  color: #ffffff;
+  color: ${colors.fonts.white};
   font-weight: bolder;
   font-family: Times;
 `;

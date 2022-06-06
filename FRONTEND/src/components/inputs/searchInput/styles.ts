@@ -1,11 +1,12 @@
 import styled from "styled-components";
 import { IinputProps } from ".";
+import { colors } from "../../../styles/colors";
 
 export const Input = styled.input<IinputProps>`
   font-size: ${({ fontSize }) => fontSize || 24}px;
   height: ${({ height }) => height ?? 66}px;
   background-color: #f5f2f2;
-  color: #3f3b3b;
+  color: ${colors.fonts.light};
   width: 100%;
   border: none;
   padding-left: 24px;
@@ -36,7 +37,7 @@ export const Button = styled.button`
   border: none;
   border-top-right-radius: 20px;
   border-bottom-right-radius: 20px;
-  background-color: #164c64;
+  background-color: ${colors.primary};
 `;
 
 export const InputContainer = styled.div`

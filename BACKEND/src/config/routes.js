@@ -13,6 +13,7 @@ module.exports = (server) => {
 
   server.use("/api", router);
 
+  // BOOKS ROUTES
   const Livro = require("../services/livroService");
   Livro.register(router, "/livros");
 
@@ -52,7 +53,6 @@ module.exports = (server) => {
   router.get("/livros/lidos", isAuthenticated, async (req, res) => {
     const id = req.userId;
 
-    //check if user exixts
     const books = await ModelBook.find({ clientId: id })
       .find({
         read: true,
@@ -93,68 +93,9 @@ module.exports = (server) => {
       }
     }
   );
-  // router.use("/favoritos", (req, res, next) => {
-  //   const filters = req.query;
-  //   const filteredUsers = data.filter((user) => {
-  //     return user.favorites === true;
-  //     // let isValid = true;
-  //     // for (key in filters) {
-  //     //   console.log("ooo ooo", key, user[key], filters[key]);
-  //     //   isValid = isValid && user[key] == filters[key];
-  //     // }
-  //     // return isValid;
-  //   });
-  //   res.send(filteredUsers);
-  // });
 
-  // router.use("/livros/favoritos", (req, res, next) => {
-  //   const filters = req.query;
-  //   const filteredUsers = data.filter((user) => {
-  //     let isValid = true;
-  //     for (key in filters) {
-  //       console.log("ooo ooo", key, user[key], filters[key]);
-  //       isValid = isValid && user[key] == filters[key];
-  //     }
-  //     return isValid;
-  //   });
-  //   res.send(filteredUsers);
-  // });
+  // USER ROUTES
 
-  // router.post('/livros', async (req, res) => {
-  //   const { title, author, favorite, read, description, image } = req.body;
-
-  //   //validation
-  //   if (!title) {
-  //     return res.status(422).json({ msg: "O titulo é obrigatório!" });
-  //   }
-  //   if (!author) {
-  //     return res.status(422).json({ msg: "O Autor é obrigatório!" });
-  //   }
-  //   imgB64 = '';
-  //   if (image) {
-  //     imgB64 = Buffer.from(image).toString('base64');
-  //     console.log(imgB64)
-  //   }
-
-  //   try {
-  //      //CREATE book
-  //     const book = new ModelBook({
-  //       title,
-  //       author,
-  //       favorite,
-  //       read,
-  //       description,
-  //       image: imgB64
-  //     })
-
-  //     const resBook = await book.save();
-
-  //     res.status(201).json({ msg: "Livro criado com sucesso!", data: resBook })
-  //   } catch (error) {
-  //     console.log(error)
-  //     res.status(500).json({ msg: "Erro no servidor, tente novamente mais tarde!" })
-  //   }
-  // });
   // Usuários
   // busca 1 user
   router.get("/users/:id", isAuthenticated, async (req, res) => {
@@ -171,8 +112,6 @@ module.exports = (server) => {
 
   // cria User
   router.post("/users", async (req, res) => {
-    //userController.store
-
     const { name, email, password } = req.body;
 
     //validation
@@ -263,7 +202,6 @@ module.exports = (server) => {
 
   // pega info do user logado
   router.get("/auth/me", isAuthenticated, async (req, res) => {
-    // router.get("/api/auth/me", isAuthenticated, async (req, res) => {
     const id = req.userId;
 
     try {

@@ -1,5 +1,6 @@
 import styled from "styled-components";
 import HeartRedIcon from "../../assets/icon/heartRed.svg";
+import { colors } from "../../styles/colors";
 
 type imageSrc = {
   src: string;
@@ -7,7 +8,7 @@ type imageSrc = {
 
 export const Container = styled.div`
   min-height: 100vh;
-  background-color: #fff;
+  background-color: ${colors.backgroundWhite};
   padding: 30px;
   border-radius: 20px;
 `;
@@ -31,7 +32,7 @@ export const Book = styled.div`
 `;
 
 export const HeaderBook = styled.div`
-  background-color: #7bbbad;
+  background-color: ${colors.lightGreen};
   height: 48px;
   border-top-left-radius: 20px;
   border-top-right-radius: 20px;

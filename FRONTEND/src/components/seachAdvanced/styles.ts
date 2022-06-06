@@ -1,16 +1,14 @@
 import styled from "styled-components";
+import { colors } from "../../styles/colors";
 import CustomInput from "../inputs/input";
 
 export const Container = styled.div`
   margin-top: 24;
-  /* background-color: pink; */
   display: flex;
   flex-direction: row;
   justify-content: space-between;
   padding-left: 10%;
   padding-right: 10%;
-  //teste height - antes nao tinha
-  /* height: 245px; */
 `;
 
 export const SearchInputTitle = styled(CustomInput).attrs({
@@ -40,13 +38,11 @@ export const Button = styled.button`
   width: 232px;
   border: none;
   border-radius: 20px;
-  background-color: #164c64;
-  color: #fff;
+  background-color: ${colors.primary};
+  color: ${colors.fonts.white};
   font-size: 20px;
   display: flex;
   flex-direction: row;
-  /* font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Oxygen,
-    Ubuntu, Cantarell, "Open Sans", "Helvetica Neue", sans-serif; */
 
   align-items: center;
   text-align: center;

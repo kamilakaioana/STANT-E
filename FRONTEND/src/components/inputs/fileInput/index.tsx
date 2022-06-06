@@ -38,7 +38,6 @@ function CustomFileInput({ setFile, res }: Props) {
         name="file"
         type="file"
         id="file"
-        // size={0.5}
         onChange={(e) => encodeFileBase64(e.target.files)}
         style={{
           display: "none",

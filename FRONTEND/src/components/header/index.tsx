@@ -1,5 +1,6 @@
 import { useEffect } from "react";
 import { useAuth } from "../../hooks/auth";
+import { StringsResources } from "../../utils/stringsResources";
 import {
   ButtonSair,
   Container,
@@ -9,25 +10,26 @@ import {
   MenuContainer,
 } from "./styles";
 
+const { CADASTRAR, FAVORITOS, LIDOS, SAIR, HOME } = StringsResources.HEADER;
 const pages = [
   {
     id: "1",
-    name: "Home",
+    name: HOME,
     path: "/",
   },
   {
     id: "2",
-    name: "Favoritos",
+    name: FAVORITOS,
     path: "/favoritos",
   },
   {
     id: "3",
-    name: "Lidos",
+    name: LIDOS,
     path: "/lidos",
   },
   {
     id: "4",
-    name: "Cadastrar",
+    name: CADASTRAR,
     path: "/livro",
   },
 ];
@@ -54,7 +56,7 @@ function Header() {
             {name}
           </Item>
         ))}
-        <ButtonSair onClick={() => logoutLink()}>Sair</ButtonSair>
+        <ButtonSair onClick={() => logoutLink()}>{SAIR}</ButtonSair>
       </MenuContainer>
     </Container>
   );

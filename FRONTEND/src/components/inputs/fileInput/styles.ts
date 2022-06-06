@@ -1,11 +1,11 @@
 import styled from "styled-components";
+import { colors } from "../../../styles/colors";
 
 export const Label = styled.label`
   padding: 20px 10px;
   width: 200px;
-  /* background-color: #333; */
-  background-color: #7bbbad;
-  color: #fff;
+  background-color: ${colors.lightGreen};
+  color: ${colors.fonts.white};
   text-transform: uppercase;
   text-align: center;
   display: block;
@@ -15,7 +15,7 @@ export const Label = styled.label`
   font-weight: bolder;
   letter-spacing: 0.3;
   :hover {
-    background-color: #aad4cb;
+    background-color: ${colors.lightGreenHover};
     transform: scale(1.05);
   }
 `;

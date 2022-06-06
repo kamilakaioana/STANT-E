@@ -1,9 +1,10 @@
 import styled from "styled-components";
 import CustomInput from "../../components/inputs/input";
+import { colors } from "../../styles/colors";
 
 export const Container = styled.div`
   min-height: 100vh;
-  background-color: #f2f8f7; 
+  background-color: #f2f8f7;
   padding: 24px;
 `;
 
@@ -25,8 +26,8 @@ export const Box = styled.div`
 `;
 
 export const BoxButton = styled.button`
-  background: #164c64;
-  color: #fff;
+  background: ${colors.primary};
+  color: ${colors.fonts.white};
   font-weight: bold;
   border: none;
   float: right;

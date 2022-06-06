@@ -1,12 +1,13 @@
 import styled from "styled-components";
 import HeartRedIcon from "../../assets/icon/heartRed.svg";
+import { colors } from "../../styles/colors";
 
 type imageSrc = {
   src: string;
 };
 
 export const Book = styled.div`
-  background-color: #f2f8f7;
+  background-color: ${colors.backgroundLight};
   box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
   transition: transform 100ms ease-in-out;
   border-radius: 20px;
@@ -18,7 +19,7 @@ export const Book = styled.div`
 `;
 
 export const HeaderBook = styled.div`
-  background-color: #7bbbad;
+  background-color: ${colors.lightGreen};
   height: 48px;
   border-top-left-radius: 20px;
   border-top-right-radius: 20px;
@@ -48,7 +49,7 @@ export const HeartIconRed = styled.img.attrs({ src: HeartRedIcon })`
 `;
 
 export const ImageContainer = styled.div`
-  background-color: #aacfc7;
+  background-color: ${colors.backgroundGreenLight};
   height: 300;
   width: 100%;
   overflow: hidden;

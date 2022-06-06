@@ -3,11 +3,6 @@ import SearchInput from "../../components/inputs/searchInput";
 import SearchAdvanced from "../../components/seachAdvanced";
 import { ShowMoreButton } from "./styles";
 
-// import { Container } from './styles';
-// interface IHeaderProps {
-//   onChange
-// }
-
 const Header: React.FC = () => {
   const [showMoreFilter, setShowMoreFilter] = useState<boolean>(false);
   const [searchInput, setSearchInput] = useState<string>("");
@@ -36,7 +31,10 @@ const Header: React.FC = () => {
           <SearchInput
             placeholder="Título livro"
             value={searchInput}
-            onChange={(e) => setSearchInput(e.target.value)}
+            onChange={(e) => {
+              setSearchInput(e.target.value);
+              // passar prop voltando
+            }}
             showButton
           />
           <div style={{ display: "flex", justifyContent: "flex-end" }}>

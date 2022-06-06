@@ -10,6 +10,8 @@ import {
   ImageContainer,
   Title,
 } from "./styles";
+import { StringsResources } from "../../utils/stringsResources";
+
 interface ICardProps {
   title: string;
   favoritos: boolean;
@@ -42,12 +44,12 @@ const Card: React.FC<ICardProps> = ({
       <ImageContainer onClick={() => onPressBook(bookId)}>
         <BookImage src={image && image !== "" ? image : DefaultBook} />
       </ImageContainer>
-      {/* // @TODO CORRIGIR ELLIPSIS */}
+
       <Content>
         <Description>
           {description?.length
             ? description
-            : "Não há uma descrição cadastrada"}
+            : StringsResources.BOOK_CARD.NO_DESCRIPTION}
         </Description>
       </Content>
     </Book>
