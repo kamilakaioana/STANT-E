@@ -19,17 +19,22 @@ import {
   PasswordInput,
 } from "./styles";
 import { loginValidationSchema } from "./loginValidationSchema";
+import { useToast } from "../../hooks/toast";
+import { StringsResources } from "../../utils/stringsResources";
 
+const { ENTRAR, NAO_TENHO_CADASTRO, CARREGANDO } = StringsResources.BUTTONS;
 function Login() {
   const navigate = useNavigate();
   const { signIn, loading } = useAuth();
+  const { showToast } = useToast();
 
   const handleLogin = async (email: string, password: string) => {
     const loginResponse: IMensageLoginType = await signIn(email, password);
     if (loginResponse.success) {
       navigate("/");
+      showToast("success", "Sucesso ao logar!", loginResponse.msg);
     } else {
-      window.alert(loginResponse.msg);
+      showToast("danger", "Erro ao logar!", loginResponse.msg);
     }
   };
   return (
@@ -65,7 +70,6 @@ function Login() {
               <>
                 <InputContainer>
                   <form>
-                    {/* <form onSubmit={handleSubmit}> */}
                     <EmailInput
                       value={values.email}
                       onChange={handleChange("email")}
@@ -86,15 +90,15 @@ function Login() {
                   <CustomButton
                     disabled={loading}
                     onClickButton={handleSubmit}
-                    height={80}
-                    text={loading ? "Loading..." : "ENTRAR"}
+                    height={60}
+                    text={loading ? CARREGANDO : ENTRAR}
                   />
                 </ButtonContainer>
               </>
             )}
           </Formik>
           <LinkContainer>
-            <LinkRegister>Não Tenho Cadastro</LinkRegister>
+            <LinkRegister>{NAO_TENHO_CADASTRO}</LinkRegister>
           </LinkContainer>
         </FormContainer>
       </LoginContainer>

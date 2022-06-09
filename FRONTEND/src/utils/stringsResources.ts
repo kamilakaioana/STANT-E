@@ -1,4 +1,9 @@
 export const StringsResources = {
+  BUTTONS: {
+    ENTRAR: "ENTRAR",
+    CARREGANDO: "CARREGANDO...",
+    NAO_TENHO_CADASTRO: "Não Tenho Cadastro",
+  },
   screens: {
     bookRegister: {
       ADICIONAR_FAVORITOS: "Adicionar favoritos",
