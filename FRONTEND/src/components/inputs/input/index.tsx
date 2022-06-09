@@ -24,7 +24,7 @@ export interface IinputProps {
 
 function CustomInput(props: IinputProps) {
   return (
-    <view>
+    <div>
       {props.label ? (
         <LabelContainer style={{ textAlign: "start", display: "flex" }}>
           <Label> {props.label} </Label>
@@ -49,7 +49,7 @@ function CustomInput(props: IinputProps) {
           <Error> {props.error ? props.tooltip : ""}</Error>
         </ErrorContainer>
       </Container>
-    </view>
+    </div>
   );
 }
 
