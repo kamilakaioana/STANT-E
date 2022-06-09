@@ -2,18 +2,18 @@ import React, { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import Listing from "../../components/listing";
 import LoadingModal from "../../components/modais/Loading";
-import { useAuth } from "../../hooks/auth";
-import { IBook, IResponse } from "../../interfaces";
-import { Container, ShowMoreButton } from "./styles";
-import Header from "./Header";
-import BookService from "../../services/bookService";
 import { useToast } from "../../hooks/toast";
+import { IBook } from "../../interfaces";
+import BookService from "../../services/bookService";
+import Header from "./Header";
+import { Container } from "./styles";
 
 interface IBookShared {
   data: IBook[];
   loading: boolean;
+  onSubmit: () => {};
 }
-const BookShared: React.FC<IBookShared> = ({ data, loading }) => {
+const BookShared: React.FC<IBookShared> = ({ data, loading, onSubmit }) => {
   const navigate = useNavigate();
   const [favoritos, setFavoritos] = useState<boolean>(true);
   const { showToast } = useToast();
@@ -40,7 +40,7 @@ const BookShared: React.FC<IBookShared> = ({ data, loading }) => {
   return (
     <>
       <Container>
-        <Header />
+        <Header onSubmit={onSubmit} />
         <Listing
           data={data}
           handleSelectBook={handleSelectedBook}

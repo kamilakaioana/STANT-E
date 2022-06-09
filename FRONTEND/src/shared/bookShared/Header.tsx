@@ -1,22 +1,23 @@
 import React, { useState } from "react";
 import SearchInput from "../../components/inputs/searchInput";
 import SearchAdvanced from "../../components/seachAdvanced";
+import { useSearch } from "../../hooks/search";
 import { ShowMoreButton } from "./styles";
 
-const Header: React.FC = () => {
+interface IBookShared {
+  onSubmit: () => void;
+}
+const Header: React.FC<IBookShared> = ({ onSubmit }) => {
   const [showMoreFilter, setShowMoreFilter] = useState<boolean>(false);
-  const [searchInput, setSearchInput] = useState<string>("");
+  const { searchData, setSearchData } = useSearch();
 
-  const handleSearch = (value: string) => {
-    console.log("a pesquisa", value);
-  };
   return (
     <div>
       {showMoreFilter ? (
         <div style={{ marginBottom: 24 }}>
           <SearchAdvanced
             setShowMoreFilter={setShowMoreFilter}
-            onSubmit={handleSearch}
+            onSubmit={onSubmit}
           />
         </div>
       ) : (
@@ -30,12 +31,12 @@ const Header: React.FC = () => {
         >
           <SearchInput
             placeholder="Título livro"
-            value={searchInput}
+            value={searchData.title ?? ""}
             onChange={(e) => {
-              setSearchInput(e.target.value);
-              // passar prop voltando
+              setSearchData({ title: e.target.value });
             }}
             showButton
+            onSubmit={onSubmit}
           />
           <div style={{ display: "flex", justifyContent: "flex-end" }}>
             <ShowMoreButton onClick={() => setShowMoreFilter(true)}>

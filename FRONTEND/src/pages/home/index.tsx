@@ -1,25 +1,35 @@
 import { useCallback, useEffect, useState } from "react";
+import { useSearch } from "../../hooks/search";
 import { IBook } from "../../interfaces";
 import BookService from "../../services/bookService";
 import BookShared from "../../shared/bookShared";
+import { filterBooks } from "../../utils";
 
 function Home() {
   const [books, setBooks] = useState<IBook[]>([]);
   const [loading, setLoading] = useState<boolean>(false);
+  const { searchData } = useSearch();
 
   const loadBooks = useCallback(async () => {
     setLoading(true);
     const book: IBook[] = await BookService.getByLoggedUser();
+    let resBooks: IBook[] = book;
 
-    book && book.length && setBooks(book);
+    if (searchData.author || searchData.title) {
+      resBooks = filterBooks(book, searchData);
+    }
+    setBooks(resBooks);
+
     setLoading(false);
-  }, []);
+  }, [searchData]);
 
   useEffect(() => {
     loadBooks();
-  }, [loadBooks]);
+  }, []);
 
-  return <BookShared data={books} loading={loading} />;
+  return (
+    <BookShared data={books} loading={loading} onSubmit={() => loadBooks()} />
+  );
 }
 
 export default Home;

@@ -4,6 +4,7 @@ import AppRoutes from "./routes";
 import { AuthProvider } from "./hooks/auth";
 import { customIntercept } from "./services/api";
 import { ToastProvider } from "./hooks/toast";
+import SearchProvider from "./hooks/search";
 
 function AxiosNavigateSetup() {
   const navigate = useNavigate();
@@ -16,7 +17,9 @@ function App() {
       <AxiosNavigateSetup />
       <AuthProvider>
         <ToastProvider>
-          <AppRoutes />
+          <SearchProvider>
+            <AppRoutes />
+          </SearchProvider>
         </ToastProvider>
       </AuthProvider>
     </BrowserRouter>

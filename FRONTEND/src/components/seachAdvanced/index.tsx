@@ -1,42 +1,41 @@
-import React, { useState } from "react";
+import React from "react";
 import Reading from "../../assets/image/reading.svg";
-
+import { useSearch } from "../../hooks/search";
 import { SearchIcon } from "../icons";
 import SearchInput from "../inputs/searchInput";
-import {
-  Button,
-  Container,
-  SearchInputAuthor,
-  SearchInputTitle,
-  ShowMoreButton,
-} from "./styles";
+import { Button, Container, ShowMoreButton } from "./styles";
 
 interface ISearchAdvanced {
   setShowMoreFilter: (value: boolean) => void;
-  onSubmit: (value: string) => void;
+  onSubmit: () => void;
 }
 const SearchAdvanced: React.FC<ISearchAdvanced> = ({
   setShowMoreFilter,
   onSubmit,
 }) => {
-  const [value, setValue] = useState<string>("");
+  const { searchData, setSearchData } = useSearch();
 
   const handleShowLess = () => {
     setShowMoreFilter(false);
+  };
+  const teste = (text: React.ChangeEvent<HTMLInputElement>) => {
+    setSearchData({ ...searchData, title: text.target.value });
   };
   return (
     <Container>
       <div style={{ width: "50%" }}>
         <SearchInput
           placeholder="Titulo livro"
-          value={value}
-          onChange={(e) => setValue(e.target.value)}
+          value={searchData.title ?? ""}
+          onChange={(e) => teste(e)}
         />
         <div style={{ paddingTop: 16 }}>
           <SearchInput
             placeholder="Autor"
-            value={value}
-            onChange={(e) => setValue(e.target.value)}
+            value={searchData.author ?? ""}
+            onChange={(e) =>
+              setSearchData({ ...searchData, author: e.target.value })
+            }
           />
         </div>
         <div style={{ display: "flex", justifyContent: "flex-end" }}>
@@ -50,7 +49,7 @@ const SearchAdvanced: React.FC<ISearchAdvanced> = ({
             display: "flex",
           }}
         >
-          <Button onClick={() => onSubmit(value)}>
+          <Button onClick={onSubmit}>
             PESQUISAR
             <img
               src={SearchIcon}

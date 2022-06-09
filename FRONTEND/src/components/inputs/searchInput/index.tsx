@@ -7,8 +7,9 @@ export interface IinputProps {
   value: string;
   onChange: React.ChangeEventHandler<HTMLInputElement> | (() => void);
   name?: string;
-  onClick?: () => void;
+  onSubmit?: () => void;
   showButton?: boolean;
+  onBlur?: React.FocusEventHandler<HTMLInputElement>;
 }
 
 function SearchInput(props: IinputProps) {
@@ -24,10 +25,11 @@ function SearchInput(props: IinputProps) {
           name={props.name}
           type="search"
           showButton={props.showButton}
+          onBlur={props.onBlur}
         />
       </InputContainer>
       {props.showButton ? (
-        <Button onClick={props.onClick}>
+        <Button onClick={props.onSubmit}>
           <img src={SearchIcon} alt="search" />
         </Button>
       ) : null}

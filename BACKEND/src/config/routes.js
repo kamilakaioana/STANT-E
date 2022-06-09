@@ -72,7 +72,6 @@ module.exports = (server) => {
     "/livros/update-favorite/:id",
     isAuthenticated,
     async (req, res) => {
-      console.log("entrei api");
       const id = req.userId;
       const bookId = req.params.id;
       try {

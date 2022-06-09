@@ -1,10 +1,11 @@
 import { useEffect } from "react";
+import { useNavigate } from "react-router-dom";
 import { useAuth } from "../../hooks/auth";
+import { useSearch } from "../../hooks/search";
 import { StringsResources } from "../../utils/stringsResources";
 import {
   ButtonSair,
   Container,
-  Item,
   Logo,
   LogoContainer,
   MenuContainer,
@@ -36,9 +37,17 @@ const pages = [
 
 function Header() {
   const { signOut, loadUser } = useAuth();
+  const { clearSearchData } = useSearch();
+
+  const navigate = useNavigate();
 
   const logoutLink = () => {
     signOut();
+  };
+
+  const handlePress = (rota: string) => {
+    clearSearchData();
+    navigate(rota);
   };
 
   useEffect(() => {
@@ -51,10 +60,16 @@ function Header() {
         <Logo />
       </LogoContainer>
       <MenuContainer>
-        {pages.map(({ id, name, path }) => (
+        {/* // @TODO APOS VALIDACAO RETIRAR COMENTARIO */}
+        {/* {pages.map(({ id, name, path }) => (
           <Item to={path} key={id}>
             {name}
           </Item>
+        ))} */}
+        {pages.map(({ id, name, path }) => (
+          <ButtonSair key={id} onClick={() => handlePress(path)}>
+            {name}
+          </ButtonSair>
         ))}
         <ButtonSair onClick={() => logoutLink()}>{SAIR}</ButtonSair>
       </MenuContainer>
