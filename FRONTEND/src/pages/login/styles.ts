@@ -5,8 +5,16 @@ import organizedBooksImg from "../../assets/image/organizedBooks.svg";
 import { Link } from "react-router-dom";
 import CustomInput from "../../components/inputs/input";
 import { colors } from "../../styles/colors";
-import { Media } from "../../utils/constants";
-//@ TODO REDUZINDO O TAMANHO - EM CONSTRUÇÃO
+import { MediaWidth } from "../../utils/constants";
+
+const {
+  mobileMax,
+  tabletMax,
+  screenSmallMax,
+  screenMediumMax,
+  screenLargeMin,
+} = MediaWidth;
+
 export const Container = styled.div`
   display: flex;
   height: 100vh;
@@ -19,10 +27,14 @@ export const LogoContainer = styled.div`
   flex-direction: column;
   justify-content: center;
   align-items: center;
+
+  @media (max-width: ${tabletMax}px) {
+    display: none;
+  }
 `;
 
 export const LoginContainer = styled.div`
-  background-color: #fdfdfd;
+  background-color: ${colors.background};
   display: flex;
   flex: 1;
   flex-direction: column;
@@ -38,31 +50,54 @@ export const ImageContainer = styled.div`
 `;
 
 export const Logo = styled.img.attrs({ src: logo })`
-  /* width: 174px;
-  height: 174px; */
   width: 135px;
   height: 135px;
+
+  @media (max-width: ${screenSmallMax}px) {
+    width: 120px;
+    height: 120px;
+  }
 `;
 
 export const Brand = styled.img.attrs({ src: stante })`
-  /* width: 323px;
-  height: 92px; */
   width: 251px;
   height: 71px;
   margin-top: 24px;
+
+  @media (max-width: ${screenSmallMax}px) {
+    width: 234px;
+    height: 67px;
+  }
 `;
 
 export const OrganizedBooksImg = styled.img.attrs({ src: organizedBooksImg })`
-  /* width: 303px;
-  height: 244px; */
+  width: 205px;
+  height: 165px;
   margin-bottom: 32px;
-  width: 224px;
-  height: 180px;
-  //
-  /* @media (max-width: ${Media.screenLargeMin}) {
+
+  @media (min-width: ${screenLargeMin}px) {
     width: 224px;
     height: 180px;
-  } ; */
+  }
+  @media (max-width: ${screenMediumMax}px) {
+    width: 205px;
+    height: 165px;
+  }
+
+  @media (max-width: ${screenSmallMax}px) {
+    width: 180px;
+    height: 145px;
+  }
+
+  @media (max-width: ${tabletMax}px) {
+    width: 147px;
+    height: 122px;
+  }
+
+  @media (max-width: ${mobileMax}px) {
+    width: 147px;
+    height: 122px;
+  }
 `;
 
 export const FormContainer = styled.div`
@@ -76,10 +111,19 @@ export const FormContainer = styled.div`
 export const InputContainer = styled.div`
   display: flex;
   flex-direction: column;
-  /* padding: 0px 120px 40px 120px; */
   padding-left: 20%;
   padding-right: 20%;
-  padding-bottom: 32px;
+  padding-bottom: 16px;
+
+  @media (max-width: ${tabletMax}px) {
+    padding-left: 20%;
+    padding-right: 20%;
+  }
+
+  @media (max-width: ${mobileMax}px) {
+    padding-left: 32px;
+    padding-right: 32px;
+  }
 `;
 
 export const EmailInput = styled(CustomInput).attrs({
@@ -89,7 +133,7 @@ export const EmailInput = styled(CustomInput).attrs({
   placeholder: "Email",
   name: "email",
 })`
-  box-shadow: 2px 2px 2px 1px rgba(0, 0, 0, 0.2);
+  box-shadow: 2px 2px 2px 1px ${colors.boxShadown};
 `;
 
 export const PasswordInput = styled(CustomInput).attrs({
@@ -100,7 +144,7 @@ export const PasswordInput = styled(CustomInput).attrs({
   name: "password",
 })`
   margin-top: 32px;
-  box-shadow: 2px 2px 2px 1px rgba(0, 0, 0, 0.2);
+  box-shadow: 2px 2px 2px 1px ${colors.boxShadown};
 `;
 
 export const LinkContainer = styled.div`
@@ -116,7 +160,11 @@ export const LinkRegister = styled(Link).attrs({
 `;
 
 export const ButtonContainer = styled.div`
-  /* padding: 0px 120px; */
   padding-left: 20%;
   padding-right: 20%;
+
+  @media (max-width: ${mobileMax}px) {
+    padding-left: 32px;
+    padding-right: 32px;
+  }
 `;

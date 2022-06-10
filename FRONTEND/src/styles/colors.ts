@@ -18,6 +18,7 @@ export const colors = {
     primary: "#164C64",
     secondary: "#338499",
   },
+  boxShadown: "rgba(0, 0, 0, 0.2)",
 };
 
 export const colorsNoHash = {
@@ -40,4 +41,3 @@ export const colorsNoHash = {
     secondary: "338499",
   },
 };
-//
