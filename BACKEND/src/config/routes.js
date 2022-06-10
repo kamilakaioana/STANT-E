@@ -84,8 +84,9 @@ module.exports = (server) => {
           { _id: bookId }, // Filter
           { favorite: !bookById.favorite } // Update)
         );
-        console.log("o livro", book);
-        res.status(200).json({ book });
+        const updatedBook = await ModelBook.findById(bookId);
+
+        res.status(200).json({ book: updatedBook });
       } catch (error) {
         console.log("error", error);
         return res.status(404).json({ msg: "Erro ao favoritar livro." });

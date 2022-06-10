@@ -1,6 +1,4 @@
-import { useNavigate } from "react-router-dom";
 import NotFound from "../../assets/image/resultsNotFound.svg";
-import { useAuth } from "../../hooks/auth";
 import { IBook } from "../../interfaces";
 import Card from "../Card";
 import {
@@ -14,16 +12,13 @@ import {
 interface IBookListProps {
   data: IBook[];
   handleSelectBook: (bookId: string) => void;
-  favoriteOnPress: (bookId: string) => void;
+  favoriteOnPress: (bookId: string) => Promise<boolean>;
 }
 const Listing: React.FC<IBookListProps> = ({
   data,
   handleSelectBook,
   favoriteOnPress,
 }) => {
-  const { signOut } = useAuth();
-  const navigate = useNavigate();
-
   return (
     <>
       {data && data.length ? (

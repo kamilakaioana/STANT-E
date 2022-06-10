@@ -8,6 +8,7 @@ import { filterBooks } from "../../utils";
 function Home() {
   const [books, setBooks] = useState<IBook[]>([]);
   const [loading, setLoading] = useState<boolean>(false);
+  const [update, setUpdate] = useState<number>(0);
   const { searchData } = useSearch();
 
   const loadBooks = useCallback(async () => {
@@ -25,10 +26,16 @@ function Home() {
 
   useEffect(() => {
     loadBooks();
-  }, []);
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [update]);
 
   return (
-    <BookShared data={books} loading={loading} onSubmit={() => loadBooks()} />
+    <BookShared
+      data={books}
+      loading={loading}
+      onSubmit={() => loadBooks()}
+      setUpdate={setUpdate}
+    />
   );
 }
 

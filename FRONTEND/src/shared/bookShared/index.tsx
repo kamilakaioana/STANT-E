@@ -12,31 +12,40 @@ interface IBookShared {
   data: IBook[];
   loading: boolean;
   onSubmit: () => {};
+  setUpdate?: React.Dispatch<React.SetStateAction<number>>;
 }
-const BookShared: React.FC<IBookShared> = ({ data, loading, onSubmit }) => {
+const BookShared: React.FC<IBookShared> = ({
+  data,
+  loading,
+  onSubmit,
+  setUpdate,
+}) => {
   const navigate = useNavigate();
-  const [favoritos, setFavoritos] = useState<boolean>(true);
   const { showToast } = useToast();
 
   const handleSelectedBook = (bookId: string) => {
     navigate(`/livro/${bookId} `);
   };
 
-  const handleFavoriteBook = async (bookId: string) => {
+  const handleFavoriteBook = async (bookId: string): Promise<boolean> => {
     const res = await BookService.UpdateFavoriteBookbyId(bookId);
+    setUpdate?.((current) => current + 1);
+    if (res.success === false) {
+      showToast("danger", "Ocorreu um erro ao realizar a ação", res.msg);
+      return false;
+    }
 
-    res.success === true
-      ? showToast(
-          "success",
-          "Livro favoritado",
-          "O livro selecionado foi adicionado aos favoritos."
-        )
-      : showToast(
-          "danger",
-          "Erro ao favoritar o livro",
-          "Não foi possivel adicionar o livro aos favoritos, por favor tente novamente mais tarde."
-        );
+    if (res.success === true && res.action === "ADD") {
+      showToast("success", "Livro favoritado", res.msg);
+      return true;
+    }
+    if (res.success === true && res.action === "REMOVE") {
+      showToast("info", "O livro retirado dos favoritos", res.msg);
+      return false;
+    }
+    return false;
   };
+
   return (
     <>
       <Container>

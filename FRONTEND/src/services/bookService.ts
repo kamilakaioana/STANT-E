@@ -3,6 +3,10 @@ import { IResponse } from "../interfaces";
 
 import { api } from "./api";
 
+interface IResponseFavoriteBook extends IResponse {
+  action: "ADD" | "REMOVE" | "ERROR";
+}
+
 class BooksService {
   public async getAll() {
     try {
@@ -42,21 +46,31 @@ class BooksService {
       return [];
     }
   }
-  public async UpdateFavoriteBookbyId(id: string): Promise<IResponse> {
+  public async UpdateFavoriteBookbyId(
+    id: string
+  ): Promise<IResponseFavoriteBook> {
     try {
       const res = await api.put(`/api/livros/update-favorite/${id}`);
-      console.log(res.data.book, "testando data");
-      return {
-        msg: res.data.book?.msg || "Livro Adicionado aos favoritos!",
-        success: true,
-      };
+
+      return res.data.book.favorite === true
+        ? {
+            msg: res.data.book?.msg || "Livro Adicionado aos favoritos!",
+            success: true,
+            action: "ADD",
+          }
+        : {
+            msg: res.data.book?.msg || "Livro removido dos favoritos!",
+            success: true,
+            action: "REMOVE",
+          };
     } catch (error: any) {
       console.log(error);
       return {
         msg:
           error?.response?.data?.book?.msg ||
-          "Ocorreu um erro, não foi possível favoritar o livro.",
+          "Ocorreu um erro, não foi possível realizar essa ação.",
         success: false,
+        action: "ERROR",
       };
     }
   }

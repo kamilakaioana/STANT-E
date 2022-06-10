@@ -4,7 +4,7 @@ import { useAuth } from "../../hooks/auth";
 import { useSearch } from "../../hooks/search";
 import { StringsResources } from "../../utils/stringsResources";
 import {
-  ButtonSair,
+  Button,
   Container,
   Logo,
   LogoContainer,
@@ -67,11 +67,11 @@ function Header() {
           </Item>
         ))} */}
         {pages.map(({ id, name, path }) => (
-          <ButtonSair key={id} onClick={() => handlePress(path)}>
+          <Button key={id} onClick={() => handlePress(path)}>
             {name}
-          </ButtonSair>
+          </Button>
         ))}
-        <ButtonSair onClick={() => logoutLink()}>{SAIR}</ButtonSair>
+        <Button onClick={() => logoutLink()}>{SAIR}</Button>
       </MenuContainer>
     </Container>
   );

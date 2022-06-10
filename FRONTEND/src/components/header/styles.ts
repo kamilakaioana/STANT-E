@@ -57,4 +57,25 @@ export const ButtonSair = styled.button`
   color: ${colors.fonts.white};
   font-weight: bolder;
   font-family: Times;
+  :hover {
+    background-color: ${colors.primary};
+    border-radius: 5%;
+    cursor: pointer;
+    background-color: "#41ACC8";
+    border: none;
+  }
+`;
+export const Button = styled.button`
+  background-color: transparent;
+  border: none;
+  font-size: 20px;
+  color: ${colors.fonts.white};
+  font-weight: bolder;
+  font-family: Times;
+  :hover {
+    background-color: ${colors.primary};
+    border-radius: 5%;
+    cursor: pointer;
+    background-color: "#41ACC8";
+  }
 `;
