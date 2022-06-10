@@ -129,7 +129,7 @@ export const InputContainer = styled.div`
 export const EmailInput = styled(CustomInput).attrs({
   height: 60,
   type: "email",
-  fontSize: 24,
+  fontSize: 22,
   placeholder: "Email",
   name: "email",
 })`
@@ -139,7 +139,7 @@ export const EmailInput = styled(CustomInput).attrs({
 export const PasswordInput = styled(CustomInput).attrs({
   height: 60,
   type: "password",
-  fontSize: 24,
+  fontSize: 22,
   placeholder: "Senha",
   name: "password",
 })`
@@ -157,6 +157,7 @@ export const LinkRegister = styled(Link).attrs({
   to: "/register",
 })`
   color: black;
+  font-size: 18px;
 `;
 
 export const ButtonContainer = styled.div`

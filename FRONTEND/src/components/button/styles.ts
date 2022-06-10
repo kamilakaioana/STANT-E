@@ -1,8 +1,11 @@
 import styled from "styled-components";
 import { IButtonProps } from ".";
 import { colorsNoHash } from "../../styles/colors";
+import { MediaWidth } from "../../utils/constants";
 
 const { primary, transparent, fonts } = colorsNoHash;
+
+const { mobileMax, tabletMax } = MediaWidth;
 
 export const Button = styled.button.attrs({
   type: "submit",
@@ -12,7 +15,14 @@ export const Button = styled.button.attrs({
   height: ${({ height }) => height}px;
   background-color: #${({ color, secondary }) => color || (secondary ? transparent : primary)};
   border-radius: ${({ borderRadius }) => borderRadius || 20}px;
-  font-size: ${({ fontSize }) => fontSize || 28}px;
+  font-size: ${({ fontSize }) => fontSize || 24}px;
+
+  @media (max-width: ${tabletMax}px) {
+    font-size: 18px;
+  }
+  @media (max-width: ${mobileMax}px) {
+    font-size: 16px;
+  }
   border: ${({ secondary }) => (secondary ? "2px solid" : "none")};
   color: #${({ textColor, secondary }) => textColor || (secondary ? primary : fonts.white)};
   opacity: 1;

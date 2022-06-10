@@ -1,6 +1,9 @@
 import styled from "styled-components";
 import { IinputProps } from ".";
 import { colors, colorsNoHash } from "../../../styles/colors";
+import { MediaWidth } from "../../../utils/constants";
+
+const { mobileMax, tabletMax } = MediaWidth;
 
 export const Container = styled.div`
   display: flex;
@@ -8,7 +11,7 @@ export const Container = styled.div`
 `;
 
 export const Input = styled.input<IinputProps>`
-  font-size: ${({ fontSize }) => fontSize || 24}px;
+  font-size: ${({ fontSize }) => fontSize || 22}px;
   height: ${({ height }) => height}px;
   border-radius: 20px;
   background-color: #${({ disabled }) => (disabled ? colorsNoHash.grayDisabled : "f5f2f2")};
@@ -23,6 +26,12 @@ export const Input = styled.input<IinputProps>`
   }
   &:focus {
     outline: none;
+  }
+  @media (max-width: ${tabletMax}px) {
+    font-size: 18px;
+  }
+  @media (max-width: ${mobileMax}px) {
+    font-size: 16px;
   }
 `;
 

@@ -22,7 +22,7 @@ import { loginValidationSchema } from "./loginValidationSchema";
 import { useToast } from "../../hooks/toast";
 import { StringsResources } from "../../utils/stringsResources";
 
-const { ENTRAR, NAO_TENHO_CADASTRO, CARREGANDO } = StringsResources.BUTTONS;
+const { ENTRAR, NAO_TENHO_CADASTRO, LOADING } = StringsResources.BUTTONS;
 function Login() {
   const navigate = useNavigate();
   const { signIn, loading } = useAuth();
@@ -91,7 +91,7 @@ function Login() {
                     disabled={loading}
                     onClickButton={handleSubmit}
                     height={60}
-                    text={loading ? CARREGANDO : ENTRAR}
+                    text={loading ? LOADING : ENTRAR}
                   />
                 </ButtonContainer>
               </>

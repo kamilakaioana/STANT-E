@@ -1,6 +1,10 @@
-import { object, string } from 'yup';
+import { object, string } from "yup";
+import { StringsResources } from "../../utils/stringsResources";
+
+const { EMAIL_REQUIRED, PASSWORD_REQUIRED, VALID_EMAIL } =
+  StringsResources.ERRORS;
 
 export const loginValidationSchema = object({
-  email: string().email('Deve informar um email valido').required('O campo e-mail é obrigatório'),
-  password: string().required('O campo senha é obrigatório'),
+  email: string().email(VALID_EMAIL).required(EMAIL_REQUIRED),
+  password: string().required(PASSWORD_REQUIRED),
 });
