@@ -1,14 +1,12 @@
-import { isEditable } from "@testing-library/user-event/dist/utils";
 import { Formik } from "formik";
 import { useCallback, useEffect, useMemo, useState } from "react";
 import { useNavigate, useParams } from "react-router-dom";
 import CustomFileInput from "../../components/inputs/fileInput";
 import DeleteConfimModal from "../../components/modais/DeleteConfimModal";
-import LoadingModal from "../../components/modais/Loading";
 import CustomTextArea from "../../components/textArea";
 import { useAuth } from "../../hooks/auth";
 import { useToast } from "../../hooks/toast";
-import { IBook, IResponse } from "../../interfaces";
+import { IBook } from "../../interfaces";
 import BookService from "../../services/bookService";
 import { registerBookValidationSchema } from "./registerBookValidationSchema";
 import {
@@ -48,8 +46,8 @@ function BookRegister() {
   const { showToast } = useToast();
   const { bookId } = useParams();
   const [file, setFile] = useState<string | ArrayBuffer | null>();
-  const [res, setRes] = useState<IResponse>();
-  const [previewImg, setPreviewImg] = useState<string>();
+  // const [res, setRes] = useState<IResponse>();
+
   const [modalConfirm, setModalConfirm] = useState<boolean>(false);
   const { user } = useAuth();
   const [lidosChecked, setLidosChecked] = useState<boolean>(true);
@@ -57,9 +55,9 @@ function BookRegister() {
   // const [haLivroSelecionado, setHaLivroSelecionado] = useState<boolean>(true);
   const [livroSelecionado, setLivroSelecionado] = useState<IBook>({} as IBook);
   const [editable, setEditable] = useState<boolean>(false);
-  console.log("um livro vazio", Boolean(livroSelecionado));
+
   const isEditable: boolean = editable && Boolean(bookId);
-  console.log("isEditable", isEditable);
+
   const imageBase64 = typeof file === "string" ? file : "";
   const disabled: boolean = Boolean(bookId) ? !editable : false;
   const loadBook = useCallback(async (bookId: string) => {
@@ -121,7 +119,7 @@ function BookRegister() {
     navigate("/");
     setLoadingDeleteBook(false);
     // @ TODO CRIAR TOAST INFORMANDO QUE FOI EXCLUIDO COM SUCESSO
-  }, [bookId, navigate]);
+  }, [bookId, navigate, showToast]);
 
   // @ TODO verificar desabilitar botao loading ao cadastrar
   const handleSubmitDisabled = (): boolean => {
@@ -170,9 +168,9 @@ function BookRegister() {
         <Content>
           <AddImageContainer>
             <ImgContent>
-              {previewImg ? <img src={imageBase64} alt="book" /> : <Logo />}
+              {imageBase64 ? <img src={imageBase64} alt="book" /> : <Logo />}
             </ImgContent>
-            <CustomFileInput res={setRes} setFile={setFile} />
+            <CustomFileInput setFile={setFile} />
           </AddImageContainer>
 
           <Formik

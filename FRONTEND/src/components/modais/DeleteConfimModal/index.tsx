@@ -10,7 +10,6 @@ import {
   SalveButton,
 } from "./styles";
 import PendingApproval from "./../../../assets/image/pendingApproval.svg";
-import { CloseIcon } from "../../icons";
 
 export interface ILoadingModalProps {
   modalVisible: boolean;

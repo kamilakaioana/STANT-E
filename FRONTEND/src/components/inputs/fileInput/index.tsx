@@ -1,12 +1,12 @@
-import { IResponse } from "../../../interfaces";
+// import { IResponse } from "../../../interfaces";
 import { Label } from "./styles";
 
 interface Props {
   setFile: (base64: string | ArrayBuffer | null) => void;
-  res: (value: IResponse) => void;
+  // res: (value: IResponse) => void;
 }
 
-function CustomFileInput({ setFile, res }: Props) {
+function CustomFileInput({ setFile }: Props) {
   const encodeFileBase64 = (files: FileList | null) => {
     var reader = new FileReader();
     if (files?.[0]) {
@@ -14,18 +14,10 @@ function CustomFileInput({ setFile, res }: Props) {
       reader.onload = () => {
         var Base64 = reader.result;
         setFile(Base64);
-        res({
-          msg: "Sucesso",
-          success: true,
-        });
       };
 
       reader.onerror = (error) => {
         console.log("error: ", error);
-        res({
-          msg: "Error",
-          success: false,
-        });
       };
     }
     return reader.result ?? "";

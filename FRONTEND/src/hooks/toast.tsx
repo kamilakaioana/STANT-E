@@ -2,11 +2,11 @@ import { createContext, useContext, useState, ReactNode } from "react";
 
 import ToastBase from "../components/toast/toastBase";
 
-interface ICustomToastProps {
-  description?: string;
-  title?: string;
-  type?: string;
-}
+// interface ICustomToastProps {
+//   description?: string;
+//   title?: string;
+//   type?: string;
+// }
 
 type toastProps = {
   id: number;
