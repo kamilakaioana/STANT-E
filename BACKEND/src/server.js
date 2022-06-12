@@ -6,7 +6,7 @@ const cors = require("cors");
 const server = express();
 
 // const allowlist = ["http://localhost:3000"];
-const allowlist = ["*"];
+const allowlist = "*";
 
 const corsOptions = {
   origin: allowlist,
