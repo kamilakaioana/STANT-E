@@ -1,1 +1,1 @@
-web: cd ./BACKEND && npm run start:prod
+web: node BACKEND/src/app.js
