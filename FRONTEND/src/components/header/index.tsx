@@ -1,79 +1,68 @@
-import { useEffect } from "react";
+import { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { useAuth } from "../../hooks/auth";
 import { useSearch } from "../../hooks/search";
-import { StringsResources } from "../../utils/stringsResources";
+import { pages } from "../../utils/headerUtils";
+import LeftNav from "../LeftNav";
 import {
   Button,
   Container,
   Logo,
   LogoContainer,
   MenuContainer,
+  CustomBurger,
 } from "./styles";
 
-const { CADASTRAR, FAVORITOS, LIDOS, SAIR, HOME } = StringsResources.HEADER;
-const pages = [
-  {
-    id: "1",
-    name: HOME,
-    path: "/",
-  },
-  {
-    id: "2",
-    name: FAVORITOS,
-    path: "/favoritos",
-  },
-  {
-    id: "3",
-    name: LIDOS,
-    path: "/lidos",
-  },
-  {
-    id: "4",
-    name: CADASTRAR,
-    path: "/livro",
-  },
-];
-
 function Header() {
+  const [navBarOpen, setNavBarOpen] = useState<boolean>(false);
   const { signOut, loadUser } = useAuth();
   const { clearSearchData } = useSearch();
 
   const navigate = useNavigate();
 
-  const logoutLink = () => {
-    signOut();
-  };
-
-  const handlePress = (rota: string) => {
+  const handlePress = (rota: string, id: string) => {
+    const sairRoute = pages[4].id;
+    if (id === sairRoute) {
+      signOut();
+      return;
+    }
     clearSearchData();
     navigate(rota);
   };
 
   useEffect(() => {
     loadUser();
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
   return (
-    <Container>
-      <LogoContainer>
-        <Logo />
-      </LogoContainer>
-      <MenuContainer>
-        {/* // @TODO APOS VALIDACAO RETIRAR COMENTARIO */}
-        {/* {pages.map(({ id, name, path }) => (
+    <>
+      <Container>
+        <LogoContainer>
+          <Logo />
+          <CustomBurger
+            onClick={() => setNavBarOpen(!navBarOpen)}
+            open={navBarOpen}
+          />
+          {/* <MenuButton /> */}
+        </LogoContainer>
+        <MenuContainer>
+          {/* // @TODO APOS VALIDACAO RETIRAR COMENTARIO */}
+          {/* {pages.map(({ id, name, path }) => (
           <Item to={path} key={id}>
             {name}
           </Item>
         ))} */}
-        {pages.map(({ id, name, path }) => (
-          <Button key={id} onClick={() => handlePress(path)}>
-            {name}
-          </Button>
-        ))}
-        <Button onClick={() => logoutLink()}>{SAIR}</Button>
-      </MenuContainer>
-    </Container>
+          {pages.map(({ id, name, path }) => (
+            <Button key={id} onClick={() => handlePress(path, id)}>
+              {name}
+            </Button>
+          ))}
+          {/* <Button onClick={() => logoutLink()}>{SAIR}</Button> */}
+        </MenuContainer>
+      </Container>
+      <LeftNav open={navBarOpen} />
+    </>
   );
 }
 
