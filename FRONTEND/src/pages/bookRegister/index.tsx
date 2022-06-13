@@ -6,7 +6,7 @@ import DeleteConfimModal from "../../components/modais/DeleteConfimModal";
 import CustomTextArea from "../../components/textArea";
 import { useAuth } from "../../hooks/auth";
 import { useToast } from "../../hooks/toast";
-import { IBook } from "../../interfaces";
+import { IBook, IResponse } from "../../interfaces";
 import BookService from "../../services/bookService";
 import { registerBookValidationSchema } from "./registerBookValidationSchema";
 import {
@@ -130,6 +130,13 @@ function BookRegister() {
     }
     return false;
   };
+
+  const sourceImage = useMemo((): string => {
+    if (bookId && livroSelecionado.image)
+      return `data:image/gif;base64,${livroSelecionado.image}`;
+    if (imageBase64) return `data:image/gif;base64,${imageBase64}`;
+    return "";
+  }, [bookId, imageBase64, livroSelecionado.image]);
   return (
     <>
       <Container>
@@ -168,7 +175,11 @@ function BookRegister() {
         <Content>
           <AddImageContainer>
             <ImgContent>
-              {imageBase64 ? <img src={imageBase64} alt="book" /> : <Logo />}
+              {sourceImage && sourceImage !== "" ? (
+                <img src={sourceImage} alt="book" />
+              ) : (
+                <Logo />
+              )}
             </ImgContent>
             <CustomFileInput setFile={setFile} />
           </AddImageContainer>
@@ -187,22 +198,20 @@ function BookRegister() {
                 author: values.author,
                 description: values.description,
                 image: imageBase64,
-                clientId: user._id ?? undefined,
+                clientId: user._id,
               };
-              const res = await BookService.create(data);
+              let res: IResponse;
+
+              if (bookId) {
+                res = await BookService.updateBookById(bookId, data);
+              } else {
+                res = await BookService.create(data);
+              }
               if (res.success === true) {
-                showToast(
-                  "success",
-                  "Livro cadastrado",
-                  "O seu livro foi cadastrado com sucesso"
-                );
+                showToast("success", "Sucesso!", res.msg);
                 navigate("/");
               } else {
-                showToast(
-                  "danger",
-                  "Erro ao cadastrar o livro",
-                  "Não foi possível realizar o cadastro do livro, tente novamente mais tarde"
-                );
+                showToast("danger", "Erro ao cadastrar o livro", res.msg);
               }
 
               setLoading(false);

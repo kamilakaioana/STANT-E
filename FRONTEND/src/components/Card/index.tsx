@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React from "react";
 import { HeartIconGray, HeartIconRed } from "../../pages/bookRegister/styles";
 import DefaultBook from "../../assets/image/defaultBook.svg";
 import {
@@ -31,16 +31,6 @@ const Card: React.FC<ICardProps> = ({
   bookId,
   favoritos,
 }) => {
-  const [valuefavorite, setValueFavorite] = useState<boolean>(favoritos);
-
-  const handlePress = async () => {
-    const favoritado = await onPressFavorite(bookId);
-    console.log("favoritado", favoritado);
-    setValueFavorite(favoritado);
-  };
-
-  console.log("valuefavorite", valuefavorite);
-  console.log("favoritos", favoritos);
   return (
     <Book key={bookId}>
       <HeaderBook>
@@ -49,8 +39,14 @@ const Card: React.FC<ICardProps> = ({
           {favoritos ? <HeartIconRed /> : <HeartIconGray />}
         </div>
       </HeaderBook>
-      <ImageContainer onClick={() => handlePress()}>
-        <BookImage src={image && image !== "" ? image : DefaultBook} />
+      <ImageContainer onClick={() => onPressBook(bookId)}>
+        <BookImage
+          src={
+            image && image !== ""
+              ? `data:image/gif;base64,${image}`
+              : DefaultBook
+          }
+        />
       </ImageContainer>
 
       <Content>

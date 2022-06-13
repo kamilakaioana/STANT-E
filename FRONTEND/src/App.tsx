@@ -14,7 +14,9 @@ function AxiosNavigateSetup() {
 function App() {
   return (
     <BrowserRouter>
-      <AxiosNavigateSetup />
+      <ToastProvider>
+        <AxiosNavigateSetup />
+      </ToastProvider>
       <AuthProvider>
         <ToastProvider>
           <SearchProvider>
