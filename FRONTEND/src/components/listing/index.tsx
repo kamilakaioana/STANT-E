@@ -12,7 +12,7 @@ import {
 interface IBookListProps {
   data: IBook[];
   handleSelectBook: (bookId: string) => void;
-  favoriteOnPress: (bookId: string) => Promise<boolean>;
+  favoriteOnPress: (bookId: string) => void;
 }
 const Listing: React.FC<IBookListProps> = ({
   data,

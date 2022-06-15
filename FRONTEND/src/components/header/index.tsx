@@ -14,7 +14,9 @@ import {
 } from "./styles";
 
 function Header() {
+  // const location = useLocation();
   const [navBarOpen, setNavBarOpen] = useState<boolean>(false);
+  const [selected, setSelected] = useState<string>("/");
   const { signOut, loadUser } = useAuth();
   const { clearSearchData } = useSearch();
 
@@ -28,6 +30,7 @@ function Header() {
     }
     clearSearchData();
     navigate(rota);
+    setSelected(rota);
   };
 
   useEffect(() => {
@@ -54,7 +57,11 @@ function Header() {
           </Item>
         ))} */}
           {pages.map(({ id, name, path }) => (
-            <Button key={id} onClick={() => handlePress(path, id)}>
+            <Button
+              selectedTab={path === selected}
+              key={id}
+              onClick={() => handlePress(path, id)}
+            >
               {name}
             </Button>
           ))}

@@ -1,4 +1,11 @@
-import { Container, Error, ErrorContainer, TextArea } from "./styles";
+import {
+  Container,
+  Error,
+  ErrorContainer,
+  Label,
+  LabelContainer,
+  TextArea,
+} from "./styles";
 
 export interface ITextAreaProps {
   value: string;
@@ -10,10 +17,16 @@ export interface ITextAreaProps {
   name?: string;
   onBlur?: React.FocusEventHandler<HTMLTextAreaElement>;
   disabled?: boolean;
+  label?: string;
 }
 const CustomTextArea: React.FC<ITextAreaProps> = (props) => {
   return (
     <Container>
+      {props.label ? (
+        <LabelContainer style={{ textAlign: "start", display: "flex" }}>
+          <Label> {props.label} </Label>
+        </LabelContainer>
+      ) : null}
       <TextArea
         value={props.value}
         onChange={props.onChange}

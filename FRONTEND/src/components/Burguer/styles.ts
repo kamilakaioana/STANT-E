@@ -1,4 +1,5 @@
 import styled from "styled-components";
+import { colors } from "../../styles/colors";
 
 interface IBurguer {
   open: boolean;
@@ -7,7 +8,7 @@ interface IBurguer {
 export const Item = styled.div<IBurguer>`
   width: 2rem;
   height: 0.25rem;
-  background-color: ${({ open }) => (open ? "#fff" : "#fff")};
+  background-color: ${colors.backgroundWhite};
   border-radius: 10px;
   transform-origin: 1px;
   transition: all 0.3s linear;
@@ -22,6 +23,7 @@ export const Item = styled.div<IBurguer>`
     transform: ${({ open }) => (open ? "rotate(-45deg)" : "rotate(0)")};
   }
 `;
+
 export const StyledBurger = styled.div`
   width: 2rem;
   height: 2rem;

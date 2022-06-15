@@ -6,7 +6,9 @@ import { MediaWidth } from "../../utils/constants";
 import Burger from "../Burguer";
 
 const { tabletMax } = MediaWidth;
-
+type ITabProps = {
+  selectedTab: boolean;
+};
 export const Container = styled.div`
   height: 80px;
   background-color: ${colors.secondary};
@@ -79,13 +81,14 @@ export const ButtonSair = styled.button`
     border: none;
   }
 `;
-export const Button = styled.button`
+export const Button = styled.button<ITabProps>`
   background-color: transparent;
   border: none;
   font-size: 20px;
   color: ${colors.fonts.white};
   font-weight: bolder;
   font-family: Times;
+  text-decoration: ${({ selectedTab }) => (selectedTab ? "underline" : "none")};
   :hover {
     background-color: ${colors.primary};
     border-radius: 5%;

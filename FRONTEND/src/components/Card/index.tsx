@@ -11,13 +11,14 @@ import {
   Title,
 } from "./styles";
 import { StringsResources } from "../../utils/stringsResources";
+import HeartButton from "../HeartButton";
 
 interface ICardProps {
   title: string;
   favoritos: boolean;
   image: string;
   description: string;
-  onPressFavorite: (e: string) => Promise<boolean>;
+  onPressFavorite: (e: string) => void;
   onPressBook: (e: string) => void;
   bookId: string;
 }
@@ -35,9 +36,10 @@ const Card: React.FC<ICardProps> = ({
     <Book key={bookId}>
       <HeaderBook>
         <Title>{title}</Title>
-        <div onClick={() => onPressFavorite(bookId)}>
-          {favoritos ? <HeartIconRed /> : <HeartIconGray />}
-        </div>
+        <HeartButton
+          favorite={favoritos}
+          onClick={() => onPressFavorite(bookId)}
+        />
       </HeaderBook>
       <ImageContainer onClick={() => onPressBook(bookId)}>
         <BookImage

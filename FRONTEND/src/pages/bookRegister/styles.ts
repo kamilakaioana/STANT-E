@@ -7,15 +7,22 @@ import HeartGrayIcon from "../../assets/icon/heartGray.svg";
 import EditFormIcon from "../../assets/icon/edit.svg";
 import CheckedIcon from "../../assets/icon/checked.svg";
 import UncheckedIcon from "../../assets/icon/unchecked.svg";
+import { colors } from "../../styles/colors";
+import { MediaWidth } from "../../utils/constants";
 
 type IcolorSelected = {
   selected?: boolean;
 };
+const { mobileMax, tabletMax, screenSmallMax, screenMediumMax } = MediaWidth;
 
 export const InputContainer = styled.div`
   display: flex;
   flex-direction: column;
-  padding: 0px 0px 40px 120px;
+  padding-left: 10%;
+  @media (max-width: ${tabletMax}px) {
+    padding-left: 0%;
+    padding-top: 24px;
+  }
   flex: 3;
 `;
 
@@ -25,9 +32,25 @@ export const ButtonContainer = styled.div`
 `;
 
 export const Container = styled.div`
-  padding: 40px 120px;
+  padding: 5px 120px;
   flex-direction: column;
   display: flex;
+  @media (max-width: ${screenMediumMax}px) {
+    padding: 5px 100px;
+  }
+  @media (max-width: ${screenSmallMax}px) {
+    padding: 5px 65px;
+  }
+  @media (max-width: ${tabletMax}px) {
+    padding-left: 0%;
+    padding-left: 48px;
+    padding-right: 48px;
+  }
+  @media (max-width: ${mobileMax}px) {
+    padding-left: 0%;
+    padding-left: 32px;
+    padding-right: 32px;
+  }
 `;
 
 export const Options = styled.div`
@@ -46,6 +69,12 @@ export const Remover = styled.p<IcolorSelected>`
   :hover {
     opacity: 0.8;
   }
+  @media (max-width: ${tabletMax}px) {
+    font-size: 16px;
+  }
+  @media (max-width: ${mobileMax}px) {
+    font-size: 14px;
+  }
 `;
 
 export const CancelarEdicao = styled.p`
@@ -54,20 +83,17 @@ export const CancelarEdicao = styled.p`
   display: flex;
   color: #797878;
   text-decoration: underline;
-  font-size: 24px;
+  font-size: 20px;
   cursor: pointer;
-`;
 
-export const AddImageContainer = styled.div`
-  flex: 1;
-  align-items: center;
-  flex-direction: column;
-  display: flex;
+  @media (max-width: ${tabletMax}px) {
+    font-size: 16px;
+  }
 `;
 
 export const TitleInput = styled(Input).attrs({
   name: "title",
-  height: 80,
+  height: 60,
   fontSize: 24,
   placeholder: "Titulo do livro",
 })`
@@ -76,34 +102,24 @@ export const TitleInput = styled(Input).attrs({
 
 export const AuthorInput = styled(Input).attrs({
   name: "author",
-  height: 80,
+  height: 60,
   fontSize: 24,
   placeholder: "Autor",
 })`
   margin-top: 32px;
   font-family: Arial, Helvetica, sans-serif;
-`;
-// export const DescriptionInput = styled(Input).attrs({
-//   name: "description",
-//   height: 80,
-//   fontSize: 24,
-//   placeholder: "Descrição",
-//   // type: "textarea",
-// })`
-//   margin-top: 32px;
-//   font-family: Arial, Helvetica, sans-serif;
-// `;
-export const ExcluirButton = styled(CustomButton).attrs({
-  height: 80,
-})`
-  box-shadow: 2px 2px 2px 1px rgba(0, 0, 0, 0.2);
+  @media (max-width: ${tabletMax}px) {
+    margin-top: 0px;
+  }
 `;
 
+export const ExcluirButton = styled(CustomButton).attrs({
+  height: 60,
+})``;
+
 export const SalveButton = styled(CustomButton).attrs({
-  height: 80,
-})`
-  box-shadow: 2px 2px 2px 1px rgba(0, 0, 0, 0.2);
-`;
+  height: 60,
+})``;
 
 export const Title = styled.h1`
   font-weight: lighter;
@@ -119,6 +135,10 @@ export const TitleContainer = styled.div`
 export const Content = styled.div`
   flex-direction: row;
   display: flex;
+
+  @media (max-width: ${tabletMax}px) {
+    flex-direction: column;
+  }
 `;
 
 export const Logo = styled.img.attrs({ src: ImageIcon })`
@@ -135,17 +155,32 @@ export const ImgContent = styled.div`
   padding-right: 30px;
   border-radius: 8px;
 `;
+
 export const ButtonExcluirContainer = styled.div`
-  margin-right: 30px;
+  margin-right: 40px;
   flex-direction: row;
   display: flex;
   width: 100%;
+  @media (max-width: ${screenSmallMax}px) {
+    margin-right: 20px;
+  }
+
+  @media (max-width: ${tabletMax}px) {
+    margin-right: 15px;
+  }
 `;
 
 export const ButtonSalveContainer = styled.div`
-  margin-left: 30px;
+  margin-left: 40px;
   width: 100%;
   flex-direction: row;
+
+  @media (max-width: ${screenSmallMax}px) {
+    margin-left: 20px;
+  }
+  @media (max-width: ${tabletMax}px) {
+    margin-left: 15px;
+  }
 `;
 
 export const HeartIconRed = styled.img.attrs({
@@ -171,6 +206,9 @@ export const RemoverContainer = styled.div`
   flex-direction: row;
   align-items: center;
   justify-content: center;
+  :hover {
+    cursor: pointer;
+  }
 `;
 
 export const CancelarContainer = styled.div`
@@ -191,7 +229,10 @@ export const LivrosLidos = styled.p`
   align-self: flex-end;
   color: #30322e;
   font-weight: bold;
-  font-size: 24px;
+  font-size: 20px;
+  @media (max-width: ${tabletMax}px) {
+    font-size: 16px;
+  }
 `;
 
 export const CheckedIconLidos = styled.img.attrs({ src: CheckedIcon })`
@@ -209,7 +250,40 @@ export const LivrosLidosContainer = styled.div`
   flex-direction: row;
   align-items: center;
   justify-content: flex-end;
+`;
+
+export const LivrosLidosContent = styled.div`
+  display: flex;
+  flex-direction: row;
+  align-items: center;
   :hover {
     opacity: 0.8;
+    cursor: pointer;
+  }
+`;
+
+export const Img = styled.img.attrs({ alt: "imagem livro" })`
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+`;
+
+export const AddImageContainer = styled.div`
+  flex: 1;
+  align-items: center;
+  flex-direction: column;
+  display: flex;
+`;
+
+export const ImgContainer = styled.div`
+  border: 4px solid ${colors.lightGreen};
+  height: 300px;
+  border-radius: 8px;
+  width: 100%;
+  @media (max-width: ${tabletMax}px) {
+    height: 300px;
+  }
+  @media (max-width: ${mobileMax}px) {
+    height: 250px;
   }
 `;
