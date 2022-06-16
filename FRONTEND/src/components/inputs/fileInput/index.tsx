@@ -12,6 +12,7 @@ function CustomFileInput({ setFile }: Props) {
       reader.onload = () => {
         const base64 = reader.result;
         if (typeof base64 === "string") {
+          // eslint-disable-next-line @typescript-eslint/no-unused-vars
           const [_, base64Hash] = base64?.split(",");
           setFile(base64Hash);
         }
