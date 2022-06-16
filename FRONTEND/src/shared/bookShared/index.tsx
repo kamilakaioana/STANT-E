@@ -27,23 +27,19 @@ const BookShared: React.FC<IBookShared> = ({
     navigate(`/livro/${bookId} `);
   };
 
-  const handleFavoriteBook = async (bookId: string): Promise<boolean> => {
+  const handleFavoriteBook = async (bookId: string) => {
     const res = await BookService.UpdateFavoriteBookbyId(bookId);
     setUpdate?.((current) => current + 1);
     if (res.success === false) {
       showToast("danger", "Ocorreu um erro ao realizar a ação", res.msg);
-      return false;
     }
 
     if (res.success === true && res.action === "ADD") {
       showToast("success", "Livro favoritado", res.msg);
-      return true;
     }
     if (res.success === true && res.action === "REMOVE") {
       showToast("info", "O livro retirado dos favoritos", res.msg);
-      return false;
     }
-    return false;
   };
 
   return (

@@ -26,8 +26,7 @@ const customIntercept = (navigate: NavigateFunction) => {
         error.response?.status === 401 &&
         error.response.data?.msg === "Token inválido"
       ) {
-       removeToken();
-        // alert("Sua conexão expirou.");
+        removeToken();
         navigate("/login");
       }
 

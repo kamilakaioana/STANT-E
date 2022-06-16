@@ -14,7 +14,7 @@ export const Input = styled.input<IinputProps>`
   font-size: ${({ fontSize }) => fontSize || 22}px;
   height: ${({ height }) => height}px;
   border-radius: 20px;
-  background-color: #${({ disabled }) => (disabled ? colorsNoHash.grayDisabled : "f5f2f2")};
+  background-color: #${({ disabled }) => (disabled ? colorsNoHash.grayDisabled : colorsNoHash.inputDefault)};
   color: ${colors.fonts.light};
   padding-left: 24px;
   border: ${({ error }) => (error ? "2px solid" : "none")};
@@ -26,6 +26,10 @@ export const Input = styled.input<IinputProps>`
   }
   &:focus {
     outline: none;
+    background-color: ${colors.grayfocus};
+  }
+  :hover[disabled] {
+    cursor: no-drop;
   }
   @media (max-width: ${tabletMax}px) {
     font-size: 18px;
@@ -55,6 +59,7 @@ export const Label = styled.label`
   font-weight: bold;
   color: ${colors.fonts.gray};
 `;
+
 export const LabelContainer = styled.div`
   text-align: start;
   display: flex;

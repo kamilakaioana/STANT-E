@@ -1,12 +1,13 @@
 import { Formik } from "formik";
 import { useCallback, useEffect, useMemo, useState } from "react";
 import { useNavigate, useParams } from "react-router-dom";
+import HeartButton from "../../components/HeartButton";
 import CustomFileInput from "../../components/inputs/fileInput";
 import DeleteConfimModal from "../../components/modais/DeleteConfimModal";
 import CustomTextArea from "../../components/textArea";
 import { useAuth } from "../../hooks/auth";
 import { useToast } from "../../hooks/toast";
-import { IBook } from "../../interfaces";
+import { IBook, IResponse } from "../../interfaces";
 import BookService from "../../services/bookService";
 import { registerBookValidationSchema } from "./registerBookValidationSchema";
 import {
@@ -22,8 +23,6 @@ import {
   Content,
   EditIcon,
   ExcluirButton,
-  HeartIconGray,
-  HeartIconRed,
   ImgContent,
   InputContainer,
   LivrosLidos,
@@ -37,6 +36,9 @@ import {
   TitleContainer,
   TitleInput,
   UncheckedIconLidos,
+  ImgContainer,
+  LivrosLidosContent,
+  Img,
 } from "./styles";
 
 function BookRegister() {
@@ -46,14 +48,15 @@ function BookRegister() {
   const { showToast } = useToast();
   const { bookId } = useParams();
   const [file, setFile] = useState<string | ArrayBuffer | null>();
-  // const [res, setRes] = useState<IResponse>();
-
   const [modalConfirm, setModalConfirm] = useState<boolean>(false);
   const { user } = useAuth();
-  const [lidosChecked, setLidosChecked] = useState<boolean>(true);
-  const [favoritos, setFavoritos] = useState<boolean>(false);
-  // const [haLivroSelecionado, setHaLivroSelecionado] = useState<boolean>(true);
   const [livroSelecionado, setLivroSelecionado] = useState<IBook>({} as IBook);
+  const [favoritos, setFavoritos] = useState<boolean>(
+    livroSelecionado.favorite
+  );
+  const [lidosChecked, setLidosChecked] = useState<boolean>(
+    livroSelecionado.read ?? false
+  );
   const [editable, setEditable] = useState<boolean>(false);
 
   const isEditable: boolean = editable && Boolean(bookId);
@@ -63,27 +66,12 @@ function BookRegister() {
   const loadBook = useCallback(async (bookId: string) => {
     const book = await BookService.getOne(bookId);
     setLivroSelecionado(book);
+    setFavoritos(book.favorite);
   }, []);
 
   useEffect(() => {
     bookId && loadBook(bookId);
   }, [bookId, loadBook]);
-
-  // useEffect(() => {
-  //   res?.success === true
-  //     ? showToast(
-  //         "info",
-  //         "Image adicionada",
-  //         "Sucesso em adicionar a imagem. preencha todos campo e confirme."
-  //       )
-  //     : showToast(
-  //         "danger",
-  //         "Erro ao adicionar o arquivo",
-  //         "Verifique se o tipo(jpge e png) e tamanho do arquivos (máximo 3MB) atendem ao requerido."
-  //       );
-  // }, []);
-
-  console.log("renderizou cadastro");
 
   const initialValues = useMemo(
     () => ({
@@ -91,13 +79,18 @@ function BookRegister() {
       author: livroSelecionado.author ?? "",
       description: livroSelecionado.description ?? "",
       image: livroSelecionado.image ?? "",
-      clientId: livroSelecionado.image ?? "",
+      clientId: livroSelecionado.clientId ?? "",
+      read: livroSelecionado.read,
+      favorite: livroSelecionado.favorite,
     }),
     [
       livroSelecionado.author,
       livroSelecionado.description,
       livroSelecionado.image,
       livroSelecionado.title,
+      livroSelecionado.clientId,
+      livroSelecionado.read,
+      livroSelecionado.favorite,
     ]
   );
 
@@ -107,7 +100,7 @@ function BookRegister() {
     const res = await BookService.deleteBook(bookId);
     res.success === true
       ? showToast(
-          "success",
+          "info",
           "Livro foi deletado!",
           "O livro selecionado foi deletado permanentemente"
         )
@@ -118,7 +111,6 @@ function BookRegister() {
         );
     navigate("/");
     setLoadingDeleteBook(false);
-    // @ TODO CRIAR TOAST INFORMANDO QUE FOI EXCLUIDO COM SUCESSO
   }, [bookId, navigate, showToast]);
 
   // @ TODO verificar desabilitar botao loading ao cadastrar
@@ -130,25 +122,35 @@ function BookRegister() {
     }
     return false;
   };
+
+  const sourceImage = useMemo((): string => {
+    if (bookId && livroSelecionado.image)
+      return `data:image/gif;base64,${livroSelecionado.image}`;
+    if (imageBase64) return `data:image/gif;base64,${imageBase64}`;
+    return "";
+  }, [bookId, imageBase64, livroSelecionado.image]);
+
   return (
     <>
       <Container>
         {Boolean(bookId) ? (
           <>
-            <LivrosLidosContainer
-              onClick={() => setLidosChecked((value) => !value)}
-            >
-              {lidosChecked ? <CheckedIconLidos /> : <UncheckedIconLidos />}
-              <LivrosLidos>Livros lidos</LivrosLidos>
+            <LivrosLidosContainer>
+              <LivrosLidosContent
+                onClick={() => !disabled && setLidosChecked((value) => !value)}
+                disabled={disabled}
+              >
+                {lidosChecked ? <CheckedIconLidos /> : <UncheckedIconLidos />}
+                <LivrosLidos>Livros lidos</LivrosLidos>
+              </LivrosLidosContent>
             </LivrosLidosContainer>
             <Options>
-              <RemoverContainer onClick={() => setFavoritos((value) => !value)}>
-                {favoritos ? (
-                  <HeartIconRed selected={favoritos} />
-                ) : (
-                  <HeartIconGray selected={favoritos} />
-                )}
-                <Remover selected={favoritos}>
+              <RemoverContainer
+                disabled={disabled}
+                onClick={() => !disabled && setFavoritos((value) => !value)}
+              >
+                <HeartButton favorite={favoritos} />
+                <Remover disabled={disabled} selected={favoritos}>
                   {favoritos ? "Remover favoritos" : "Adicionar favoritos"}
                 </Remover>
               </RemoverContainer>
@@ -167,9 +169,15 @@ function BookRegister() {
         )}
         <Content>
           <AddImageContainer>
-            <ImgContent>
-              {imageBase64 ? <img src={imageBase64} alt="book" /> : <Logo />}
-            </ImgContent>
+            {sourceImage && sourceImage !== "" ? (
+              <ImgContainer>
+                <Img src={sourceImage} />
+              </ImgContainer>
+            ) : (
+              <ImgContent>
+                <Logo />
+              </ImgContent>
+            )}
             <CustomFileInput setFile={setFile} />
           </AddImageContainer>
 
@@ -187,22 +195,22 @@ function BookRegister() {
                 author: values.author,
                 description: values.description,
                 image: imageBase64,
-                clientId: user._id ?? undefined,
+                clientId: user._id,
+                read: lidosChecked,
+                favorite: favoritos,
               };
-              const res = await BookService.create(data);
+              let res: IResponse;
+
+              if (bookId) {
+                res = await BookService.updateBookById(bookId, data);
+              } else {
+                res = await BookService.create(data);
+              }
               if (res.success === true) {
-                showToast(
-                  "success",
-                  "Livro cadastrado",
-                  "O seu livro foi cadastrado com sucesso"
-                );
+                showToast("success", "Sucesso!", res.msg);
                 navigate("/");
               } else {
-                showToast(
-                  "danger",
-                  "Erro ao cadastrar o livro",
-                  "Não foi possível realizar o cadastro do livro, tente novamente mais tarde"
-                );
+                showToast("danger", "Erro ao cadastrar o livro", res.msg);
               }
 
               setLoading(false);
@@ -227,6 +235,7 @@ function BookRegister() {
                     onBlur={handleBlur("title")}
                     type="text"
                     disabled={disabled}
+                    label="Titulo"
                   />
                   <AuthorInput
                     value={values.author}
@@ -236,6 +245,7 @@ function BookRegister() {
                     onBlur={handleBlur("author")}
                     type="text"
                     disabled={disabled}
+                    label="Autor"
                   />
                   <CustomTextArea
                     placeholder="Descrição"
@@ -247,6 +257,7 @@ function BookRegister() {
                     error={Boolean(touched.description && errors.description)}
                     onBlur={handleBlur("description")}
                     disabled={disabled}
+                    label="Descrição"
                   />
 
                   <ButtonContainer>
@@ -256,7 +267,7 @@ function BookRegister() {
                           bookId ? setModalConfirm(true) : navigate("/")
                         }
                         secondary
-                        text={livroSelecionado ? "EXCLUIR" : "CANCELAR"}
+                        text={bookId ? "EXCLUIR" : "CANCELAR"}
                         disabled={loadingDeleteBook}
                       />
                     </ButtonExcluirContainer>

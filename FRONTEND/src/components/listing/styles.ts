@@ -60,7 +60,7 @@ export const HeartIconRed = styled.img.attrs({ src: HeartRedIcon })`
 
 export const ImageContainer = styled.div`
   background-color: #aacfc7;
-  height: 300;
+  height: 300px;
   width: 100%;
   overflow: hidden;
 `;

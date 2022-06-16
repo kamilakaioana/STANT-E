@@ -1,11 +1,14 @@
 import styled from "styled-components";
 import { ITextAreaProps } from ".";
-import { colors } from "../../styles/colors";
+import { colors, colorsNoHash } from "../../styles/colors";
+import { MediaWidth } from "../../utils/constants";
+
+const { mobileMax, tabletMax } = MediaWidth;
 
 export const TextArea = styled.textarea<ITextAreaProps>`
   font-size: 24px;
   border-radius: 20px;
-  background-color: #${({ disabled }) => (disabled ? "C4C4C466" : "f5f2f2")};
+  background-color: #${({ disabled }) => (disabled ? colorsNoHash.grayDisabled : colorsNoHash.inputDefault)};
   color: ${colors.fonts.light};
   padding: 12px 24px;
   font-family: Arial, Helvetica, sans-serif;
@@ -26,6 +29,17 @@ export const TextArea = styled.textarea<ITextAreaProps>`
   }
   &:focus {
     outline: none;
+    background-color: ${colors.grayfocus};
+  }
+  :hover[disabled] {
+    cursor: no-drop;
+  }
+
+  @media (max-width: ${tabletMax}px) {
+    font-size: 18px;
+  }
+  @media (max-width: ${mobileMax}px) {
+    font-size: 16px;
   }
 `;
 
@@ -44,4 +58,17 @@ export const Error = styled.p`
 export const Container = styled.div`
   display: flex;
   flex-direction: column;
+`;
+
+export const Label = styled.label`
+  font-size: 16px;
+  margin-left: 16px;
+  margin-bottom: 4px;
+  font-style: italic;
+  font-weight: bold;
+  color: ${colors.fonts.gray};
+`;
+export const LabelContainer = styled.div`
+  text-align: start;
+  display: flex;
 `;

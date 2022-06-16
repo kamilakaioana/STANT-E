@@ -8,7 +8,9 @@ export const colors = {
   backgroundWhite: "#ffffff",
   backgroundGreenLight: "#aacfc7",
   transparent: "#00FFFF00",
-  grayDisabled: "#C4C4C466",
+  grayDisabled: "#C4C4C4aa",
+  inputDefault: "#f5f2f2",
+  grayfocus: "#f5f2f288",
   fonts: {
     white: "#FFFFFF",
     placeholder: "#CCCCCC",
@@ -30,7 +32,9 @@ export const colorsNoHash = {
   backgroundLight: "f2f8f7",
   backgroundWhite: "ffffff",
   transparent: "00FFFF00",
-  grayDisabled: "C4C4C466",
+  grayDisabled: "C4C4C4aa",
+  inputDefault: "f5f2f2",
+  grayfocus: "f5f2f288",
   fonts: {
     white: "FFFFFF",
     placeholder: "CCCCCC",

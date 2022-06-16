@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React from "react";
 import { HeartIconGray, HeartIconRed } from "../../pages/bookRegister/styles";
 import DefaultBook from "../../assets/image/defaultBook.svg";
 import {
@@ -11,13 +11,14 @@ import {
   Title,
 } from "./styles";
 import { StringsResources } from "../../utils/stringsResources";
+import HeartButton from "../HeartButton";
 
 interface ICardProps {
   title: string;
   favoritos: boolean;
   image: string;
   description: string;
-  onPressFavorite: (e: string) => Promise<boolean>;
+  onPressFavorite: (e: string) => void;
   onPressBook: (e: string) => void;
   bookId: string;
 }
@@ -31,26 +32,23 @@ const Card: React.FC<ICardProps> = ({
   bookId,
   favoritos,
 }) => {
-  const [valuefavorite, setValueFavorite] = useState<boolean>(favoritos);
-
-  const handlePress = async () => {
-    const favoritado = await onPressFavorite(bookId);
-    console.log("favoritado", favoritado);
-    setValueFavorite(favoritado);
-  };
-
-  console.log("valuefavorite", valuefavorite);
-  console.log("favoritos", favoritos);
   return (
     <Book key={bookId}>
       <HeaderBook>
         <Title>{title}</Title>
-        <div onClick={() => onPressFavorite(bookId)}>
-          {favoritos ? <HeartIconRed /> : <HeartIconGray />}
-        </div>
+        <HeartButton
+          favorite={favoritos}
+          onClick={() => onPressFavorite(bookId)}
+        />
       </HeaderBook>
-      <ImageContainer onClick={() => handlePress()}>
-        <BookImage src={image && image !== "" ? image : DefaultBook} />
+      <ImageContainer onClick={() => onPressBook(bookId)}>
+        <BookImage
+          src={
+            image && image !== ""
+              ? `data:image/gif;base64,${image}`
+              : DefaultBook
+          }
+        />
       </ImageContainer>
 
       <Content>

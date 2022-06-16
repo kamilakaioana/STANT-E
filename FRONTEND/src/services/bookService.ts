@@ -107,6 +107,29 @@ class BooksService {
     }
   }
 
+  public async updateBookById(id: string, data: any): Promise<IResponse> {
+    const postData = data;
+
+    try {
+      const res: AxiosResponse<any, any> = await api.put(
+        `/api/livros/${id}`,
+        postData
+      );
+
+      return {
+        msg: res.data.msg || "Livro atualizado com sucesso!",
+        success: true,
+      };
+    } catch (error: any) {
+      return {
+        msg:
+          error?.response?.data?.msg ||
+          "Não foi possível atualizar o livro, tente novamente mais tarde",
+        success: false,
+      };
+    }
+  }
+
   public async deleteBook(id: string): Promise<IResponse> {
     try {
       const res: AxiosResponse<any, any> = await api.delete(

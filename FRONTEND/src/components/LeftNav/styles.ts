@@ -35,10 +35,10 @@ export const Ul = styled.ul<ILeftNavBar>`
     padding-top: 1rem;
     position: fixed;
     height: 100vh;
-    width: 250px;
+    width: 300px;
   }
   @media (max-width: ${mobileMax}px) {
-    width: 180px;
+    width: 200px;
   }
 `;
 export const Li = styled.li`
@@ -47,9 +47,6 @@ export const Li = styled.li`
     color: #fff;
   }
   :hover {
-    /* background-color: ${colors.primary}; */
-
     cursor: pointer;
-    /* background-color: ${colors.secondary}; */
   }
 `;

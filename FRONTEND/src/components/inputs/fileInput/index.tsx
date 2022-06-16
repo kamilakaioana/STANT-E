@@ -1,9 +1,7 @@
-// import { IResponse } from "../../../interfaces";
 import { Label } from "./styles";
 
 interface Props {
   setFile: (base64: string | ArrayBuffer | null) => void;
-  // res: (value: IResponse) => void;
 }
 
 function CustomFileInput({ setFile }: Props) {
@@ -12,8 +10,11 @@ function CustomFileInput({ setFile }: Props) {
     if (files?.[0]) {
       reader.readAsDataURL(files?.[0]);
       reader.onload = () => {
-        var Base64 = reader.result;
-        setFile(Base64);
+        const base64 = reader.result;
+        if (typeof base64 === "string") {
+          const [_, base64Hash] = base64?.split(",");
+          setFile(base64Hash);
+        }
       };
 
       reader.onerror = (error) => {
