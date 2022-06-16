@@ -48,14 +48,15 @@ function BookRegister() {
   const { showToast } = useToast();
   const { bookId } = useParams();
   const [file, setFile] = useState<string | ArrayBuffer | null>();
-  // const [res, setRes] = useState<IResponse>();
-
   const [modalConfirm, setModalConfirm] = useState<boolean>(false);
   const { user } = useAuth();
-  const [lidosChecked, setLidosChecked] = useState<boolean>(true);
-  const [favoritos, setFavoritos] = useState<boolean>(false);
-  // const [haLivroSelecionado, setHaLivroSelecionado] = useState<boolean>(true);
   const [livroSelecionado, setLivroSelecionado] = useState<IBook>({} as IBook);
+  const [favoritos, setFavoritos] = useState<boolean>(
+    livroSelecionado.favorite
+  );
+  const [lidosChecked, setLidosChecked] = useState<boolean>(
+    livroSelecionado.read ?? false
+  );
   const [editable, setEditable] = useState<boolean>(false);
 
   const isEditable: boolean = editable && Boolean(bookId);
@@ -65,6 +66,7 @@ function BookRegister() {
   const loadBook = useCallback(async (bookId: string) => {
     const book = await BookService.getOne(bookId);
     setLivroSelecionado(book);
+    setFavoritos(book.favorite);
   }, []);
 
   useEffect(() => {
@@ -77,13 +79,18 @@ function BookRegister() {
       author: livroSelecionado.author ?? "",
       description: livroSelecionado.description ?? "",
       image: livroSelecionado.image ?? "",
-      clientId: livroSelecionado.image ?? "",
+      clientId: livroSelecionado.clientId ?? "",
+      read: livroSelecionado.read,
+      favorite: livroSelecionado.favorite,
     }),
     [
       livroSelecionado.author,
       livroSelecionado.description,
       livroSelecionado.image,
       livroSelecionado.title,
+      livroSelecionado.clientId,
+      livroSelecionado.read,
+      livroSelecionado.favorite,
     ]
   );
 
@@ -123,22 +130,6 @@ function BookRegister() {
     return "";
   }, [bookId, imageBase64, livroSelecionado.image]);
 
-  const handleFavoriteBook = async (bookId: string) => {
-    const res = await BookService.UpdateFavoriteBookbyId(bookId);
-
-    if (res.success === false) {
-      showToast("danger", "Ocorreu um erro ao realizar a ação", res.msg);
-    }
-
-    if (res.success === true && res.action === "ADD") {
-      showToast("success", "Livro favoritado", res.msg);
-      setFavoritos(true);
-    }
-    if (res.success === true && res.action === "REMOVE") {
-      showToast("info", "O livro retirado dos favoritos", res.msg);
-      setFavoritos(false);
-    }
-  };
   return (
     <>
       <Container>
@@ -146,7 +137,8 @@ function BookRegister() {
           <>
             <LivrosLidosContainer>
               <LivrosLidosContent
-                onClick={() => setLidosChecked((value) => !value)}
+                onClick={() => !disabled && setLidosChecked((value) => !value)}
+                disabled={disabled}
               >
                 {lidosChecked ? <CheckedIconLidos /> : <UncheckedIconLidos />}
                 <LivrosLidos>Livros lidos</LivrosLidos>
@@ -154,10 +146,11 @@ function BookRegister() {
             </LivrosLidosContainer>
             <Options>
               <RemoverContainer
-                onClick={() => handleFavoriteBook(bookId ? bookId : "")}
+                disabled={disabled}
+                onClick={() => !disabled && setFavoritos((value) => !value)}
               >
                 <HeartButton favorite={favoritos} />
-                <Remover selected={favoritos}>
+                <Remover disabled={disabled} selected={favoritos}>
                   {favoritos ? "Remover favoritos" : "Adicionar favoritos"}
                 </Remover>
               </RemoverContainer>
@@ -203,6 +196,8 @@ function BookRegister() {
                 description: values.description,
                 image: imageBase64,
                 clientId: user._id,
+                read: lidosChecked,
+                favorite: favoritos,
               };
               let res: IResponse;
 
@@ -272,7 +267,7 @@ function BookRegister() {
                           bookId ? setModalConfirm(true) : navigate("/")
                         }
                         secondary
-                        text={livroSelecionado ? "EXCLUIR" : "CANCELAR"}
+                        text={bookId ? "EXCLUIR" : "CANCELAR"}
                         disabled={loadingDeleteBook}
                       />
                     </ButtonExcluirContainer>

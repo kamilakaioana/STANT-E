@@ -12,6 +12,11 @@ import { MediaWidth } from "../../utils/constants";
 
 type IcolorSelected = {
   selected?: boolean;
+  disabled?: boolean;
+};
+
+type Props = {
+  disabled?: boolean;
 };
 const { mobileMax, tabletMax, screenSmallMax, screenMediumMax } = MediaWidth;
 
@@ -66,8 +71,9 @@ export const Remover = styled.p<IcolorSelected>`
   color: #${({ selected }) => (selected ? "FF1D1D" : "666666")};
   font-weight: bold;
   font-size: 20px;
+  opacity: ${({ disabled }) => (disabled ? "0.5" : "1")};
   :hover {
-    opacity: 0.8;
+    opacity: ${({ disabled }) => (disabled ? "0.5" : "0.8")};
   }
   @media (max-width: ${tabletMax}px) {
     font-size: 16px;
@@ -201,13 +207,15 @@ export const HeartIconGray = styled.img.attrs({
   align-self: center;
 `;
 
-export const RemoverContainer = styled.div`
+export const RemoverContainer = styled.div<Props>`
   display: flex;
   flex-direction: row;
   align-items: center;
   justify-content: center;
+  opacity: ${({ disabled }) => (disabled ? "0.5" : "1")};
   :hover {
-    cursor: pointer;
+    cursor: ${({ disabled }) => (disabled ? "no-drop" : "pointer")};
+    opacity: ${({ disabled }) => (disabled ? "0.5" : "0.8")};
   }
 `;
 
@@ -252,13 +260,14 @@ export const LivrosLidosContainer = styled.div`
   justify-content: flex-end;
 `;
 
-export const LivrosLidosContent = styled.div`
+export const LivrosLidosContent = styled.div<Props>`
   display: flex;
   flex-direction: row;
   align-items: center;
+  opacity: ${({ disabled }) => (disabled ? "0.5" : "1")};
   :hover {
-    opacity: 0.8;
-    cursor: pointer;
+    opacity: ${({ disabled }) => (disabled ? "0.5" : "0.8")};
+    cursor: ${({ disabled }) => (disabled ? "no-drop" : "pointer")};
   }
 `;
 
