@@ -6,6 +6,7 @@ import SearchIcon from "./../../assets/icon/search.svg";
 import CloseIcon from "./../../assets/icon/close.svg";
 import HeartGrayIcon from "./../../assets/icon/heartGray.svg";
 import HeartRedIcon from "./../../assets/icon/heartRed.svg";
+import PlusIcon from "./../../assets/icon/plus.svg";
 
 export {
   CheckedIcon,
@@ -13,6 +14,7 @@ export {
   HeartGrayIcon,
   HeartRedIcon,
   ImageIcon,
+  PlusIcon,
   SearchIcon,
   UncheckedIcon,
   CloseIcon,
