@@ -20,9 +20,9 @@ export const TextArea = styled.textarea<ITextAreaProps>`
   -ms-overflow-style: none; /* IE and Edge */
   scrollbar-width: none; /* Firefox */
 
-  box-shadow: 2px 2px 2px 1px rgba(0, 0, 0, 0.2);
-  border: ${({ error }) => (error ? "2px solid" : "none")};
-  border-color: ${({ error }) => (error ? "red" : "#000")};
+  box-shadow: 2px 2px 2px 1px rgb(0 0 0 / 10%);
+  border: 2px solid;
+  border-color: ${({ error }) => (error ? "red" : colors.gray)};
   &::placeholder {
     color: #cccccc;
     font-style: italic;

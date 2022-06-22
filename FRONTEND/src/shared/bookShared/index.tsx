@@ -29,11 +29,10 @@ const BookShared: React.FC<IBookShared> = ({
 
   const handleFavoriteBook = async (bookId: string) => {
     const res = await BookService.UpdateFavoriteBookbyId(bookId);
-    setUpdate?.((current) => current + 1);
+    if (res.success) setUpdate?.((current) => current + 1);
     if (res.success === false) {
       showToast("danger", "Ocorreu um erro ao realizar a ação", res.msg);
     }
-
     if (res.success === true && res.action === "ADD") {
       showToast("success", "Livro favoritado", res.msg);
     }

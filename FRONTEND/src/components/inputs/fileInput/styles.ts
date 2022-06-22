@@ -1,7 +1,11 @@
 import styled from "styled-components";
 import { colors } from "../../../styles/colors";
 
-export const Label = styled.label`
+type IIputFileProps = {
+  disabled?: boolean;
+};
+
+export const Label = styled.label<IIputFileProps>`
   padding: 20px 10px;
   width: 200px;
   background-color: ${colors.lightGreen};
@@ -11,11 +15,13 @@ export const Label = styled.label`
   display: block;
   margin-top: 10px;
   border-radius: 20px;
-  cursor: pointer;
   font-weight: bolder;
   letter-spacing: 0.3;
+  opacity: ${({ disabled }) => (disabled ? 0.3 : 1)};
   :hover {
-    background-color: ${colors.lightGreenHover};
-    transform: scale(1.05);
+    cursor: ${({ disabled }) => (disabled ? "no-drop" : "pointer")};
+    background-color: ${({ disabled }) =>
+      disabled ? colors.lightGreen : colors.lightGreenHover};
+    transform: ${({ disabled }) => (disabled ? "none" : "scale(1.05)")};
   }
 `;

@@ -51,7 +51,7 @@ const LeftNav: React.FC<ILeftNavBar> = ({ open }) => {
   return (
     <Ul open={open}>
       {pages.map(({ id, name, path }) => (
-        <Li>
+        <Li key={id}>
           <Button key={id} onClick={() => handlePress(path, id)}>
             {name}
           </Button>

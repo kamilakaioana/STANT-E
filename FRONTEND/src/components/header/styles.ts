@@ -72,7 +72,6 @@ export const ButtonSair = styled.button`
   font-size: 20px;
   color: ${colors.fonts.white};
   font-weight: bolder;
-  font-family: Times;
   :hover {
     background-color: ${colors.primary};
     border-radius: 5%;
@@ -87,7 +86,6 @@ export const Button = styled.button<ITabProps>`
   font-size: 20px;
   color: ${colors.fonts.white};
   font-weight: bolder;
-  font-family: Times;
   text-decoration: ${({ selectedTab }) => (selectedTab ? "underline" : "none")};
   :hover {
     background-color: ${colors.primary};
@@ -104,19 +102,3 @@ export const CustomBurger = styled(Burger)`
     display: none;
   }
 `;
-
-// export const MenuButton = styled.img`
-
-//   justify-content: start;
-//   /* align-items: center; */
-//   width: 250px;
-//   margin-right: 80px;
-// `;
-
-// export const MenuButton = styled.img.attrs({ src: brand })`
-//   width: 188px;
-//   height: 50px;
-//   @media (max-width: ${tabletMax}px) {
-//     display: none;
-//   }
-// `;

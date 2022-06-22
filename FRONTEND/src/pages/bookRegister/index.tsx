@@ -39,10 +39,16 @@ import {
   ImgContainer,
   LivrosLidosContent,
   Img,
+  BackIcon,
+  BackTitle,
+  BackContent,
+  InputFileContainer,
 } from "./styles";
+import LoadingBookModal from "../../components/modais/LoadingBookModal";
 
 function BookRegister() {
   const [loading, setLoading] = useState<boolean>(false);
+  const [loadingRecuperar, setLoadingRecuperar] = useState<boolean>(false);
   const [loadingDeleteBook, setLoadingDeleteBook] = useState<boolean>(false);
   const navigate = useNavigate();
   const { showToast } = useToast();
@@ -61,16 +67,21 @@ function BookRegister() {
 
   const isEditable: boolean = editable && Boolean(bookId);
 
-  const imageBase64 = typeof file === "string" ? file : "";
+  let imageBase64 = useMemo(() => {
+    return file && typeof file === "string" ? file : livroSelecionado.image;
+  }, [file, livroSelecionado.image]);
+
   const disabled: boolean = Boolean(bookId) ? !editable : false;
   const loadBook = useCallback(async (bookId: string) => {
+    setLoadingRecuperar(true);
     const book = await BookService.getOne(bookId);
     setLivroSelecionado(book);
     setFavoritos(book.favorite);
+    setLoadingRecuperar(false);
   }, []);
 
   useEffect(() => {
-    bookId && loadBook(bookId);
+    bookId ? loadBook(bookId) : setLivroSelecionado({} as IBook);
   }, [bookId, loadBook]);
 
   const initialValues = useMemo(
@@ -123,19 +134,25 @@ function BookRegister() {
     return false;
   };
 
-  const sourceImage = useMemo((): string => {
-    if (bookId && livroSelecionado.image)
-      return `data:image/gif;base64,${livroSelecionado.image}`;
-    if (imageBase64) return `data:image/gif;base64,${imageBase64}`;
-    return "";
-  }, [bookId, imageBase64, livroSelecionado.image]);
+  let sourceImage = useMemo((): string => {
+    if (imageBase64 === "" || !imageBase64) return "";
+    return `data:image/gif;base64,${imageBase64}`;
+  }, [imageBase64]);
+
+  // const deleteImageHandlePress = () => {
+  //   imageBase64 = "";
+  // };
 
   return (
-    <>
+    <div style={{ paddingBottom: 24 }}>
       <Container>
         {Boolean(bookId) ? (
           <>
             <LivrosLidosContainer>
+              <BackContent onClick={() => navigate("/")}>
+                <BackIcon />
+                <BackTitle>HOME</BackTitle>
+              </BackContent>
               <LivrosLidosContent
                 onClick={() => !disabled && setLidosChecked((value) => !value)}
                 disabled={disabled}
@@ -164,6 +181,10 @@ function BookRegister() {
           </>
         ) : (
           <TitleContainer>
+            <BackContent onClick={() => navigate("/")}>
+              <BackIcon />
+              <BackTitle>HOME</BackTitle>
+            </BackContent>
             <Title>Cadastro</Title>
           </TitleContainer>
         )}
@@ -178,7 +199,11 @@ function BookRegister() {
                 <Logo />
               </ImgContent>
             )}
-            <CustomFileInput setFile={setFile} />
+
+            <InputFileContainer>
+              <CustomFileInput setFile={setFile} disabled={disabled} />
+            </InputFileContainer>
+            {/* <DeleteImg onClick={() => deleteImageHandlePress()} /> */}
           </AddImageContainer>
 
           <Formik
@@ -290,7 +315,8 @@ function BookRegister() {
         handleDelete={() => handleDeleteBook()}
         handleCancel={() => setModalConfirm(false)}
       />
-    </>
+      <LoadingBookModal modalVisible={loadingRecuperar} />
+    </div>
   );
 }
 

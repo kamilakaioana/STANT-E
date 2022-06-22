@@ -3,12 +3,12 @@ import { HeartIconGray, HeartIconRed } from "./styles";
 
 interface IHeartButton {
   favorite: boolean;
-  onClick?: (e: string) => void;
+  onClick?: () => void;
 }
 
 const HeartButton: React.FC<IHeartButton> = ({ favorite, onClick }) => {
   return (
-    <div onClick={() => onClick}>
+    <div onClick={onClick}>
       {favorite ? <HeartIconRed /> : <HeartIconGray />}
     </div>
   );

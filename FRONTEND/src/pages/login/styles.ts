@@ -127,7 +127,6 @@ export const InputContainer = styled.div`
 `;
 
 export const EmailInput = styled(CustomInput).attrs({
-  height: 60,
   type: "email",
   fontSize: 22,
   placeholder: "Email",
@@ -137,7 +136,6 @@ export const EmailInput = styled(CustomInput).attrs({
 `;
 
 export const PasswordInput = styled(CustomInput).attrs({
-  height: 60,
   type: "password",
   fontSize: 22,
   placeholder: "Senha",
