@@ -4,7 +4,6 @@ import { StringsResources } from "../../utils/stringsResources";
 const {
   NAME_REQUIRED,
   VALID_FULL_NAME,
-  FULL_NAME_REQUIRED,
   PASSWORDS_NEED_MATCH,
   CONFIRM_PASSWORD,
   MIN_CHARACTERS,
