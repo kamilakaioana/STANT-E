@@ -7,16 +7,17 @@ type imageSrc = {
 };
 
 export const Container = styled.div`
-  min-height: 100vh;
   background-color: ${colors.backgroundWhite};
   padding: 30px;
   border-radius: 20px;
+  max-height: 750px;
+  overflow: auto;
 `;
 
 export const Books = styled.div`
   display: grid;
-  grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
-  gap: 30px;
+  grid-template-columns: repeat(auto-fill, minmax(230px, 1fr));
+  gap: 25px;
 `;
 
 export const Book = styled.div`
@@ -85,7 +86,7 @@ export const InfoMessage = styled.p`
   padding: 0;
   margin: 0;
   font-size: 24px;
-  font-family: "Times New Roman", Times, serif;
+  /* font-family: "Times New Roman", Times, serif; */
 `;
 
 export const ContainerNotFound = styled.div`

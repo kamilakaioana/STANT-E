@@ -16,8 +16,7 @@ const {
 export const registerValidationSchema = object({
   name: string()
     .required(NAME_REQUIRED)
-    .matches(/^([^0-9]*)$/, VALID_FULL_NAME)
-    .matches(/^[a-z]{2,} [a-z]{2,}/gi, FULL_NAME_REQUIRED),
+    .matches(/^([^0-9]*)$/, VALID_FULL_NAME),
   email: string().email(VALID_EMAIL).required(EMAIL_REQUIRED_SECONDARY),
   password: string()
     .required(PASSWORD_REQUIRED_SECONDARY)

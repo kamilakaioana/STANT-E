@@ -22,6 +22,9 @@ export const Item = styled.div<IBurguer>`
   &:nth-child(3) {
     transform: ${({ open }) => (open ? "rotate(-45deg)" : "rotate(0)")};
   }
+  :hover {
+    cursor: pointer;
+  }
 `;
 
 export const StyledBurger = styled.div`

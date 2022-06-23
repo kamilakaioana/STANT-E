@@ -1,4 +1,5 @@
 import styled from "styled-components";
+import { colors } from "../../../styles/colors";
 import CustomButton from "../../button";
 
 export const ModalText = styled.text`
@@ -12,8 +13,7 @@ export const ModalText = styled.text`
 export const InfoMessage = styled.p`
   padding: 0;
   margin: 0;
-  font-size: 24px;
-  font-family: "Times New Roman", Times, serif;
+  font-size: 22px;
 `;
 
 export const ContainerNotFound = styled.div`
@@ -58,7 +58,7 @@ export const ExcluirButton = styled(CustomButton).attrs({
   fontSize: 14,
   borderRadius: 10,
 })`
-  box-shadow: 2px 2px 2px 1px rgba(0, 0, 0, 0.2);
+  box-shadow: 2px 2px 2px 1px ${colors.boxShadown};
 `;
 
 export const SalveButton = styled(CustomButton).attrs({
@@ -66,7 +66,7 @@ export const SalveButton = styled(CustomButton).attrs({
   fontSize: 14,
   borderRadius: 10,
 })`
-  box-shadow: 2px 2px 2px 1px rgba(0, 0, 0, 0.2);
+  box-shadow: 2px 2px 2px 1px ${colors.boxShadown};
 `;
 
 export const ButtonContainer = styled.div`

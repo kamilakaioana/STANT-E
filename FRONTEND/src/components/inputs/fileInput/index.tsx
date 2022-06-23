@@ -2,9 +2,10 @@ import { Label } from "./styles";
 
 interface Props {
   setFile: (base64: string | ArrayBuffer | null) => void;
+  disabled?: boolean;
 }
 
-function CustomFileInput({ setFile }: Props) {
+function CustomFileInput({ setFile, disabled }: Props) {
   const encodeFileBase64 = (files: FileList | null) => {
     var reader = new FileReader();
     if (files?.[0]) {
@@ -27,7 +28,9 @@ function CustomFileInput({ setFile }: Props) {
 
   return (
     <div>
-      <Label htmlFor="file">Enviar arquivo</Label>
+      <Label disabled={disabled} htmlFor="file">
+        Enviar arquivo
+      </Label>
       <input
         name="file"
         type="file"
@@ -37,6 +40,7 @@ function CustomFileInput({ setFile }: Props) {
           display: "none",
         }}
         accept="image/png, image/jpeg"
+        disabled={disabled}
       />
     </div>
   );

@@ -3,7 +3,13 @@ import Reading from "../../assets/image/reading.svg";
 import { useSearch } from "../../hooks/search";
 import { SearchIcon } from "../icons";
 import SearchInput from "../inputs/searchInput";
-import { Button, Container, ShowMoreButton } from "./styles";
+import {
+  Button,
+  Container,
+  ShowMoreButton,
+  ReadingImg,
+  Content,
+} from "./styles";
 
 interface ISearchAdvanced {
   setShowMoreFilter: (value: boolean) => void;
@@ -23,7 +29,7 @@ const SearchAdvanced: React.FC<ISearchAdvanced> = ({
   };
   return (
     <Container>
-      <div style={{ width: "50%" }}>
+      <Content>
         <SearchInput
           placeholder="Titulo livro"
           value={searchData.title ?? ""}
@@ -62,9 +68,9 @@ const SearchAdvanced: React.FC<ISearchAdvanced> = ({
             />
           </Button>
         </div>
-      </div>
+      </Content>
 
-      <img src={Reading} alt="reading" height={183} width={294} />
+      <ReadingImg src={Reading} alt="reading" />
     </Container>
   );
 };

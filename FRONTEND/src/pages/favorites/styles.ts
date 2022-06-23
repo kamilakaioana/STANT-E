@@ -3,18 +3,16 @@ import CustomInput from "../../components/inputs/input";
 import { colors } from "../../styles/colors";
 
 export const Container = styled.div`
-  min-height: 100vh;
   background-color: #f2f8f7; //trocar
   padding: 24px;
 `;
 
 export const SearchInput = styled(CustomInput).attrs({
-  height: 64,
   fontSize: 24,
   placeholder: "Titulo do livro",
   name: "name",
 })`
-  box-shadow: 2px 2px 2px 1px rgba(0, 0, 0, 0.2);
+  box-shadow: 2px 2px 2px 1px ${colors.boxShadown};
   margin-bottom: 0;
   padding-bottom: 0;
 `;

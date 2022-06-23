@@ -45,3 +45,22 @@ export const filterBooks = (data: IBook[], query: ISearchData): IBook[] => {
   }
   return books ?? [];
 };
+
+export const greetingMessage = (): string => {
+  let hour = new Date().getHours();
+  switch (true) {
+    case hour > 5 && hour < 12:
+      return "Bom dia";
+    case hour > 12 && hour < 18:
+      return "Boa tarde";
+    default:
+      return "Boa noite";
+  }
+};
+
+export const cutStringByCharacterLimit = (text: string, limit: number) => {
+  if (limit >= text?.length || !text) return text;
+  const value = text?.slice(0, limit);
+  console.log("de novo");
+  return `${value}...`;
+};

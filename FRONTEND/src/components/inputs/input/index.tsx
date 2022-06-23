@@ -9,7 +9,6 @@ import {
 
 export interface IinputProps {
   placeholder: string;
-  height?: number;
   fontSize?: number;
   value: string;
   onChange: React.ChangeEventHandler<HTMLInputElement> | (() => void);
@@ -34,7 +33,6 @@ function CustomInput(props: IinputProps) {
       <Container>
         <Input
           placeholder={props.placeholder}
-          height={props.height}
           fontSize={props.fontSize}
           value={props.value}
           onChange={props.onChange}

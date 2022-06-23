@@ -1,5 +1,5 @@
 import { SearchIcon } from "../../icons";
-import { Button, Container, Input, InputContainer } from "./styles";
+import { Button, Container, Input, InputContainer, IconSearch } from "./styles";
 
 export interface IinputProps {
   placeholder: string;
@@ -30,7 +30,7 @@ function SearchInput(props: IinputProps) {
       </InputContainer>
       {props.showButton ? (
         <Button onClick={props.onSubmit}>
-          <img src={SearchIcon} alt="search" />
+          <IconSearch src={SearchIcon} alt="search" />
         </Button>
       ) : null}
     </Container>

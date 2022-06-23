@@ -59,7 +59,6 @@ export const InputContainer = styled.div`
 `;
 
 export const NomeInput = styled(CustomInput).attrs({
-  height: 60,
   fontSize: 22,
   placeholder: FULL_NAME,
   name: "name",
@@ -68,7 +67,6 @@ export const NomeInput = styled(CustomInput).attrs({
 `;
 
 export const EmailInput = styled(CustomInput).attrs({
-  height: 60,
   type: "email",
   fontSize: 22,
   placeholder: EMAIL,
@@ -79,7 +77,7 @@ export const EmailInput = styled(CustomInput).attrs({
 `;
 
 export const PasswordInput = styled(CustomInput).attrs({
-  height: 60,
+  // height: 60,
   type: "password",
   fontSize: 22,
   placeholder: MIN_CHARACTERS,
@@ -89,7 +87,7 @@ export const PasswordInput = styled(CustomInput).attrs({
 `;
 
 export const ConfirmPasswordInput = styled(CustomInput).attrs({
-  height: 60,
+  // height: 60,
   type: "password",
   fontSize: 22,
   placeholder: PASSWORD,

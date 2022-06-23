@@ -12,14 +12,14 @@ export const Container = styled.div`
 
 export const Input = styled.input<IinputProps>`
   font-size: ${({ fontSize }) => fontSize || 22}px;
-  height: ${({ height }) => height}px;
+  height: 60px;
   border-radius: 20px;
   background-color: #${({ disabled }) => (disabled ? colorsNoHash.grayDisabled : colorsNoHash.inputDefault)};
   color: ${colors.fonts.light};
   padding-left: 24px;
-  border: ${({ error }) => (error ? "2px solid" : "none")};
-  border-color: ${({ error }) => (error ? "red" : "#000")};
-  box-shadow: 2px 2px 2px 1px rgba(0, 0, 0, 0.2);
+  border: 2px solid;
+  border-color: ${({ error }) => (error ? "red" : colors.gray)};
+  box-shadow: 2px 2px 2px 1px rgb(0 0 0 / 10%);
   &::placeholder {
     color: #cccccc;
     font-style: italic;
@@ -33,9 +33,13 @@ export const Input = styled.input<IinputProps>`
   }
   @media (max-width: ${tabletMax}px) {
     font-size: 18px;
+    height: 50px;
+    border-radius: 15px;
   }
   @media (max-width: ${mobileMax}px) {
     font-size: 16px;
+    height: 40px;
+    border-radius: 10px;
   }
 `;
 

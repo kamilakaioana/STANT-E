@@ -21,7 +21,7 @@ export const Book = styled.div`
 
 export const HeaderBook = styled.div`
   background-color: ${colors.lightGreen};
-  height: 48px;
+  height: 32px;
   /* border-top-left-radius: 20px;
   border-top-right-radius: 20px; */
   align-self: flex-start;
@@ -34,7 +34,7 @@ export const HeaderBook = styled.div`
 `;
 
 export const Title = styled.p`
-  font-size: 20px;
+  font-size: 18px;
   font-weight: 600;
   text-transform: capitalize;
   white-space: nowrap;
@@ -51,14 +51,14 @@ export const HeartIconRed = styled.img.attrs({ src: HeartRedIcon })`
 
 export const ImageContainer = styled.div`
   background-color: ${colors.backgroundGreenLight};
-  height: 300px;
+  height: 230px;
   width: 100%;
   overflow: hidden;
 `;
 
 export const Content = styled.div`
-  padding: 16px 16px;
-  height: 50px;
+  padding: 6px 12px 12px 12px;
+  height: 28px;
 `;
 
 export const BookImage = styled.img.attrs({ alt: "imagem livro" })<imageSrc>`
@@ -68,10 +68,11 @@ export const BookImage = styled.img.attrs({ alt: "imagem livro" })<imageSrc>`
 `;
 
 export const Description = styled.p`
+  font-size: 16px;
   padding: 0;
   margin: 0;
   display: -webkit-box;
-  -webkit-line-clamp: 3;
+  -webkit-line-clamp: 2;
   -webkit-box-orient: vertical;
   overflow: hidden;
 `;
