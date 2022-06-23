@@ -44,7 +44,7 @@ function Header() {
   }, [location.pathname]);
 
   return (
-    <div>
+    <>
       <Container>
         <LogoContainer>
           <Logo />
@@ -66,7 +66,7 @@ function Header() {
         </MenuContainer>
       </Container>
       <LeftNav open={navBarOpen} />
-    </div>
+    </>
   );
 }
 
