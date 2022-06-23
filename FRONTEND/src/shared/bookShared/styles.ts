@@ -67,7 +67,7 @@ export const GreetingMessageText = styled.p`
     font-size: 14px;
   }
 `;
-export const ContainerSearch = styled.p`
+export const ContainerSearch = styled.div`
   padding-left: 25%;
   padding-right: 25%;
   margin-bottom: 40px;

@@ -1,5 +1,4 @@
 import React from "react";
-import { HeartIconGray, HeartIconRed } from "../../pages/bookRegister/styles";
 import DefaultBook from "../../assets/image/defaultBook.svg";
 import {
   Book,
