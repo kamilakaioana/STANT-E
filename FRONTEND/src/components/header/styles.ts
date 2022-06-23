@@ -42,6 +42,12 @@ export const Logo = styled.img.attrs({ src: brand })`
   }
 `;
 
+export const CustomBurger = styled(Burger)`
+  @media (max-width: 767px) {
+    display: none;
+  }
+`;
+
 export const MenuContainer = styled.div`
   height: 80px;
   display: flex;
@@ -66,39 +72,20 @@ export const Item = styled(Link)`
   text-decoration: none;
 `;
 
-export const ButtonSair = styled.button`
-  background-color: transparent;
-  border: none;
-  font-size: 20px;
-  color: ${colors.fonts.white};
-  font-weight: bolder;
-  :hover {
-    background-color: ${colors.primary};
-    border-radius: 5%;
-    cursor: pointer;
-    background-color: "#41ACC8";
-    border: none;
-  }
-`;
 export const Button = styled.button<ITabProps>`
-  background-color: transparent;
+  background-color: ${({ selectedTab }) =>
+    selectedTab ? colors.primary : "transparent"};
   border: none;
-  font-size: 20px;
+  font-size: 18px;
   color: ${colors.fonts.white};
   font-weight: bolder;
-  text-decoration: ${({ selectedTab }) => (selectedTab ? "underline" : "none")};
+
+  padding: 0px 24px;
+  border-bottom: ${({ selectedTab }) =>
+    selectedTab ? `3px solid ${colors.lightGreenHover}` : "none"};
   :hover {
     background-color: ${colors.primary};
-    border-radius: 5%;
     cursor: pointer;
     background-color: "#41ACC8";
-  }
-`;
-
-//
-
-export const CustomBurger = styled(Burger)`
-  @media (max-width: 767px) {
-    display: none;
   }
 `;

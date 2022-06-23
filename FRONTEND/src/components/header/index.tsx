@@ -1,5 +1,5 @@
 import { useEffect, useState } from "react";
-import { useNavigate } from "react-router-dom";
+import { useLocation, useNavigate } from "react-router-dom";
 import { useAuth } from "../../hooks/auth";
 import { useSearch } from "../../hooks/search";
 import { pages } from "../../utils/headerUtils";
@@ -14,7 +14,7 @@ import {
 } from "./styles";
 
 function Header() {
-  // const location = useLocation();
+  const location = useLocation();
   const [navBarOpen, setNavBarOpen] = useState<boolean>(false);
   const [selected, setSelected] = useState<string>("/");
   const { signOut, loadUser } = useAuth();
@@ -38,8 +38,13 @@ function Header() {
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
+  useEffect(() => {
+    const rotaSelecionada = `/${location.pathname.split("/")?.[1]}`;
+    setSelected(rotaSelecionada);
+  }, [location.pathname]);
+
   return (
-    <>
+    <div>
       <Container>
         <LogoContainer>
           <Logo />
@@ -47,15 +52,8 @@ function Header() {
             onClick={() => setNavBarOpen(!navBarOpen)}
             open={navBarOpen}
           />
-          {/* <MenuButton /> */}
         </LogoContainer>
         <MenuContainer>
-          {/* // @TODO APOS VALIDACAO RETIRAR COMENTARIO */}
-          {/* {pages.map(({ id, name, path }) => (
-          <Item to={path} key={id}>
-            {name}
-          </Item>
-        ))} */}
           {pages.map(({ id, name, path }) => (
             <Button
               selectedTab={path === selected}
@@ -65,11 +63,10 @@ function Header() {
               {name}
             </Button>
           ))}
-          {/* <Button onClick={() => logoutLink()}>{SAIR}</Button> */}
         </MenuContainer>
       </Container>
       <LeftNav open={navBarOpen} />
-    </>
+    </div>
   );
 }
 
