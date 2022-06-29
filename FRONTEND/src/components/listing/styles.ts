@@ -86,7 +86,6 @@ export const InfoMessage = styled.p`
   padding: 0;
   margin: 0;
   font-size: 24px;
-  /* font-family: "Times New Roman", Times, serif; */
 `;
 
 export const ContainerNotFound = styled.div`

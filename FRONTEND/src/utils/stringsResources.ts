@@ -5,6 +5,9 @@ export const StringsResources = {
     NAO_TENHO_CADASTRO: "Não Tenho Cadastro",
     JA_TENHO_CADASTRO: "Já tenho Cadastro",
     REGISTER: "CADASTRAR",
+    SEARCH: "PESQUISAR",
+    HIDE_FILTERS: "Esconder filtros",
+    SHOW_FILTERS: "Busca Avançada",
   },
   LABELS: {
     NAME: "Nome",
@@ -17,6 +20,8 @@ export const StringsResources = {
     EMAIL: "Informe um email",
     MIN_CHARACTERS: "Mínimo 5 caracteres",
     PASSWORD: "Confirme sua senha",
+    BOOK_TITLE: "Titulo do livro",
+    AUTHOR: "Autor do livro",
   },
   screens: {
     bookRegister: {

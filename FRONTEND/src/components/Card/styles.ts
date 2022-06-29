@@ -22,8 +22,6 @@ export const Book = styled.div`
 export const HeaderBook = styled.div`
   background-color: ${colors.lightGreen};
   height: 32px;
-  /* border-top-left-radius: 20px;
-  border-top-right-radius: 20px; */
   align-self: flex-start;
   display: flex;
   flex-direction: row;
@@ -61,7 +59,9 @@ export const Content = styled.div`
   height: 28px;
 `;
 
-export const BookImage = styled.img.attrs({ alt: "imagem livro" })<imageSrc>`
+export const BookImage = styled.img.attrs({
+  alt: "visualização da imagem do livro",
+})<imageSrc>`
   width: 100%;
   height: 100%;
   object-fit: cover;

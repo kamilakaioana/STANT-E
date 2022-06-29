@@ -25,7 +25,7 @@ function CustomInput(props: IinputProps) {
   return (
     <div>
       {props.label ? (
-        <LabelContainer style={{ textAlign: "start", display: "flex" }}>
+        <LabelContainer>
           <Label> {props.label} </Label>
         </LabelContainer>
       ) : null}

@@ -1,7 +1,7 @@
 import React from "react";
 import Reading from "../../assets/image/reading.svg";
 import { useSearch } from "../../hooks/search";
-import { SearchIcon } from "../icons";
+import { StringsResources } from "../../utils/stringsResources";
 import SearchInput from "../inputs/searchInput";
 import {
   Button,
@@ -9,6 +9,10 @@ import {
   ShowMoreButton,
   ReadingImg,
   Content,
+  Icon,
+  ContainerButton,
+  ShowMoreContainer,
+  ContainerInput,
 } from "./styles";
 
 interface ISearchAdvanced {
@@ -27,47 +31,37 @@ const SearchAdvanced: React.FC<ISearchAdvanced> = ({
   const teste = (text: React.ChangeEvent<HTMLInputElement>) => {
     setSearchData({ ...searchData, title: text.target.value });
   };
+
   return (
     <Container>
       <Content>
         <SearchInput
-          placeholder="Titulo livro"
+          placeholder={StringsResources.PLACEHOLDERS.BOOK_TITLE}
           value={searchData.title ?? ""}
           onChange={(e) => teste(e)}
+          height={50}
         />
-        <div style={{ paddingTop: 16 }}>
+        <ContainerInput>
           <SearchInput
-            placeholder="Autor"
+            placeholder={StringsResources.PLACEHOLDERS.AUTHOR}
             value={searchData.author ?? ""}
             onChange={(e) =>
               setSearchData({ ...searchData, author: e.target.value })
             }
+            height={50}
           />
-        </div>
-        <div style={{ display: "flex", justifyContent: "flex-end" }}>
+        </ContainerInput>
+        <ShowMoreContainer>
           <ShowMoreButton onClick={() => handleShowLess()}>
-            Esconder filtros
+            {StringsResources.BUTTONS.HIDE_FILTERS}
           </ShowMoreButton>
-        </div>
-        <div
-          style={{
-            justifyContent: "center",
-            display: "flex",
-          }}
-        >
+        </ShowMoreContainer>
+        <ContainerButton>
           <Button onClick={onSubmit}>
-            PESQUISAR
-            <img
-              src={SearchIcon}
-              alt="search"
-              height={24}
-              width={24}
-              style={{
-                marginLeft: 12,
-              }}
-            />
+            {StringsResources.BUTTONS.SEARCH}
+            <Icon />
           </Button>
-        </div>
+        </ContainerButton>
       </Content>
 
       <ReadingImg src={Reading} alt="reading" />

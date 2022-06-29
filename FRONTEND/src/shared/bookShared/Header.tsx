@@ -6,13 +6,21 @@ import SearchAdvanced from "../../components/seachAdvanced";
 import { useAuth } from "../../hooks/auth";
 import { useSearch } from "../../hooks/search";
 import { cutStringByCharacterLimit, greetingMessage } from "../../utils";
-import { GreetingMessageText, ShowMoreButton, ContainerSearch } from "./styles";
+import { StringsResources } from "../../utils/stringsResources";
+import {
+  GreetingMessageText,
+  ShowMoreButton,
+  ContainerSearch,
+  ShowMoreButtonContainer,
+  MessageContainer,
+  AdvancedContainer,
+} from "./styles";
 
 interface IBookShared {
   onSubmit: () => void;
 }
 const Header: React.FC<IBookShared> = ({ onSubmit }) => {
-  const [showMoreFilter, setShowMoreFilter] = useState<boolean>(false);
+  const [showMoreFilter, setShowMoreFilter] = useState<boolean>(true);
   const { searchData, setSearchData } = useSearch();
   const { user } = useAuth();
   const navigate = useNavigate();
@@ -23,30 +31,21 @@ const Header: React.FC<IBookShared> = ({ onSubmit }) => {
 
   return (
     <div>
-      <div
-        style={{
-          display: "flex",
-          flexDirection: "row",
-          justifyContent: "space-between",
-          alignItems: "start",
-          paddingBottom: 0,
-          marginBottom: 0,
-        }}
-      >
+      <MessageContainer>
         <GreetingMessageText>{greetings}</GreetingMessageText>
         <PlusButton onClick={() => navigate("/livro")} />
-      </div>
+      </MessageContainer>
       {showMoreFilter ? (
-        <div style={{ marginBottom: 24 }}>
+        <AdvancedContainer>
           <SearchAdvanced
             setShowMoreFilter={setShowMoreFilter}
             onSubmit={onSubmit}
           />
-        </div>
+        </AdvancedContainer>
       ) : (
         <ContainerSearch>
           <SearchInput
-            placeholder="Título livro"
+            placeholder={StringsResources.PLACEHOLDERS.BOOK_TITLE}
             value={searchData.title ?? ""}
             onChange={(e) => {
               setSearchData({ title: e.target.value });
@@ -54,11 +53,12 @@ const Header: React.FC<IBookShared> = ({ onSubmit }) => {
             showButton
             onSubmit={onSubmit}
           />
-          <div style={{ display: "flex", justifyContent: "flex-end" }}>
+
+          <ShowMoreButtonContainer>
             <ShowMoreButton onClick={() => setShowMoreFilter(true)}>
-              Busca Avançada
+              {StringsResources.BUTTONS.SHOW_FILTERS}
             </ShowMoreButton>
-          </div>
+          </ShowMoreButtonContainer>
         </ContainerSearch>
       )}
     </div>

@@ -60,7 +60,7 @@ export const Li = styled.li<ILeftNavBarProps>`
 
 export const CheckedIcon = styled.img.attrs({
   src: CheckIcon,
-  alt: "icone sinalizando o item selecionado",
+  alt: "Icone sinalizando o item selecionado",
 })`
   width: 22px;
   height: 22px;

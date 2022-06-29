@@ -10,6 +10,8 @@ export interface IinputProps {
   onSubmit?: () => void;
   showButton?: boolean;
   onBlur?: React.FocusEventHandler<HTMLInputElement>;
+  height?: number;
+  label?: string;
 }
 
 function SearchInput(props: IinputProps) {
@@ -18,7 +20,7 @@ function SearchInput(props: IinputProps) {
       <InputContainer>
         <Input
           placeholder={props.placeholder}
-          height={66}
+          height={props.height}
           fontSize={props.fontSize}
           value={props.value}
           onChange={props.onChange}

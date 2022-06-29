@@ -36,11 +36,13 @@ const LeftNav: React.FC<ILeftNavBar> = ({ open }) => {
   return (
     <Ul open={open}>
       {pages.map(({ id, name, path }) => (
-        <Li key={id} selected={path === selected}>
+        <Li
+          key={id}
+          selected={path === selected}
+          onClick={() => handlePress(path, id)}
+        >
           {path === selected ? <CheckedIcon /> : null}
-          <Button key={id} onClick={() => handlePress(path, id)}>
-            {name}
-          </Button>
+          <Button key={id}>{name}</Button>
         </Li>
       ))}
     </Ul>

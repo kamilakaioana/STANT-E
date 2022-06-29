@@ -9,6 +9,7 @@ const { tabletMax } = MediaWidth;
 type ITabProps = {
   selectedTab: boolean;
 };
+
 export const Container = styled.div`
   height: 80px;
   background-color: ${colors.secondary};
@@ -86,6 +87,5 @@ export const Button = styled.button<ITabProps>`
   :hover {
     background-color: ${colors.primary};
     cursor: pointer;
-    background-color: "#41ACC8";
   }
 `;

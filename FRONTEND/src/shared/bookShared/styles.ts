@@ -1,5 +1,4 @@
 import styled from "styled-components";
-import CustomInput from "../../components/inputs/input";
 import { colors } from "../../styles/colors";
 import { MediaWidth } from "../../utils/constants";
 
@@ -10,18 +9,6 @@ export const Container = styled.div`
   padding: 5%;
   padding-top: 0px;
   padding-bottom: 32px;
-`;
-
-export const SearchInput = styled(CustomInput).attrs({
-  fontSize: 24,
-  placeholder: "Titulo do livro",
-  name: "name",
-})`
-  box-shadow: 2px 2px 2px 1px ${colors.boxShadown};
-  border-top-right-radius: 0px !important;
-  border-bottom-right-radius: 0px !important;
-  margin-bottom: 0;
-  padding-bottom: 0;
 `;
 
 export const Box = styled.div`
@@ -52,6 +39,24 @@ export const ShowMoreButton = styled.button`
   cursor: pointer;
 `;
 
+export const ShowMoreButtonContainer = styled.div`
+  display: flex;
+  justify-content: flex-end;
+`;
+
+export const MessageContainer = styled.div`
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  align-items: start;
+  padding-bottom: 0;
+  margin-bottom: 0;
+`;
+
+export const AdvancedContainer = styled.div`
+  margin-bottom: 24px;
+`;
+
 export const GreetingMessageText = styled.p`
   font-size: 22px;
   font-family: Arial, Helvetica, sans-serif;
@@ -67,20 +72,24 @@ export const GreetingMessageText = styled.p`
     font-size: 14px;
   }
 `;
+
 export const ContainerSearch = styled.div`
   padding-left: 25%;
   padding-right: 25%;
   margin-bottom: 40px;
+
   @media (max-width: ${screenSmallMax}px) {
     padding-left: 20%;
     padding-right: 20%;
     margin-bottom: 40px;
   }
+
   @media (max-width: ${tabletMax}px) {
     padding-left: 10%;
     padding-right: 10%;
     margin-bottom: 32px;
   }
+
   @media (max-width: ${mobileMax}px) {
     padding-left: 32px;
     padding-right: 32px;

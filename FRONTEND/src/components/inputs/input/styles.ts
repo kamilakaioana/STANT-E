@@ -5,6 +5,20 @@ import { MediaWidth } from "../../../utils/constants";
 
 const { mobileMax, tabletMax } = MediaWidth;
 
+export const LabelContainer = styled.div`
+  text-align: start;
+  display: flex;
+`;
+
+export const Label = styled.label`
+  font-size: 16px;
+  margin-left: 16px;
+  margin-bottom: 4px;
+  font-style: italic;
+  font-weight: bold;
+  color: ${colors.fonts.gray};
+`;
+
 export const Container = styled.div`
   display: flex;
   flex-direction: column;
@@ -53,18 +67,4 @@ export const Error = styled.p`
   margin-top: 4px;
   text-align: left;
   margin-left: 8px;
-`;
-
-export const Label = styled.label`
-  font-size: 16px;
-  margin-left: 16px;
-  margin-bottom: 4px;
-  font-style: italic;
-  font-weight: bold;
-  color: ${colors.fonts.gray};
-`;
-
-export const LabelContainer = styled.div`
-  text-align: start;
-  display: flex;
 `;

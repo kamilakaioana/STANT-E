@@ -1,7 +1,7 @@
 import styled from "styled-components";
 import { colors } from "../../styles/colors";
 import { MediaWidth } from "../../utils/constants";
-import CustomInput from "../inputs/input";
+import { SearchIcon } from "../icons";
 
 const { mobileMax, tabletMax, screenSmallMax } = MediaWidth;
 
@@ -16,6 +16,7 @@ export const Container = styled.div`
     justify-content: center;
   }
 `;
+
 export const Content = styled.div`
   width: 50%;
   @media (max-width: ${tabletMax}px) {
@@ -23,29 +24,10 @@ export const Content = styled.div`
   }
 `;
 
-export const SearchInputTitle = styled(CustomInput).attrs({
-  fontSize: 24,
-  placeholder: "Titulo do livro",
-  name: "name",
-})`
-  box-shadow: 2px 2px 2px 1px ${colors.boxShadown};
-  margin-bottom: 0;
-  padding-bottom: 0;
-`;
-
-export const SearchInputAuthor = styled(CustomInput).attrs({
-  fontSize: 24,
-  placeholder: "Autor",
-  name: "name",
-})`
-  box-shadow: 2px 2px 2px 1px ${colors.boxShadown};
-  margin-bottom: 0;
-  padding-bottom: 0;
-`;
-
 export const Button = styled.button`
-  height: 60px;
-  width: 232px;
+  margin-top: 8px;
+  height: 50px;
+  width: 220px;
   border: none;
   border-radius: 20px;
   background-color: ${colors.primary};
@@ -53,24 +35,30 @@ export const Button = styled.button`
   font-size: 20px;
   display: flex;
   flex-direction: row;
-
   align-items: center;
   text-align: center;
   justify-content: center;
   cursor: pointer;
+  :hover {
+    background-color: ${colors.secondary};
+    transform: scale(1.05);
+  }
   @media (max-width: ${screenSmallMax}px) {
-    height: 56px;
-    width: 232px;
+    height: 45px;
+    width: 210px;
+    font-size: 16px;
   }
   @media (max-width: ${tabletMax}px) {
-    height: 48px;
+    height: 40px;
     width: 200px;
     border-radius: 15px;
+    font-size: 14px;
   }
   @media (max-width: ${mobileMax}px) {
-    height: 40px;
+    height: 35px;
     width: 180px;
     border-radius: 10px;
+    font-size: 12px;
   }
 `;
 
@@ -83,10 +71,34 @@ export const ShowMoreButton = styled.button`
   text-decoration: underline;
   cursor: pointer;
 `;
+
 export const ReadingImg = styled.img`
   height: 183px;
   width: 294px;
   @media (max-width: ${tabletMax}px) {
     display: none;
   }
+`;
+
+export const ContainerButton = styled.div`
+  justify-content: center;
+  display: flex;
+`;
+
+export const ShowMoreContainer = styled.div`
+  display: flex;
+  justify-content: flex-end;
+`;
+
+export const ContainerInput = styled.div`
+  padding-top: 16px;
+`;
+
+export const Icon = styled.img.attrs({
+  src: SearchIcon,
+  alt: "Icone de uma lupa indicando pesquisa",
+})`
+  width: 24px;
+  height: 24px;
+  margin-left: 12px;
 `;

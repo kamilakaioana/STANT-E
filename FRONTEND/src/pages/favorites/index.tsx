@@ -12,6 +12,7 @@ function Favorites() {
   const { searchData } = useSearch();
 
   const loadBooks = useCallback(async () => {
+    setLoading(true);
     const book: IBook[] = await BookService.getFavorites();
     let resBooks: IBook[] = book;
     if (searchData.author || searchData.title) {
