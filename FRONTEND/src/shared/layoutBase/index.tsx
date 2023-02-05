@@ -19,8 +19,7 @@ function LayoutBase() {
         }}
       >
         <p style={{ color: "#000" }}>
-          <b> KAMILA KAIOANA ALEIXO COSTA </b>- Mentoria React Js DB1 - Mentor:
-          Diogo Souza
+          <b> © Copyright Kamila Kaioana Aleixo Costa 2022.</b>
         </p>
       </div>
     </div>
