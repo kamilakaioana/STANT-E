@@ -8,7 +8,6 @@ export const Container = styled.div`
   background-color: #f2f8f7;
   padding: 5%;
   padding-top: 0px;
-  padding-bottom: 32px;
 `;
 
 export const Box = styled.div`

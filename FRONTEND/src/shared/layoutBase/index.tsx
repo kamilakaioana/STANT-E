@@ -5,17 +5,18 @@ import { colors } from "../../styles/colors";
 
 function LayoutBase() {
   return (
-    <div>
+    <div style={{ height: '100vh', width: '100vw', display: 'flex', flexDirection: 'column'}}>
       <Header />
-      <Outlet />
+      <div style={{flex: 1}}>
+        <Outlet  />
+      </div>
       <div
         style={{
           backgroundColor: colors.backgroundGreenLight,
-          width: "100%",
           textAlign: "center",
           paddingTop: 4,
           paddingBottom: 4,
-          position: "absolute",
+          width: '100%',
         }}
       >
         <p style={{ color: "#000" }}>

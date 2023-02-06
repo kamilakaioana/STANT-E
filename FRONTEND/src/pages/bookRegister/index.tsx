@@ -144,7 +144,7 @@ function BookRegister() {
   // };
 
   return (
-    <div style={{ paddingBottom: 24 }}>
+    <div style={{ paddingBottom: 24,  height: '100%'  }}>
       <Container>
         {Boolean(bookId) ? (
           <>
